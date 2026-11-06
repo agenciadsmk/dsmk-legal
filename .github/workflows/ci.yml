@@ -1,0 +1,31 @@
+# Integración continua: sintaxis en PHP 7.4 y 8.3, pruebas de lógica y estándares.
+name: CI
+on: [push, pull_request]
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.4', '8.0', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer
+      - name: Sintaxis
+        run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l
+      - name: Pruebas de lógica
+        run: php tests/php/run-tests.php
+  standards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer
+      - run: composer install --no-interaction --no-progress
+      - name: WordPress Coding Standards (informativo hasta limpiar la base)
+        run: composer lint
+        continue-on-error: true

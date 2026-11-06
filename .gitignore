@@ -1,0 +1,11 @@
+# Dependencias y artefactos de desarrollo
+/vendor/
+/node_modules/
+/dist/
+/tests/e2e/capturas/
+*.zip
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

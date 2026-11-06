@@ -187,6 +187,25 @@ final class DSMKC_Services {
 	}
 
 	/**
+	 * Servicios de Google que, con Consent Mode avanzado, se cargan sin bloquear.
+	 *
+	 * En modo avanzado las etiquetas de Google se cargan siempre y respetan por
+	 * sí mismas el estado de Consent Mode (sin cookies mientras esté denegado).
+	 * Antes de 2.2.0 el interceptor del <head> seguía bloqueando gtm.js aunque
+	 * el fragmento de GTM se imprimiera libre. Las etiquetas que no son de
+	 * Google y se inyectan desde GTM (píxel de Meta…) siguen bloqueadas.
+	 *
+	 * @since  2.2.0
+	 * @return string[] Ids de servicio.
+	 */
+	public static function consent_mode_free() {
+		if ( ! DSMKC_Settings::get( 'consent_mode' ) || ! DSMKC_Settings::get( 'consent_mode_avanzado' ) ) {
+			return array();
+		}
+		return array( 'gtm', 'ga4', 'google_ads' );
+	}
+
+	/**
 	 * Reglas de bloqueo para el HTML y para el interceptor JavaScript.
 	 *
 	 * Se incluyen TODOS los servicios no necesarios del catálogo (aunque no se
@@ -200,9 +219,10 @@ final class DSMKC_Services {
 			return self::$rules;
 		}
 		$rules = array();
+		$free  = self::consent_mode_free();
 		foreach ( self::catalogue() as $id => $service ) {
 			$category = self::category_of( $id );
-			if ( 'necessary' === $category || 'excluded' === $category ) {
+			if ( 'necessary' === $category || 'excluded' === $category || in_array( $id, $free, true ) ) {
 				continue;
 			}
 			$rules[] = array(

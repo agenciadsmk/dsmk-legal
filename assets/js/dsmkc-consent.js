@@ -99,20 +99,58 @@
 	/**
 	 * Envía la prueba del consentimiento al servidor.
 	 *
+	 * Si el servidor no la guarda (red, 429, 5xx) se deja en localStorage y se
+	 * reintenta en la siguiente página (logPending), para no perder la prueba.
+	 *
 	 * @param {string} action accept|reject|custom|service|gpc.
 	 * @param {Object} c      Consentimiento.
 	 */
 	function log(action, c) {
 		if (!C.log || !C.rest || !w.fetch) { return; }
+		send({ id: c.id, action: action, c: c.c, s: c.s, v: c.v, bh: C.bh, url: w.location.pathname });
+	}
+
+	/**
+	 * POST al endpoint; en caso de fallo guarda el cuerpo para reintentarlo.
+	 *
+	 * @param {Object} body Datos del registro.
+	 */
+	function send(body) {
 		try {
 			w.fetch(C.rest, {
 				method: 'POST',
 				credentials: 'omit',
 				keepalive: true,
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ id: c.id, action: action, c: c.c, s: c.s, v: c.v, bh: C.bh, url: w.location.pathname })
-			})['catch'](function () {});
+				body: JSON.stringify(body)
+			}).then(function (r) {
+				if (!r.ok && r.status !== 400) { keep(body); }
+			})['catch'](function () { keep(body); });
 		} catch (e) { /* El registro nunca debe romper la navegación. */ }
+	}
+
+	/**
+	 * Guarda un registro pendiente (máx. 5; los más recientes).
+	 *
+	 * @param {Object} body Datos del registro.
+	 */
+	function keep(body) {
+		try {
+			var q = JSON.parse(w.localStorage.getItem('dsmkc_pending') || '[]');
+			q.push(body);
+			w.localStorage.setItem('dsmkc_pending', JSON.stringify(q.slice(-5)));
+		} catch (e) { /* Sin almacenamiento: no se puede reintentar. */ }
+	}
+
+	/** Reenvía los registros pendientes de visitas anteriores. */
+	function logPending() {
+		if (!C.log || !C.rest || !w.fetch) { return; }
+		var q;
+		try {
+			q = JSON.parse(w.localStorage.getItem('dsmkc_pending') || '[]');
+			w.localStorage.removeItem('dsmkc_pending');
+		} catch (e) { return; }
+		for (var i = 0; i < q.length; i++) { if (q[i] && q[i].id) { send(q[i]); } }
 	}
 
 	/* ------------------------------------------------------------------
@@ -431,6 +469,7 @@
 		}
 		d.addEventListener('click', onClick);
 		d.addEventListener('keydown', onKey);
+		logPending();
 
 		if (!H.consent && C.gpc && w.navigator.globalPrivacyControl) {
 			decide('gpc', [], []);

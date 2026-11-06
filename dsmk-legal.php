@@ -3,9 +3,11 @@
  * Plugin Name:       DSMK Legal
  * Plugin URI:        https://dsmk.es
  * Description:       Hub legal para webs de clientes: aviso legal, política de privacidad, política de cookies con gestión del consentimiento (LSSI, RGPD, Guía AEPD), términos y condiciones de servicios, condiciones de venta y desistimiento. Auditoría técnica automatizada con histórico e informe PDF, importación/exportación JSON y plantilla para rellenarlo con IA.
- * Version:           2.1.1
+ * Version:           2.3.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
+ * Tested up to:      6.8
+ * Update URI:        https://agenciadsmk.github.io/dsmk-legal/
  * Author:            DSMK Agencia Digital
  * Author URI:        https://dsmk.es
  * License:           GPL-2.0-or-later
@@ -21,10 +23,14 @@
  * Responsabilidad: definir constantes, cargar clases y registrar activación.
  * No contiene lógica de negocio (ver includes/class-dsmkc-plugin.php).
  *
- * Compatibilidad: sucesor de «DSMK Cookies» 1.x. Usa las mismas opciones
- * (dsmkc_settings, dsmkc_data) y la misma tabla, así que al instalarlo se
- * conserva toda la configuración y el registro de consentimientos. Al
- * activarlo desactiva DSMK Cookies para evitar dos banners.
+ * Compatibilidad: sustituye a «DSMK Cookies» (agenciadsmk/dsmk-cookies), que
+ * comparte prefijo, opciones y tabla. Al activarlo desactiva DSMK Cookies para
+ * evitar dos banners; importa el titular y conserva el registro de
+ * consentimientos (ver CLAUDE.md › Convivencia).
+ *
+ * «Update URI» (2.3.0): las actualizaciones llegan del servidor de DSMK
+ * (DSMKC_Updater) y WordPress nunca lo sustituirá por un plugin de
+ * wordpress.org con el mismo nombre de carpeta.
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -44,14 +50,16 @@ if ( defined( 'DSMKC_VERSION' ) ) {
 	add_action(
 		'admin_notices',
 		static function () {
-			echo '<div class="notice notice-info"><p><strong>DSMK Legal</strong> sustituye a DSMK Cookies y conserva toda su configuración. DSMK Cookies se ha desactivado: recarga la página.</p></div>';
+			echo '<div class="notice notice-info"><p><strong>DSMK Legal</strong> sustituye a DSMK Cookies: importa los datos del titular y conserva el registro de consentimientos. DSMK Cookies se ha desactivado: recarga la página y revisa los ajustes.</p></div>';
 		}
 	);
 	return;
 }
 
-define( 'DSMKC_VERSION', '2.1.1' );
-define( 'DSMKC_DB_VERSION', '1' );
+define( 'DSMKC_VERSION', '2.3.0' );
+// '2' desde 2.2.1: el plugin «DSMK Cookies» 1.0.0 de Arturo también guarda
+// dsmkc_db_version = '1' con otra tabla; con '1' nuestra tabla no se completaba.
+define( 'DSMKC_DB_VERSION', '2' );
 define( 'DSMKC_FILE', __FILE__ );
 define( 'DSMKC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DSMKC_URL', plugin_dir_url( __FILE__ ) );
@@ -67,6 +75,7 @@ require_once DSMKC_DIR . 'includes/class-dsmkc-scanner.php';
 require_once DSMKC_DIR . 'includes/class-dsmkc-report.php';
 require_once DSMKC_DIR . 'includes/class-dsmkc-audit.php';
 require_once DSMKC_DIR . 'includes/class-dsmkc-tools.php';
+require_once DSMKC_DIR . 'includes/class-dsmkc-updater.php';
 require_once DSMKC_DIR . 'includes/class-dsmkc-plugin.php';
 require_once DSMKC_DIR . 'includes/functions.php';
 require_once DSMKC_DIR . 'admin/class-dsmkc-admin.php';

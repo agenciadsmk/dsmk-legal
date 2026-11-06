@@ -11,7 +11,7 @@
  *   - Selectores de color y vista previa en vivo del banner.
  *   - Mostrar / ocultar los campos de color según el modo de estilo.
  *   - Escaneo en el navegador: carga las páginas de la web en iframes ocultos
- *     con ?dsmkc_scan=TOKEN (sin bloqueos), recoge cookies propias, claves de
+ *     con ?dsmkc_scan=NONCE (sin bloqueos), recoge cookies propias, claves de
  *     localStorage y recursos cargados, limpia las cookies creadas durante el
  *     escaneo y envía el resultado por AJAX (con nonce).
  *   - Botón «Copiar» de la declaración de cumplimiento.

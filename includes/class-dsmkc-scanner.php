@@ -15,7 +15,7 @@
  *      la web con la cabecera secreta X-DSMKC-Scan (sin bloqueos) y analiza
  *      el HTML (scripts, iframes, píxeles) y las cabeceras Set-Cookie.
  *   2. Escaneo de navegador (botón en el panel): el navegador del administrador
- *      carga las páginas en iframes ocultos con ?dsmkc_scan=TOKEN, ejecuta todo
+ *      carga las páginas en iframes ocultos con ?dsmkc_scan=NONCE, ejecuta todo
  *      el JavaScript y devuelve las cookies propias, las claves de localStorage
  *      y los recursos cargados (dominios de terceros inyectados por GTM, etc.).
  *
@@ -41,6 +41,9 @@ final class DSMKC_Scanner {
 
 	/** @var int Máximo de URL por escaneo. */
 	const MAX_URLS = 10;
+
+	/** @var int Elementos sin clasificar que se conservan (los más recientes). @since 2.2.0 */
+	const MAX_UNKNOWN = 200;
 
 	/**
 	 * Registra hooks.
@@ -119,6 +122,69 @@ final class DSMKC_Scanner {
 	}
 
 	/**
+	 * GET a una URL de la propia web siguiendo redirecciones SOLO dentro del dominio.
+	 *
+	 * Seguridad (2.2.0): con `redirection => 3` WordPress reenviaba la cabecera
+	 * X-DSMKC-Scan (token) a cualquier dominio al que redirigiera una página.
+	 * Aquí se siguen a mano hasta 3 redirecciones y solo si el destino es el
+	 * mismo host (se admite el cambio http→https y con/sin «www.»).
+	 *
+	 * @since  2.2.0
+	 * @param  string $url  URL inicial (de DSMKC_Scanner::urls(), siempre de la web).
+	 * @param  array  $args Argumentos de wp_remote_get() (se fuerza redirection = 0).
+	 * @return array|WP_Error Respuesta final.
+	 */
+	public static function request( $url, array $args ) {
+		$args['redirection'] = 0;
+		$home                = self::bare_host( (string) wp_parse_url( home_url(), PHP_URL_HOST ) );
+		$response            = null;
+		for ( $hop = 0; $hop <= 3; $hop++ ) {
+			$response = wp_remote_get( $url, $args );
+			if ( is_wp_error( $response ) ) {
+				return $response;
+			}
+			$code = (int) wp_remote_retrieve_response_code( $response );
+			if ( $code < 300 || $code >= 400 ) {
+				return $response;
+			}
+			$headers  = wp_remote_retrieve_headers( $response );
+			$location = isset( $headers['location'] ) ? $headers['location'] : '';
+			$location = is_array( $location ) ? (string) end( $location ) : (string) $location;
+			if ( '' === $location ) {
+				return $response;
+			}
+			$next = class_exists( 'WP_Http' ) ? WP_Http::make_absolute_url( $location, $url ) : $location;
+			if ( self::bare_host( (string) wp_parse_url( $next, PHP_URL_HOST ) ) !== $home ) {
+				return $response; // Redirección a otro dominio: no se sigue (el token no sale de la web).
+			}
+			$url = $next;
+		}
+		return $response;
+	}
+
+	/**
+	 * Host en minúsculas sin «www.» inicial.
+	 *
+	 * @since  2.2.0
+	 * @param  string $host Host.
+	 * @return string
+	 */
+	private static function bare_host( $host ) {
+		return preg_replace( '/^www\./', '', strtolower( $host ) );
+	}
+
+	/**
+	 * Añade un parámetro único para que ninguna caché sirva ni guarde la respuesta del escáner.
+	 *
+	 * @since  2.2.0
+	 * @param  string $url URL.
+	 * @return string
+	 */
+	public static function nocache_url( $url ) {
+		return add_query_arg( 'dsmkc_nc', wp_generate_password( 10, false, false ), $url );
+	}
+
+	/**
 	 * Escaneo desde el servidor.
 	 *
 	 * @since  1.0.0
@@ -133,11 +199,10 @@ final class DSMKC_Scanner {
 		$scanned  = 0;
 
 		foreach ( self::urls() as $url ) {
-			$response = wp_remote_get(
-				$url,
+			$response = self::request(
+				self::nocache_url( $url ),
 				array(
 					'timeout'     => 20,
-					'redirection' => 3,
 					'headers'     => array( 'X-DSMKC-Scan' => $token, 'Cache-Control' => 'no-cache' ),
 					'sslverify'   => apply_filters( 'https_local_ssl_verify', false ), // Igual que las peticiones loopback del core.
 					'user-agent'  => 'DSMK-Cookies-Scanner/' . DSMKC_VERSION . '; ' . home_url(),
@@ -313,6 +378,17 @@ final class DSMKC_Scanner {
 				$new_unk[]        = $name;
 			}
 			$unknown[ $name ]['last'] = $now;
+		}
+
+		// Tope (2.2.0): dsmkc_data se lee en cada visita; la lista no puede crecer sin límite.
+		if ( count( $unknown ) > self::MAX_UNKNOWN ) {
+			uasort(
+				$unknown,
+				static function ( $a, $b ) {
+					return (int) $b['last'] - (int) $a['last'];
+				}
+			);
+			$unknown = array_slice( $unknown, 0, self::MAX_UNKNOWN, true );
 		}
 
 		DSMKC_Settings::update_data(
