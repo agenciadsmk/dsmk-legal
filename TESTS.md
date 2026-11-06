@@ -4,12 +4,12 @@
 
 | Suite | Resultado |
 |---|---|
-| `php tests/php/run-tests.php` | **213/213** |
+| `php tests/php/run-tests.php` | **216/216** |
 | `node tests/e2e/consent.e2e.js` | **46/46** |
 | Pestaña Herramientas renderizada (tarjeta de actualizaciones, clave como contraseña) | OK |
-| Publicación real en local: `bin/build.sh` + `make-update-json` con la clave de producción, validado con la `PUBLIC_KEY` del plugin en un proceso aparte | OK |
+| En una copia temporal: `make-signing-key` → `build.sh` → `make-update-json` → validación con la clave que escribió el script en el plugin | OK (copia borrada) |
 
-**Nuevas [17]: actualizador (46 pruebas).**
+**Nuevas [17]: actualizador (49 pruebas).**
 
 | Qué se prueba | Comprobaciones |
 |---|---|
@@ -24,8 +24,8 @@
 | Exportación e importación | La clave, la URL y las automáticas ni se exportan ni se importan, y la clave no sale en el briefing de IA. |
 | Automáticas | Por defecto solo para este plugin; en multisite manda la red; desactivadas, manda WordPress. |
 | «Comprobar de nuevo» | Consulta también nuestro servidor, una vez por petición. |
-| `Update URI` y clave pública | Presentes en el plugin. |
-| `make-update-json` | JSON firmado aceptado por el actualizador, con el changelog en HTML. Se niega con URL http, con un ZIP de otra versión o sin clave de firma. |
+| `Update URI` y clave pública | `Update URI` presente. La clave pública es vacía o válida; vacía = no se acepta ninguna actualización. |
+| `make-update-json` | JSON firmado aceptado por el actualizador, con el changelog en HTML. Se niega con URL http, con un ZIP de otra versión, sin clave de firma, con una clave que no es la pareja de la del plugin o con `PUBLIC_KEY` vacía. |
 
 **Revisión independiente:** encontró 11 problemas (2 altos, 4 medios y 5 bajos); están corregidos y cubiertos por estas pruebas. El detalle está en el CHANGELOG.
 

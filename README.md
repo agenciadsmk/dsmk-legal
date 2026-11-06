@@ -26,7 +26,11 @@ Cada web consulta cada 12 horas `https://agenciadsmk.github.io/dsmk-legal/info.j
 
 **Configuración inicial del repositorio** (una sola vez):
 
-- **Secreto `UPDATE_SIGNING_KEY`** (Settings › Secrets and variables › Actions): la clave privada de firma, en base64. **Guarda una copia en el gestor de contraseñas de DSMK.** Si se pierde, las webs dejarán de aceptar versiones nuevas y habrá que reinstalar a mano en cada una.
+- **Clave de firma:** en un equipo de DSMK, `php bin/make-signing-key.php`. Escribe la clave pública en el plugin (haz commit de ese cambio) y muestra **una sola vez** la clave privada. Hay que:
+  - Guardarla en el gestor de contraseñas de DSMK.
+  - Crear con ella el secreto **`UPDATE_SIGNING_KEY`** (Settings › Secrets and variables › Actions).
+
+  Si se pierde, las webs dejarán de aceptar versiones nuevas y habrá que reinstalar a mano en cada una. Sin este paso, la publicación se niega a firmar y el plugin no acepta ninguna actualización.
 - **Settings › Pages › Source:** «GitHub Actions».
 - **Settings › Environments › github-pages › Deployment branches and tags:** añadir la regla de etiqueta `v*`.
 - **Repositorio privado:** GitHub Pages en un repositorio privado necesita el plan Team. Las URL de Pages son públicas aunque el código no lo sea.
@@ -38,8 +42,8 @@ Cada web consulta cada 12 horas `https://agenciadsmk.github.io/dsmk-legal/info.j
 
 **Rotar la clave de firma** (solo si se filtra):
 
-1. Genera un par nuevo: `php -r '$k=sodium_crypto_sign_keypair(); echo base64_encode(sodium_crypto_sign_secretkey($k)),"\n",base64_encode(sodium_crypto_sign_publickey($k)),"\n";'`.
-2. Pon la clave pública nueva en `DSMKC_Updater::PUBLIC_KEY` y publica esa versión **todavía firmada con la clave antigua**.
+1. `php bin/make-signing-key.php --force`. Escribe la clave pública nueva en `DSMKC_Updater::PUBLIC_KEY` y muestra la privada nueva.
+2. Publica esa versión **todavía firmada con la clave antigua**. Como la clave del plugin ya es la nueva, genera el `info.json` a mano con `DSMK_SIGNING_KEY=<privada antigua> php bin/make-update-json.php … --expected-pubkey=<pública antigua>` y súbelo a la Release y a Pages.
 3. Después, cambia el secreto `UPDATE_SIGNING_KEY` por la clave privada nueva.
 
 Si la clave antigua se ha comprometido, cambia el secreto enseguida. Las webs que ya tengan la versión nueva siguen bien; las demás hay que actualizarlas a mano una vez, o definir `DSMK_LEGAL_UPDATE_PUBKEY` en su `wp-config.php`.

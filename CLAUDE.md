@@ -95,7 +95,7 @@ Es **otro plugin**, no una versión anterior de este, aunque comparte prefijo `d
 
 - `DSMKC_Updater` solo engancha filtros; la petición la lanza WordPress cuando comprueba actualizaciones. El JSON por defecto está en `https://agenciadsmk.github.io/dsmk-legal/info.json` y lo publica `.github/workflows/release.yml` al subir la etiqueta `vX.Y.Z`.
 - Reglas que no se pueden romper:
-  - **Firma Ed25519 obligatoria.** El mensaje firmado es `DSMKC_Updater::signed_message()`. La clave pública está en `DSMKC_Updater::PUBLIC_KEY` y la privada solo en el secreto `UPDATE_SIGNING_KEY`, nunca en el repositorio.
+  - **Firma Ed25519 obligatoria.** El mensaje firmado es `DSMKC_Updater::signed_message()`. La clave pública está en `DSMKC_Updater::PUBLIC_KEY` (la escribe `bin/make-signing-key.php`) y la privada solo en el secreto `UPDATE_SIGNING_KEY` y en el gestor de contraseñas, nunca en el repositorio ni en un chat.
   - **Huella SHA-256 firmada, verificada antes de instalar, con fallo cerrado** (`upgrader_pre_download`).
   - Solo https.
   - Se mantienen `Update URI` y `external`.
@@ -129,7 +129,7 @@ Es **otro plugin**, no una versión anterior de este, aunque comparte prefijo `d
 ## Pruebas (obligatorias antes de publicar)
 
 ```bash
-php tests/php/run-tests.php                         # 213 pruebas de lógica
+php tests/php/run-tests.php                         # 216 pruebas de lógica
 php tests/php/render-report.php > informe.html      # informe técnico de una auditoría simulada
 php -S 127.0.0.1:8765 tests/e2e/router.php &        # web de prueba con rastreadores locales
 node tests/e2e/consent.e2e.js [carpeta-capturas]    # 46 pruebas en Chromium real

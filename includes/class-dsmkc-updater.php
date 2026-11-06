@@ -71,13 +71,15 @@ class DSMKC_Updater {
 
 	/**
 	 * Clave pública Ed25519 (base64) con la que se verifican las versiones.
-	 * Su pareja privada es el secreto UPDATE_SIGNING_KEY del repositorio.
-	 * Cambiarla exige publicar antes una versión firmada con la clave antigua
-	 * que traiga la nueva (ver README › Actualizaciones › Rotar la clave).
+	 * La escribe `php bin/make-signing-key.php` en el equipo de DSMK; su pareja
+	 * privada es el secreto UPDATE_SIGNING_KEY del repositorio. Vacía = el
+	 * plugin no acepta ninguna actualización (y la publicación se niega a
+	 * firmar). Cambiarla exige publicar antes una versión firmada con la clave
+	 * antigua que traiga la nueva (ver README › Actualizaciones › Rotar la clave).
 	 *
 	 * @var string
 	 */
-	const PUBLIC_KEY = 'Yi1xtHm610AdOR/sSFCZgil6hfIBRE646bFTVdHrP9A=';
+	const PUBLIC_KEY = '';
 
 	/** @var int Caché de una respuesta correcta (segundos). */
 	const TTL_OK = 43200;

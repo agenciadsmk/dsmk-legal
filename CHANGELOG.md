@@ -8,6 +8,7 @@ Formato: versión semántica (MAYOR.MENOR.PARCHE). Cada entrada indica qué camb
 - **Actualizaciones desde el servidor de DSMK** (`includes/class-dsmkc-updater.php`). Cada web muestra el aviso normal de WordPress «Hay una nueva versión disponible», con la ventana «Ver detalles» y su changelog, y se puede actualizar con un clic. Por defecto se instala sola en segundo plano.
   - **Origen:** `info.json` en GitHub Pages (`https://agenciadsmk.github.io/dsmk-legal/info.json`). Se puede cambiar con la constante `DSMK_LEGAL_UPDATE_URL`, el ajuste «URL de actualizaciones» (solo en webs que no son multisite) o el filtro `dsmkc_update_url`.
   - **Firma digital Ed25519:** cada versión se firma con la clave privada de DSMK (secreto `UPDATE_SIGNING_KEY` de GitHub) y las webs la verifican con la clave pública incluida en el plugin. Aunque alguien manipulara GitHub Pages o el servidor de descargas, ninguna web instalaría un ZIP sin firmar.
+  - **Clave de firma generada en el equipo de DSMK:** `bin/make-signing-key.php` escribe la pública en el plugin y muestra la privada una sola vez. Mientras `PUBLIC_KEY` esté vacía, el plugin no acepta actualizaciones y la publicación se niega a firmar. `make-update-json` también se niega si la clave que firma no es la pareja de la del plugin.
   - **Huella SHA-256 firmada:** el ZIP se descarga y se comprueba antes de instalarse. Si falta la huella o no coincide, la instalación se cancela: nunca se instala nada sin verificar.
   - **Cabecera `Update URI`** y detalles sin enlace a wordpress.org (`external`).
   - **Se respeta la carpeta en la que está instalado** (p. ej. `dsmk-legal-main/`), para que el plugin no se desactive al actualizar (`upgrader_source_selection`).
@@ -38,7 +39,7 @@ Formato: versión semántica (MAYOR.MENOR.PARCHE). Cada entrada indica qué camb
   - y otros menores.
 
 ### Pruebas
-- PHP: 213/213. Nueva sección [17] con 46 pruebas: firma, huella, caché, versión en disco, fallo cerrado, carpeta, multisite, clave, importación y exportación, automáticas, «Comprobar de nuevo», generador firmado.
+- PHP: 216/216. Nueva sección [17] con 49 pruebas: firma, huella, caché, versión en disco, fallo cerrado, carpeta, multisite, clave, importación y exportación, automáticas, «Comprobar de nuevo», generador firmado.
 - E2E: 46/46.
 
 ## [2.2.1] — 2026-11-06

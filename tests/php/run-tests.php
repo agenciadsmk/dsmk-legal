@@ -495,9 +495,8 @@ echo "\n[17] Actualizaciones desde el servidor de DSMK (2.3.0)\n";
 dsmkc_test_setup();
 DSMKC_Updater::clear();
 delete_site_transient( 'update_plugins' );
-// Par de claves de prueba: la constante sustituye a la clave pública de producción.
-$kp = sodium_crypto_sign_keypair();
-define( 'DSMK_LEGAL_UPDATE_PUBKEY', base64_encode( sodium_crypto_sign_publickey( $kp ) ) );
+// Par de claves de prueba.
+$kp   = sodium_crypto_sign_keypair();
 $sign = static function ( array $j ) use ( $kp ) {
 	$j['signature'] = base64_encode( sodium_crypto_sign_detached( DSMKC_Updater::signed_message( $j['version'], $j['sha256'] ), sodium_crypto_sign_secretkey( $kp ) ) );
 	return $j;
@@ -524,7 +523,12 @@ $GLOBALS['__http'] = function ( $url, $args ) use ( &$served ) {
 };
 $fresh = static function () { return (object) array( 'response' => array(), 'no_update' => array(), 'checked' => array( 'dsmk-legal/dsmk-legal.php' => DSMKC_VERSION ) ); };
 
-ok( 'Yi1xtHm610AdOR/sSFCZgil6hfIBRE646bFTVdHrP9A=' === DSMKC_Updater::PUBLIC_KEY && 32 === strlen( base64_decode( DSMKC_Updater::PUBLIC_KEY ) ), 'Clave pública de producción Ed25519 incluida en el plugin' );
+ok( '' === DSMKC_Updater::PUBLIC_KEY || 32 === strlen( (string) base64_decode( DSMKC_Updater::PUBLIC_KEY, true ) ), 'DSMKC_Updater::PUBLIC_KEY vacía (aún sin generar) o una clave Ed25519 válida' );
+if ( '' === DSMKC_Updater::PUBLIC_KEY ) {
+	ok( is_wp_error( DSMKC_Updater::validate( $good ) ), 'Sin clave pública el plugin no acepta ninguna actualización (falla cerrado)' );
+}
+// A partir de aquí, la constante de wp-config sustituye a la clave del plugin por la de prueba.
+define( 'DSMK_LEGAL_UPDATE_PUBKEY', base64_encode( sodium_crypto_sign_publickey( $kp ) ) );
 ok( DSMKC_Updater::DEFAULT_URL === DSMKC_Updater::url(), 'Sin configurar consulta el JSON de GitHub Pages del repositorio' );
 $GLOBALS['__opts']['dsmkc_settings']['update_url'] = 'http://dsmk.es/info.json';
 DSMKC_Settings::flush();
@@ -682,9 +686,10 @@ $tmpd = sys_get_temp_dir() . '/dsmkc-rel-' . getmypid();
 @mkdir( $tmpd );
 $zipf = $tmpd . '/dsmk-legal-' . DSMKC_VERSION . '.zip';
 file_put_contents( $zipf, 'zip de prueba' );
-$gen = static function ( $zip, $base, $key ) {
+$gen = static function ( $zip, $base, $key, $pub = null ) use ( $kp ) {
 	$env = null === $key ? '' : 'DSMK_SIGNING_KEY=' . escapeshellarg( $key ) . ' ';
-	exec( $env . 'php ' . escapeshellarg( DSMKC_DIR . 'bin/make-update-json.php' ) . ' --zip=' . escapeshellarg( $zip ) . ' --base-url=' . escapeshellarg( $base ) . ' 2>&1', $o, $rc );
+	$pub = null === $pub ? base64_encode( sodium_crypto_sign_publickey( $kp ) ) : $pub;
+	exec( $env . 'php ' . escapeshellarg( DSMKC_DIR . 'bin/make-update-json.php' ) . ' --zip=' . escapeshellarg( $zip ) . ' --base-url=' . escapeshellarg( $base ) . ( '' === $pub ? '' : ' --expected-pubkey=' . escapeshellarg( $pub ) ) . ' 2>&1', $o, $rc );
 	return $rc;
 };
 $rc   = $gen( $zipf, 'https://agenciadsmk.github.io/dsmk-legal', base64_encode( sodium_crypto_sign_secretkey( $kp ) ) );
@@ -696,6 +701,11 @@ $wrong = $tmpd . '/dsmk-legal-0.0.1.zip';
 copy( $zipf, $wrong );
 ok( 1 === $gen( $zipf, 'http://inseguro.es', base64_encode( sodium_crypto_sign_secretkey( $kp ) ) ) && 1 === $gen( $wrong, 'https://x.es', base64_encode( sodium_crypto_sign_secretkey( $kp ) ) ), 'make-update-json: se niega con URL http o con un ZIP de otra versión' );
 ok( 1 === $gen( $zipf, 'https://x.es', null ), 'make-update-json: sin clave de firma no publica nada' );
+$otherkey = sodium_crypto_sign_keypair();
+ok( 1 === $gen( $zipf, 'https://x.es', base64_encode( sodium_crypto_sign_secretkey( $otherkey ) ) ), 'make-update-json: se niega si la clave que firma no es la pareja de la clave pública del plugin' );
+if ( '' === DSMKC_Updater::PUBLIC_KEY ) {
+	ok( 1 === $gen( $zipf, 'https://x.es', base64_encode( sodium_crypto_sign_secretkey( $kp ) ), '' ), 'make-update-json: se niega mientras PUBLIC_KEY esté vacía (hay que ejecutar make-signing-key)' );
+}
 array_map( 'unlink', glob( $tmpd . '/*' ) );
 rmdir( $tmpd );
 

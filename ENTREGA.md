@@ -18,7 +18,7 @@ Es un hub legal para WordPress. Incluye:
 | Área | Estado |
 |---|---|
 | Funcionalidad | Completa (ver `CHANGELOG.md`, de 1.0.0 a 2.2.0). |
-| Pruebas de lógica (PHP, sin WordPress) | 196/196 — `php tests/php/run-tests.php` |
+| Pruebas de lógica (PHP, sin WordPress) | 216/216 — `php tests/php/run-tests.php` |
 | Pruebas en navegador real (Chromium) | 46/46 — ver `CLAUDE.md` › Pruebas |
 | Revisión de seguridad | Hecha en 2.2.0 por un revisor independiente; los 11 hallazgos están corregidos o documentados (ver `CHANGELOG.md`). |
 | WordPress real | **Sin probar todavía en staging.** Es lo primero que hay que hacer (punto 4). |
@@ -56,13 +56,17 @@ La CI (`.github/workflows/ci.yml`) pasa sintaxis en PHP 7.4, 8.0 y 8.3 y las pru
 
 Desde la 2.3.0 las webs se actualizan solas desde GitHub Pages (ver `README.md` › Actualizaciones). Para dejarlo funcionando:
 
-1. Fusiona la rama `claude/actualizador-2.3.0` en `produccion`.
-2. En el repositorio:
+1. Fusiona la rama `claude/actualizador-2.3.0` en `produccion` (PR #1).
+2. **Clave de firma**, en tu equipo:
+   - `php bin/make-signing-key.php`.
+   - Guarda la clave privada que muestra en el gestor de contraseñas y crea con ella el secreto `UPDATE_SIGNING_KEY` del repositorio.
+   - `git commit -am "Clave pública de firma de actualizaciones" && git push`.
+3. En el repositorio:
    - **Settings › Pages › Source:** «GitHub Actions».
    - **Settings › Environments › github-pages › Deployment branches and tags:** añadir la regla de etiqueta `v*`.
-3. `git tag v2.3.0 && git push origin v2.3.0`, y revisa que la acción **Release** acabe en verde y que `https://agenciadsmk.github.io/dsmk-legal/info.json` responda.
-4. Las webs que ya tienen la 2.2.1 o anteriores hay que actualizarlas a mano **una sola vez**, con el ZIP de la Release v2.3.0. Las versiones siguientes llegan solas.
-5. **Decidid si el repositorio debe ser privado** (ahora es público). Si lo hacéis privado, GitHub Pages necesita el plan Team, o hay que usar el servidor propio por SSH (secretos `UPDATE_SSH_*`).
+4. `git tag v2.3.0 && git push origin v2.3.0`, y revisa que la acción **Release** acabe en verde y que `https://agenciadsmk.github.io/dsmk-legal/info.json` responda.
+5. Las webs que ya tienen la 2.2.1 o anteriores hay que actualizarlas a mano **una sola vez**, con el ZIP de la Release v2.3.0. Las versiones siguientes llegan solas.
+6. **Decidid si el repositorio debe ser privado** (ahora es público). Si lo hacéis privado, GitHub Pages necesita el plan Team, o hay que usar el servidor propio por SSH (secretos `UPDATE_SSH_*`).
 
 ## 5. Límites conocidos (documentados, no son fallos)
 
