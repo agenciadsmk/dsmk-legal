@@ -1,0 +1,154 @@
+# Publicación de una versión de DSMK Legal.
+#
+# Se dispara al subir una etiqueta vX.Y.Z (p. ej. `git tag v2.3.0 && git push origin v2.3.0`).
+#
+# Trabajo «build» (sin entorno protegido):
+#   1. Comprueba que la etiqueta coincide con «Version:» y DSMKC_VERSION.
+#   2. Pasa las pruebas, genera el ZIP (bin/build.sh) y el info.json firmado con
+#      la clave Ed25519 (secreto UPDATE_SIGNING_KEY) y su SHA-256 y changelog.
+#   3. Crea (o completa, si se relanza) la Release de GitHub con ZIP e info.json.
+# Trabajo «pages» (entorno github-pages):
+#   4. Publica info.json + ZIP (y los ZIP de las 5 versiones anteriores) en
+#      GitHub Pages: es la URL que consultan las webs
+#      (DSMKC_Updater::DEFAULT_URL = https://agenciadsmk.github.io/dsmk-legal/info.json).
+# Trabajo «ssh» (opcional):
+#   5. Copia los mismos archivos a un servidor propio si existen los secretos
+#      UPDATE_SSH_HOST, UPDATE_SSH_USER, UPDATE_SSH_KEY y UPDATE_SSH_PATH.
+#
+# Configuración (una sola vez), ver README › Actualizaciones:
+#   - Secreto UPDATE_SIGNING_KEY (clave secreta Ed25519 en base64). Sin él no se publica nada.
+#   - Settings › Pages › Source = «GitHub Actions».
+#   - Settings › Environments › github-pages › Deployment branches and tags: regla de etiqueta «v*».
+#   - Variable opcional UPDATE_BASE_URL si las webs deben descargar de otro sitio.
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    env:
+      BASE_URL: ${{ vars.UPDATE_BASE_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: sodium
+
+      - name: La etiqueta coincide con la versión del plugin
+        id: version
+        run: |
+          VERSION=$(grep -m1 -oP 'Version:\s*\K[\d.]+' dsmk-legal.php)
+          test "v${VERSION}" = "${GITHUB_REF_NAME}" || { echo "::error::La etiqueta ${GITHUB_REF_NAME} no coincide con Version: ${VERSION}"; exit 1; }
+          grep -q "define( 'DSMKC_VERSION', '${VERSION}' );" dsmk-legal.php || { echo "::error::DSMKC_VERSION no es ${VERSION}"; exit 1; }
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
+
+      - name: Pruebas y ZIP
+        run: bash bin/build.sh
+
+      - name: info.json firmado
+        env:
+          DSMK_SIGNING_KEY: ${{ secrets.UPDATE_SIGNING_KEY }}
+        run: php bin/make-update-json.php --zip="dist/dsmk-legal-${VERSION}.zip" --base-url="${BASE_URL}" --out=dist/info.json
+
+      - name: Release de GitHub (se puede relanzar)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          awk "/^## \\[${VERSION}\\]/{f=1;next} /^## \\[/{f=0} f" CHANGELOG.md > dist/notes.md
+          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" "dist/dsmk-legal-${VERSION}.zip" dist/info.json --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" "dist/dsmk-legal-${VERSION}.zip" dist/info.json \
+              --title "DSMK Legal ${VERSION}" --notes-file dist/notes.md
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: |
+            dist/dsmk-legal-${{ steps.version.outputs.version }}.zip
+            dist/info.json
+
+  pages:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      VERSION: ${{ needs.build.outputs.version }}
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: release
+          path: dist
+
+      - name: Preparar la web de actualizaciones
+        run: |
+          mkdir -p _site
+          cp "dist/dsmk-legal-${VERSION}.zip" dist/info.json _site/
+          cp "dist/dsmk-legal-${VERSION}.zip" _site/dsmk-legal-latest.zip
+          # Se conservan los ZIP anteriores (webs con el JSON antiguo en caché).
+          gh release list --limit 6 --json tagName -q '.[].tagName' | while read -r tag; do
+            v="${tag#v}"; [ "$v" = "${VERSION}" ] && continue
+            gh release download "$tag" --pattern "dsmk-legal-${v}.zip" --dir _site --skip-existing || true
+          done
+          printf '<!doctype html><meta charset="utf-8"><title>DSMK Legal</title><p>DSMK Legal %s · <a href="info.json">info.json</a> · <a href="dsmk-legal-latest.zip">dsmk-legal-latest.zip</a></p>\n' "${VERSION}" > _site/index.html
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+  ssh:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.build.outputs.version }}
+      HAS_SSH: ${{ secrets.UPDATE_SSH_KEY != '' }}
+    steps:
+      - name: Sin servidor propio configurado
+        if: env.HAS_SSH != 'true'
+        run: echo "No hay secretos UPDATE_SSH_*; solo se publica en GitHub Pages."
+
+      - uses: actions/download-artifact@v4
+        if: env.HAS_SSH == 'true'
+        with:
+          name: release
+          path: dist
+
+      - name: Copia a servidor propio
+        if: env.HAS_SSH == 'true'
+        env:
+          SSH_HOST: ${{ secrets.UPDATE_SSH_HOST }}
+          SSH_USER: ${{ secrets.UPDATE_SSH_USER }}
+          SSH_KEY: ${{ secrets.UPDATE_SSH_KEY }}
+          SSH_PATH: ${{ secrets.UPDATE_SSH_PATH }}
+        run: |
+          install -m 600 /dev/null ~/.ssh_key && printf '%s\n' "$SSH_KEY" > ~/.ssh_key
+          # El JSON se sube el último: ninguna web ve una versión cuyo ZIP aún no está.
+          scp -i ~/.ssh_key -o StrictHostKeyChecking=accept-new "dist/dsmk-legal-${VERSION}.zip" "${SSH_USER}@${SSH_HOST}:${SSH_PATH}/"
+          scp -i ~/.ssh_key -o StrictHostKeyChecking=accept-new dist/info.json "${SSH_USER}@${SSH_HOST}:${SSH_PATH}/info.json"
+          rm -f ~/.ssh_key

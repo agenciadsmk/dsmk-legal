@@ -67,7 +67,7 @@ final class DSMKC_Consent_Log {
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				consent_id varchar(36) NOT NULL,
 				created_at datetime NOT NULL,
-				action varchar(12) NOT NULL,
+				action varchar(20) NOT NULL,
 				categories varchar(100) NOT NULL DEFAULT '',
 				services varchar(255) NOT NULL DEFAULT '',
 				policy_version int(10) unsigned NOT NULL DEFAULT 1,
@@ -80,7 +80,37 @@ final class DSMKC_Consent_Log {
 				KEY created_at (created_at)
 			) {$charset};"
 		);
+		self::migrate_dsmk_cookies();
 		update_option( 'dsmkc_db_version', DSMKC_DB_VERSION, false );
+	}
+
+	/**
+	 * Adapta los registros del plugin «DSMK Cookies» 1.0.0 (Arturo) a este formato.
+	 *
+	 * Ese plugin usa la misma tabla con otras columnas (preferences, statistics,
+	 * marketing, revision). dbDelta() ya ha añadido las nuestras; aquí se
+	 * rellenan `categories` y `policy_version` de las filas antiguas para que
+	 * aparezcan en el registro y en el CSV. La acción original (accept_all,
+	 * reject_all…) no se toca: es la prueba tal como se registró.
+	 *
+	 * @since  2.2.1
+	 * @return void
+	 */
+	private static function migrate_dsmk_cookies() {
+		global $wpdb;
+		$table = self::table();
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Tabla propia; nombre de tabla no parametrizable.
+		$columns = $wpdb->get_col( "SHOW COLUMNS FROM {$table}" );
+		if ( ! is_array( $columns ) || 4 !== count( array_intersect( array( 'preferences', 'statistics', 'marketing', 'revision' ), $columns ) ) ) {
+			return;
+		}
+		$wpdb->query(
+			"UPDATE {$table}
+			 SET categories = CONCAT( 'preferences:', preferences, ',analytics:', statistics, ',marketing:', marketing ),
+			     policy_version = revision
+			 WHERE categories = ''"
+		);
+		// phpcs:enable
 	}
 
 	/**
@@ -113,7 +143,12 @@ final class DSMKC_Consent_Log {
 					'id'     => array( 'type' => 'string', 'required' => true ),
 					'action' => array( 'type' => 'string', 'required' => true, 'enum' => self::ACTIONS ),
 					'c'      => array( 'type' => 'object', 'required' => false ),
-					's'      => array( 'type' => 'array', 'required' => false ),
+					's'      => array(
+						'type'     => 'array',
+						'required' => false,
+						'maxItems' => 50,
+						'items'    => array( 'type' => 'string', 'maxLength' => 64 ),
+					),
 					'v'      => array( 'type' => 'integer', 'required' => false ),
 					'bh'     => array( 'type' => 'string', 'required' => false ),
 					'url'    => array( 'type' => 'string', 'required' => false ),
@@ -134,13 +169,15 @@ final class DSMKC_Consent_Log {
 			return new WP_REST_Response( array( 'ok' => true, 'logged' => false ), 200 );
 		}
 
-		$id = (string) $request->get_param( 'id' );
-		if ( ! preg_match( '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i', $id ) ) {
+		$id = $request->get_param( 'id' );
+		// \z (no $): $ aceptaría un salto de línea final y la fila no cabría en varchar(36).
+		if ( ! is_string( $id ) || ! preg_match( '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\z/i', $id ) ) {
 			return new WP_Error( 'dsmkc_invalid', 'Invalid id', array( 'status' => 400 ) );
 		}
 
-		$ip_anon = self::anonymize_ip( self::client_ip() );
-		if ( ! self::rate_ok( $ip_anon ) ) {
+		$ip      = self::client_ip();
+		$ip_anon = self::anonymize_ip( $ip );
+		if ( ! self::rate_ok( $ip ) ) {
 			return new WP_Error( 'dsmkc_rate', 'Too many requests', array( 'status' => 429 ) );
 		}
 
@@ -153,16 +190,20 @@ final class DSMKC_Consent_Log {
 		}
 		$services = array();
 		foreach ( (array) $request->get_param( 's' ) as $svc ) {
-			$svc = sanitize_key( (string) $svc );
-			if ( '' !== $svc && count( $services ) < 15 ) {
+			if ( ! is_scalar( $svc ) ) {
+				continue;
+			}
+			$svc = substr( sanitize_key( (string) $svc ), 0, 32 );
+			if ( '' !== $svc && strlen( implode( ',', $services ) ) + strlen( $svc ) < 250 ) {
 				$services[] = $svc;
 			}
 		}
 
-		$path = (string) wp_parse_url( (string) $request->get_param( 'url' ), PHP_URL_PATH );
+		$url  = $request->get_param( 'url' );
+		$path = is_string( $url ) ? (string) wp_parse_url( $url, PHP_URL_PATH ) : '';
 		$ua   = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
 
-		self::insert(
+		$stored = self::insert(
 			array(
 				'consent_id'     => strtolower( $id ),
 				'action'         => (string) $request->get_param( 'action' ),
@@ -176,6 +217,10 @@ final class DSMKC_Consent_Log {
 			)
 		);
 
+		if ( ! $stored ) {
+			// Sin 201 falso: el navegador guarda la prueba y la reintenta en la siguiente página.
+			return new WP_Error( 'dsmkc_db', 'Not stored', array( 'status' => 500 ) );
+		}
 		return new WP_REST_Response( array( 'ok' => true, 'logged' => true ), 201 );
 	}
 
@@ -196,11 +241,24 @@ final class DSMKC_Consent_Log {
 	/**
 	 * IP del cliente (REMOTE_ADDR; no se confía en cabeceras manipulables).
 	 *
+	 * Detrás de un proxy inverso o CDN (Cloudflare…) REMOTE_ADDR es la IP del
+	 * proxy: el filtro `dsmkc_client_ip` permite leer la cabecera de confianza
+	 * de ese hosting concreto. Solo se usa para limitar la frecuencia; en la base
+	 * de datos se guarda siempre anonimizada.
+	 *
 	 * @since  1.0.0
+	 * @since  2.2.0 Filtro `dsmkc_client_ip`.
 	 * @return string
 	 */
 	private static function client_ip() {
 		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+		/**
+		 * IP real del visitante (p. ej. HTTP_CF_CONNECTING_IP detrás de Cloudflare).
+		 *
+		 * @since 2.2.0
+		 * @param string $ip IP según REMOTE_ADDR.
+		 */
+		$ip = (string) apply_filters( 'dsmkc_client_ip', $ip );
 		return filter_var( $ip, FILTER_VALIDATE_IP ) ? $ip : '';
 	}
 
@@ -222,16 +280,27 @@ final class DSMKC_Consent_Log {
 	}
 
 	/**
-	 * Limitación de frecuencia por IP anonimizada.
+	 * Limitación de frecuencia por IP.
+	 *
+	 * Se usa un HMAC de la IP completa (nunca se guarda la IP): con la IP
+	 * anonimizada (/24) todos los visitantes detrás del mismo proxy compartían
+	 * cupo y se perdían pruebas reales.
 	 *
 	 * @since  1.0.0
-	 * @param  string $ip_anon IP anonimizada.
+	 * @since  2.2.0 Clave por IP completa (hash) y límite filtrable (60 / 10 min).
+	 * @param  string $ip IP del cliente.
 	 * @return bool true si se permite.
 	 */
-	private static function rate_ok( $ip_anon ) {
-		$key   = 'dsmkc_rl_' . md5( $ip_anon );
+	private static function rate_ok( $ip ) {
+		$key   = 'dsmkc_rl_' . substr( hash_hmac( 'sha256', $ip, wp_salt( 'nonce' ) ), 0, 32 );
 		$count = (int) get_transient( $key );
-		if ( $count >= 30 ) {
+		/**
+		 * Registros permitidos por IP cada 10 minutos.
+		 *
+		 * @since 2.2.0
+		 * @param int $limit Límite.
+		 */
+		if ( $count >= (int) apply_filters( 'dsmkc_log_rate_limit', 60 ) ) {
 			return false;
 		}
 		set_transient( $key, $count + 1, 10 * MINUTE_IN_SECONDS );

@@ -38,7 +38,9 @@ defined( 'ABSPATH' ) || exit;
 final class DSMKC_Tools {
 
 	/** @var string[] Claves que nunca se importan. */
-	const NO_IMPORT = array( 'pagina_aviso', 'pagina_privacidad', 'pagina_cookies', 'pagina_terminos', 'pagina_condiciones', 'pagina_desistimiento', 'paginas_auto' );
+	// 2.3.0: el origen y la activación de las actualizaciones tampoco (un JSON
+	// importado no puede decidir qué código se instala en la web).
+	const NO_IMPORT = array( 'pagina_aviso', 'pagina_privacidad', 'pagina_cookies', 'pagina_terminos', 'pagina_condiciones', 'pagina_desistimiento', 'paginas_auto', 'update_url', 'update_auto', 'update_key' );
 
 	/**
 	 * Configuración exportable.
@@ -50,6 +52,11 @@ final class DSMKC_Tools {
 		$settings = DSMKC_Settings::all();
 		foreach ( self::NO_IMPORT as $key ) {
 			unset( $settings[ $key ] );
+		}
+		foreach ( DSMKC_Settings::fields() as $key => $field ) {
+			if ( ! empty( $field['secret'] ) ) {
+				unset( $settings[ $key ] ); // Claves (2.3.0): nunca salen de la web.
+			}
 		}
 		$data = DSMKC_Settings::data();
 		return array(
@@ -97,7 +104,7 @@ final class DSMKC_Tools {
 		$ignored  = array();
 
 		foreach ( $settings as $key => $value ) {
-			if ( ! isset( $fields[ $key ] ) || in_array( $key, self::NO_IMPORT, true ) ) {
+			if ( ! isset( $fields[ $key ] ) || in_array( $key, self::NO_IMPORT, true ) || ! empty( $fields[ $key ]['secret'] ) ) {
 				if ( ! in_array( $key, array( 'plugin', 'version', 'site', 'generated', 'manual', 'overrides', 'settings' ), true ) ) {
 					$ignored[] = (string) $key;
 				}
@@ -182,7 +189,7 @@ final class DSMKC_Tools {
 	public static function ai_brief() {
 		$schema   = DSMKC_Settings::schema();
 		$values   = DSMKC_Settings::all();
-		$skip     = array( 'estilo', 'categorias', 'servicios', 'registro', 'avanzado' );
+		$skip     = array( 'actualizaciones', 'estilo', 'categorias', 'servicios', 'registro', 'avanzado' );
 		$woo      = class_exists( 'WooCommerce' );
 		$services = array();
 		foreach ( DSMKC_Services::active() as $service ) {
@@ -221,7 +228,7 @@ final class DSMKC_Tools {
 				$md .= '_' . $section['intro'] . "_\n\n";
 			}
 			foreach ( $section['fields'] as $key => $field ) {
-				if ( 'page' === $field['type'] || 'css' === $field['type'] ) {
+				if ( 'page' === $field['type'] || 'css' === $field['type'] || ! empty( $field['secret'] ) ) {
 					continue;
 				}
 				$line = '- `' . $key . '` (' . self::type_label( $field['type'] ) . ') — ' . $field['label'];

@@ -312,6 +312,15 @@ final class DSMKC_Settings {
 					'borrar_datos'   => array( 'type' => 'bool', 'default' => 0, 'label' => __( 'Borrar todos los datos y registros al desinstalar el plugin', 'dsmk-legal' ) ),
 				),
 			),
+			// 2.3.0: actualizaciones desde el servidor de DSMK (DSMKC_Updater).
+			'actualizaciones' => array(
+				'title'  => __( 'Actualizaciones', 'dsmk-legal' ),
+				'fields' => array(
+					'update_auto' => array( 'type' => 'bool', 'default' => 1, 'label' => __( 'Instalar automáticamente las nuevas versiones de DSMK Legal', 'dsmk-legal' ), 'help' => __( 'WordPress las instala solo, en segundo plano, y avisa por email al administrador. Desactívalo para actualizar a mano desde Plugins.', 'dsmk-legal' ) ),
+					'update_url'  => array( 'type' => 'url', 'default' => '', 'label' => __( 'URL de actualizaciones', 'dsmk-legal' ), 'help' => __( 'Vacío = servidor de DSMK. Solo https. La constante DSMK_LEGAL_UPDATE_URL de wp-config.php tiene prioridad.', 'dsmk-legal' ) ),
+					'update_key'  => array( 'type' => 'text', 'secret' => true, 'default' => '', 'label' => __( 'Clave de actualizaciones', 'dsmk-legal' ), 'help' => __( 'Opcional. Solo si el servidor de actualizaciones la pide. Nunca se exporta.', 'dsmk-legal' ) ),
+				),
+			),
 		);
 
 		/**
@@ -384,7 +393,7 @@ final class DSMKC_Settings {
 	 * Sanea y guarda un conjunto de valores (solo las claves recibidas).
 	 *
 	 * @since  1.0.0
-	 * @param  array $input       Valores en bruto (p. ej. $_POST['dsmkc']).
+	 * @param  array $input       Valores sin barras (wp_unslash( $_POST['dsmkc'] ) o JSON importado).
 	 * @param  array $only_fields Limita el guardado a estas claves (pestaña actual).
 	 * @return array Configuración resultante.
 	 */
@@ -430,13 +439,20 @@ final class DSMKC_Settings {
 	/**
 	 * Sanea un valor según la definición de su campo.
 	 *
+	 * Recibe valores YA sin barras: el handler del formulario aplica wp_unslash()
+	 * y el JSON importado no las lleva. Hasta 2.1.x se quitaban dos veces y se
+	 * perdían las barras invertidas legítimas (p. ej. CSS `content:"\201C"`).
+	 *
 	 * @since  1.0.0
-	 * @param  mixed $value Valor en bruto (puede ser null si no se envió).
+	 * @since  2.2.0 Sin wp_unslash() interno; arrays en campos escalares → vacío (sin avisos de PHP).
+	 * @param  mixed $value Valor sin barras (puede ser null si no se envió).
 	 * @param  array $field Definición del campo.
 	 * @return mixed Valor saneado.
 	 */
 	public static function sanitize_field( $value, array $field ) {
-		$value = is_string( $value ) ? wp_unslash( $value ) : $value;
+		if ( null !== $value && ! is_scalar( $value ) && ! in_array( $field['type'], array( 'bool', 'multicheck' ), true ) ) {
+			$value = ''; // Array u objeto donde se espera texto o número: JSON o POST manipulado.
+		}
 
 		switch ( $field['type'] ) {
 			case 'bool':
@@ -522,7 +538,6 @@ final class DSMKC_Settings {
 	 *
 	 * Claves:
 	 *   policy_version (int)   Versión del consentimiento; si cambia se vuelve a preguntar.
-	 *   scan_token     (string) Secreto para las peticiones de escaneo.
 	 *   detected       (array) id_servicio => [ 'first' => ts, 'last' => ts, 'via' => string ].
 	 *   unknown        (array) nombre => [ 'type' => cookie|storage|domain, 'first' => ts, 'last' => ts, 'via' => string ].
 	 *   manual         (array) Cookies añadidas o clasificadas a mano.
@@ -544,7 +559,6 @@ final class DSMKC_Settings {
 				is_array( $saved ) ? $saved : array(),
 				array(
 					'policy_version' => 1,
-					'scan_token'     => '',
 					'detected'       => array(),
 					'unknown'        => array(),
 					'manual'         => array(),
@@ -576,19 +590,36 @@ final class DSMKC_Settings {
 	}
 
 	/**
-	 * Token secreto para que el escáner pueda ver la web sin bloqueos.
+	 * Token secreto para que el escáner del servidor vea la web sin bloqueos.
 	 *
-	 * Seguridad: 32 caracteres aleatorios; solo se compara con hash_equals().
+	 * Seguridad (2.2.0): token efímero en un transient de 15 minutos que se
+	 * genera al empezar un escaneo o una auditoría. Antes era permanente y, si
+	 * se filtraba, permitía desactivar el bloqueo a cualquiera. Solo viaja en
+	 * la cabecera X-DSMKC-Scan de peticiones del propio servidor a su dominio
+	 * y se compara con hash_equals().
 	 *
 	 * @since  1.0.0
-	 * @return string
+	 * @since  2.2.0 Efímero (transient) en lugar de permanente.
+	 * @return string Token (se crea o renueva su caducidad).
 	 */
 	public static function scan_token() {
-		$data = self::data();
-		if ( empty( $data['scan_token'] ) ) {
-			$data = self::update_data( array( 'scan_token' => wp_generate_password( 32, false, false ) ) );
+		$token = self::current_scan_token();
+		if ( '' === $token ) {
+			$token = wp_generate_password( 40, false, false );
 		}
-		return $data['scan_token'];
+		set_transient( 'dsmkc_scan_token', $token, 15 * MINUTE_IN_SECONDS );
+		return $token;
+	}
+
+	/**
+	 * Token de escaneo vigente, sin crearlo (para validar peticiones entrantes).
+	 *
+	 * @since  2.2.0
+	 * @return string Vacío si no hay ningún escaneo en curso.
+	 */
+	public static function current_scan_token() {
+		$token = get_transient( 'dsmkc_scan_token' );
+		return is_string( $token ) && strlen( $token ) >= 32 ? $token : '';
 	}
 
 	/**

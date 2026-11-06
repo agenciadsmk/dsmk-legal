@@ -85,8 +85,9 @@ final class DSMKC_Frontend {
 		$rules = array();
 		foreach ( DSMKC_Services::rules() as $rule ) {
 			$patterns = array_values( array_unique( array_merge( $rule['src'], $rule['iframe'] ) ) );
-			if ( $patterns ) {
-				$rules[] = array( 's' => $rule['s'], 'c' => $rule['c'], 'p' => $patterns );
+			if ( $patterns || $rule['img'] ) {
+				// p = script/iframe; i = píxeles <img> (solo sus patrones, para no ocultar imágenes normales).
+				$rules[] = array( 's' => $rule['s'], 'c' => $rule['c'], 'p' => $patterns, 'i' => array_values( $rule['img'] ) );
 			}
 		}
 		$data = DSMKC_Settings::data();

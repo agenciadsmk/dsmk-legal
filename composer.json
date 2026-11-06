@@ -1,0 +1,26 @@
+{
+  "name": "dsmk/dsmk-legal",
+  "description": "Hub legal para webs WordPress de clientes (aviso legal, privacidad, cookies, términos, venta, desistimiento).",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "wp-coding-standards/wpcs": "^3.1",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "scripts": {
+    "lint": "phpcs",
+    "lint:fix": "phpcbf",
+    "test": "php tests/php/run-tests.php",
+    "pot": "php bin/make-pot.php",
+    "build": "bash bin/build.sh"
+  }
+}
