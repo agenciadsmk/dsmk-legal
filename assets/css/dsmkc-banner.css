@@ -1,0 +1,412 @@
+/**
+ * DSMK Legal — Estilos del banner, panel, botón flotante y avisos de contenido bloqueado.
+ *
+ * @package   DSMK_Legal
+ * @file      assets/css/dsmkc-banner.css
+ * @since     1.0.0
+ * @author    DSMK Agencia Digital <hola@dsmk.es>
+ *
+ * Los colores, tipografía y medidas llegan como variables CSS (--dsmkc-*)
+ * generadas en DSMKC_Frontend::css_vars(): modo «heredar» (Elementor / tema)
+ * o «personalizado».
+ *
+ * Regla de cumplimiento: .dsmkc-btn--primary se usa para ACEPTAR y para
+ * RECHAZAR. Nunca dar a uno de los dos un estilo distinto (Guía AEPD:
+ * mismo nivel de visibilidad).
+ */
+
+.dsmkc-root,
+.dsmkc-placeholder {
+	--dsmkc-bg: #ffffff;
+	--dsmkc-text: #1f2937;
+	--dsmkc-primary: #1f2937;
+	--dsmkc-primary-text: #ffffff;
+	--dsmkc-link: #1d4ed8;
+	--dsmkc-font: inherit;
+	--dsmkc-radius: 8px;
+	--dsmkc-size: 15px;
+	--dsmkc-maxw: 440px;
+	--dsmkc-shadow: 0 10px 40px rgba(0, 0, 0, .18);
+}
+
+.dsmkc-root *,
+.dsmkc-placeholder * { box-sizing: border-box; }
+
+.dsmkc-root [hidden],
+.dsmkc-root[hidden] { display: none !important; }
+
+/* ------------------------------------------------------------------ Capa 1 */
+.dsmkc-root .dsmkc-banner,
+.dsmkc-root .dsmkc-panel {
+	position: fixed;
+	z-index: 2147483001;
+	background: var(--dsmkc-bg);
+	color: var(--dsmkc-text);
+	font-family: var(--dsmkc-font);
+	font-size: var(--dsmkc-size);
+	line-height: 1.5;
+	box-shadow: var(--dsmkc-shadow);
+	text-align: left;
+	letter-spacing: normal;
+	text-transform: none;
+}
+
+.dsmkc-root .dsmkc-banner {
+	padding: 20px 22px;
+	border-radius: var(--dsmkc-radius);
+	max-height: calc(100vh - 32px);
+	overflow: auto;
+}
+
+.dsmkc-pos-caja_izquierda .dsmkc-banner,
+.dsmkc-pos-caja_derecha .dsmkc-banner {
+	bottom: 16px;
+	width: calc(100% - 32px);
+	max-width: var(--dsmkc-maxw);
+}
+.dsmkc-pos-caja_izquierda .dsmkc-banner { left: 16px; }
+.dsmkc-pos-caja_derecha .dsmkc-banner { right: 16px; }
+
+.dsmkc-pos-barra_inferior .dsmkc-banner,
+.dsmkc-pos-barra_superior .dsmkc-banner {
+	left: 0;
+	right: 0;
+	border-radius: 0;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 32px;
+	padding: 18px max(22px, calc((100vw - 1200px) / 2));
+}
+.dsmkc-pos-barra_inferior .dsmkc-banner { bottom: 0; }
+.dsmkc-pos-barra_superior .dsmkc-banner { top: 0; }
+.dsmkc-pos-barra_inferior .dsmkc-banner .dsmkc-title,
+.dsmkc-pos-barra_superior .dsmkc-banner .dsmkc-title { flex-basis: 100%; }
+.dsmkc-pos-barra_inferior .dsmkc-desc,
+.dsmkc-pos-barra_superior .dsmkc-desc { flex: 1 1 520px; margin: 0; }
+.dsmkc-pos-barra_inferior .dsmkc-actions,
+.dsmkc-pos-barra_superior .dsmkc-actions { flex: 0 1 auto; margin: 0; }
+
+.dsmkc-pos-modal .dsmkc-banner {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(100% - 32px);
+	max-width: max(var(--dsmkc-maxw), 520px);
+}
+
+.dsmkc-root .dsmkc-title {
+	margin: 0 0 8px;
+	font-size: 1.15em;
+	font-weight: 700;
+	line-height: 1.3;
+	color: inherit;
+	font-family: inherit;
+}
+
+.dsmkc-root .dsmkc-desc { margin: 0 0 16px; }
+.dsmkc-root .dsmkc-desc p { margin: 0 0 8px; }
+.dsmkc-root .dsmkc-desc p:last-child { margin-bottom: 0; }
+.dsmkc-root a,
+.dsmkc-placeholder a { color: var(--dsmkc-link); text-decoration: underline; }
+
+/* ------------------------------------------------------------------ Botones */
+.dsmkc-root .dsmkc-actions,
+.dsmkc-root .dsmkc-panel-foot {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.dsmkc-root .dsmkc-btn,
+.dsmkc-placeholder .dsmkc-btn {
+	-webkit-appearance: none;
+	appearance: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1 1 auto;
+	min-height: 44px;
+	margin: 0;
+	padding: 10px 18px;
+	border: 2px solid var(--dsmkc-primary);
+	border-radius: var(--dsmkc-radius);
+	font-family: inherit;
+	font-size: 1em;
+	font-weight: 600;
+	line-height: 1.2;
+	text-transform: none;
+	letter-spacing: normal;
+	text-decoration: none;
+	cursor: pointer;
+	box-shadow: none;
+	transition: filter .15s ease, background-color .15s ease;
+}
+.dsmkc-root .dsmkc-btn--primary,
+.dsmkc-placeholder .dsmkc-btn--primary {
+	background: var(--dsmkc-primary);
+	color: var(--dsmkc-primary-text);
+}
+.dsmkc-root .dsmkc-actions .dsmkc-btn--primary,
+.dsmkc-root .dsmkc-panel-foot .dsmkc-btn--primary {
+	flex: 1 1 0; /* Aceptar y Rechazar: exactamente el mismo ancho. */
+	min-width: 132px;
+	white-space: nowrap;
+}
+/* En los formatos de caja, «Configurar» ocupa su propia fila. */
+.dsmkc-pos-caja_izquierda .dsmkc-actions .dsmkc-btn--secondary,
+.dsmkc-pos-caja_derecha .dsmkc-actions .dsmkc-btn--secondary,
+.dsmkc-pos-modal .dsmkc-actions .dsmkc-btn--secondary { flex: 1 1 100%; }
+.dsmkc-root .dsmkc-btn--secondary,
+.dsmkc-placeholder .dsmkc-btn--secondary {
+	background: transparent;
+	color: var(--dsmkc-text);
+}
+.dsmkc-root .dsmkc-btn:hover,
+.dsmkc-placeholder .dsmkc-btn:hover { filter: brightness(1.12); }
+.dsmkc-root .dsmkc-btn:focus-visible,
+.dsmkc-root .dsmkc-close:focus-visible,
+.dsmkc-root .dsmkc-revisit:focus-visible,
+.dsmkc-root summary:focus-visible,
+.dsmkc-placeholder .dsmkc-btn:focus-visible {
+	outline: 3px solid var(--dsmkc-link);
+	outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------ Capa 2 */
+.dsmkc-root .dsmkc-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 2147483000;
+	background: rgba(0, 0, 0, .45);
+}
+
+.dsmkc-root .dsmkc-panel {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(100% - 24px);
+	max-width: 680px;
+	max-height: calc(100vh - 24px);
+	display: flex;
+	flex-direction: column;
+	border-radius: var(--dsmkc-radius);
+}
+.dsmkc-root .dsmkc-panel[hidden] { display: none !important; }
+
+.dsmkc-root .dsmkc-panel-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 18px 22px 10px;
+}
+.dsmkc-root .dsmkc-panel-head .dsmkc-title { margin: 0; }
+
+.dsmkc-root .dsmkc-close {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: transparent;
+	color: inherit;
+	font-size: 28px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.dsmkc-root .dsmkc-panel-body {
+	padding: 0 22px 12px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+.dsmkc-root .dsmkc-panel-intro { margin: 0 0 12px; }
+
+.dsmkc-root .dsmkc-cat {
+	padding: 14px 0;
+	border-top: 1px solid rgba(127, 127, 127, .25);
+}
+.dsmkc-root .dsmkc-cat-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+.dsmkc-root .dsmkc-cat-name { font-weight: 700; }
+.dsmkc-root .dsmkc-cat-desc,
+.dsmkc-root .dsmkc-cat-services { margin: 6px 0 0; font-size: .92em; }
+.dsmkc-root .dsmkc-always { font-size: .85em; font-weight: 600; opacity: .8; white-space: nowrap; }
+
+.dsmkc-root .dsmkc-details { margin-top: 8px; font-size: .88em; }
+.dsmkc-root .dsmkc-details summary { cursor: pointer; color: var(--dsmkc-link); font-weight: 600; }
+.dsmkc-root .dsmkc-table-wrap { overflow-x: auto; margin-top: 8px; }
+.dsmkc-root .dsmkc-table { width: 100%; border-collapse: collapse; font-size: .95em; }
+.dsmkc-root .dsmkc-table th,
+.dsmkc-root .dsmkc-table td {
+	padding: 6px 8px;
+	border-bottom: 1px solid rgba(127, 127, 127, .2);
+	text-align: left;
+	vertical-align: top;
+	color: inherit;
+	background: transparent;
+}
+.dsmkc-root .dsmkc-table code { font-size: .95em; word-break: break-all; background: transparent; color: inherit; }
+
+.dsmkc-root .dsmkc-panel-foot {
+	padding: 14px 22px 18px;
+	border-top: 1px solid rgba(127, 127, 127, .25);
+}
+
+/* Interruptor (role="switch") */
+.dsmkc-root .dsmkc-switch {
+	position: relative;
+	display: inline-block;
+	flex: 0 0 auto;
+	width: 46px;
+	height: 26px;
+	margin: 0;
+}
+.dsmkc-root .dsmkc-switch input {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	opacity: 0;
+	cursor: pointer;
+	z-index: 1;
+}
+.dsmkc-root .dsmkc-slider {
+	position: absolute;
+	inset: 0;
+	border-radius: 26px;
+	background: #9ca3af;
+	transition: background-color .15s ease;
+}
+.dsmkc-root .dsmkc-slider::before {
+	content: "";
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #ffffff;
+	transition: transform .15s ease;
+}
+.dsmkc-root .dsmkc-switch input:checked + .dsmkc-slider { background: var(--dsmkc-link); }
+.dsmkc-root .dsmkc-switch input:checked + .dsmkc-slider::before { transform: translateX(20px); }
+.dsmkc-root .dsmkc-switch input:focus-visible + .dsmkc-slider { outline: 3px solid var(--dsmkc-link); outline-offset: 2px; }
+
+/* ------------------------------------------------------------------ Botón flotante */
+.dsmkc-root .dsmkc-revisit {
+	-webkit-appearance: none;
+	appearance: none;
+	position: fixed;
+	bottom: 16px;
+	z-index: 2147482999;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: var(--dsmkc-primary);
+	color: var(--dsmkc-primary-text);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+	cursor: pointer;
+}
+.dsmkc-root .dsmkc-revisit--izquierda { left: 16px; }
+.dsmkc-root .dsmkc-revisit--derecha { right: 16px; }
+
+.dsmkc-root .dsmkc-sr {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ Contenido bloqueado */
+.dsmkc-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	width: 100%;
+	padding: 20px;
+	background: #f3f4f6;
+	color: #1f2937;
+	border-radius: var(--dsmkc-radius);
+	font-family: var(--dsmkc-font);
+	font-size: 14px;
+	line-height: 1.5;
+	text-align: center;
+	z-index: 1;
+}
+.dsmkc-placeholder p { margin: 0 0 8px; max-width: 520px; }
+.dsmkc-placeholder p:last-child { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0; }
+.dsmkc-placeholder .dsmkc-btn { flex: 0 0 auto; font-size: 14px; min-height: 40px; }
+
+.dsmkc-footer-links {
+	padding: 12px 16px;
+	text-align: center;
+	font-size: 14px;
+}
+.dsmkc-legal-links a { margin: 0 6px; }
+
+/* ------------------------------------------------------------------ Páginas legales */
+.dsmkc-legal table.dsmkc-policy-table { width: 100%; border-collapse: collapse; margin: 1em 0 2em; font-size: .92em; }
+.dsmkc-legal table.dsmkc-policy-table th,
+.dsmkc-legal table.dsmkc-policy-table td { padding: 8px; border: 1px solid rgba(127, 127, 127, .3); text-align: left; vertical-align: top; }
+.dsmkc-legal table.dsmkc-policy-table code { word-break: break-all; }
+.dsmkc-legal .dsmkc-table-scroll { overflow-x: auto; }
+
+/* ------------------------------------------------------------------ Móvil */
+@media (max-width: 600px) {
+	.dsmkc-root .dsmkc-banner { padding: 14px 16px; font-size: min(var(--dsmkc-size), 14px); max-height: 75vh; }
+	.dsmkc-root .dsmkc-desc { margin-bottom: 12px; }
+	.dsmkc-pos-caja_izquierda .dsmkc-banner,
+	.dsmkc-pos-caja_derecha .dsmkc-banner { left: 8px; right: 8px; bottom: 8px; width: auto; max-width: none; }
+	.dsmkc-pos-barra_inferior .dsmkc-banner,
+	.dsmkc-pos-barra_superior .dsmkc-banner { padding: 14px 16px; }
+	/* Aceptar y Rechazar lado a lado (mismo ancho); Configurar debajo. */
+	.dsmkc-root .dsmkc-actions .dsmkc-btn--primary,
+	.dsmkc-root .dsmkc-panel-foot .dsmkc-btn--primary { flex: 1 1 calc(50% - 4px); min-width: 0; padding: 10px 8px; white-space: normal; }
+	.dsmkc-root .dsmkc-actions .dsmkc-btn--secondary,
+	.dsmkc-root .dsmkc-panel-foot .dsmkc-btn--secondary { flex: 1 1 100%; }
+	.dsmkc-root .dsmkc-panel { width: 100%; max-height: 100%; height: 100%; border-radius: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.dsmkc-root *,
+	.dsmkc-placeholder * { transition: none !important; }
+}
+
+@media print {
+	.dsmkc-root { display: none !important; }
+}
+
+/* ------------------------------------------------------------------ Desistimiento (2.0) */
+.dsmkc-legal .dsmkc-model-form { border: 1px dashed rgba(127, 127, 127, .5); border-radius: 6px; padding: 16px 20px; margin: 1em 0 2em; }
+.dsmkc-legal .dsmkc-model-form p { margin: 0 0 .6em; }
+.dsmkc-legal .dsmkc-withdrawal-form { margin: 1.5em 0; }
+.dsmkc-legal .dsmkc-withdrawal-button {
+	display: inline-block;
+	padding: 12px 22px;
+	border-radius: 6px;
+	background: var(--e-global-color-primary, #1f2937);
+	color: #fff;
+	font-weight: 700;
+	text-decoration: none;
+}
+.dsmkc-legal .dsmkc-withdrawal-button:hover,
+.dsmkc-legal .dsmkc-withdrawal-button:focus { filter: brightness(1.12); color: #fff; }
+.dsmkc-legal mark.dsmkc-pending { background: #fde68a; color: #78350f; padding: 0 3px; }

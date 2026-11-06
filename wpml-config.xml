@@ -1,0 +1,31 @@
+<wpml-config>
+	<!-- DSMK Legal: textos editables traducibles con WPML / Polylang (String Translation).
+	     TranslatePress traduce directamente el HTML del banner y de las páginas legales. -->
+	<admin-texts>
+		<key name="dsmkc_settings">
+			<key name="banner_titulo" />
+			<key name="banner_texto" />
+			<key name="btn_aceptar" />
+			<key name="btn_rechazar" />
+			<key name="btn_configurar" />
+			<key name="btn_guardar" />
+			<key name="titular_actividad" />
+			<key name="cat_necessary_nombre" />
+			<key name="cat_necessary_desc" />
+			<key name="cat_preferences_nombre" />
+			<key name="cat_preferences_desc" />
+			<key name="cat_analytics_nombre" />
+			<key name="cat_analytics_desc" />
+			<key name="cat_marketing_nombre" />
+			<key name="cat_marketing_desc" />
+			<key name="extra_aviso" />
+			<key name="extra_privacidad" />
+			<key name="extra_cookies" />
+			<key name="extra_terminos" />
+			<key name="extra_condiciones" />
+			<key name="extra_desistimiento" />
+			<key name="serv_descripcion" />
+			<key name="tienda_productos" />
+		</key>
+	</admin-texts>
+</wpml-config>

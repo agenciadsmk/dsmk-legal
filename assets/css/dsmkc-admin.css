@@ -1,0 +1,52 @@
+/**
+ * DSMK Legal — Estilos del panel de administración.
+ *
+ * @package   DSMK_Legal
+ * @file      assets/css/dsmkc-admin.css
+ * @since     1.0.0
+ */
+
+.dsmkc-admin .dsmkc-version { font-size: 13px; font-weight: 400; color: #646970; }
+.dsmkc-admin .dsmkc-tab { margin-top: 16px; }
+.dsmkc-admin .dsmkc-card { background: #fff; border: 1px solid #dcdcde; border-radius: 6px; padding: 4px 20px 16px; margin-bottom: 16px; }
+.dsmkc-admin .dsmkc-card h2 { font-size: 15px; margin: 16px 0 8px; }
+.dsmkc-admin .dsmkc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; align-items: start; }
+.dsmkc-admin .dsmkc-two-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 1200px) { .dsmkc-admin .dsmkc-two-cols { grid-template-columns: 1fr; } }
+.dsmkc-admin .dsmkc-sticky { position: sticky; top: 46px; }
+.dsmkc-admin .form-table th { width: 260px; }
+.dsmkc-admin .dsmkc-req { color: #b32d2e; }
+.dsmkc-admin .dsmkc-check { display: inline-block; min-width: 260px; margin: 0 12px 6px 0; }
+.dsmkc-admin .dsmkc-ok { color: #00733a; }
+.dsmkc-admin .dsmkc-warn { color: #996800; }
+.dsmkc-admin .dsmkc-fail { color: #b32d2e; }
+.dsmkc-admin .dsmkc-big { font-size: 22px; font-weight: 700; }
+.dsmkc-admin .dsmkc-big span { margin-right: 16px; }
+.dsmkc-admin .dsmkc-checklist { margin: 0; }
+.dsmkc-admin .dsmkc-checklist li { padding: 6px 0 6px 22px; border-bottom: 1px solid #f0f0f1; position: relative; color: #1d2327; }
+.dsmkc-admin .dsmkc-checklist li::before { position: absolute; left: 0; top: 6px; font-weight: 700; }
+.dsmkc-admin .dsmkc-checklist li.dsmkc-ok::before { content: "✔"; color: #00733a; }
+.dsmkc-admin .dsmkc-checklist li.dsmkc-warn::before { content: "!"; color: #996800; left: 4px; }
+.dsmkc-admin .dsmkc-checklist li.dsmkc-fail::before { content: "✘"; color: #b32d2e; }
+.dsmkc-admin .dsmkc-checklist li span { color: #646970; font-size: 12px; }
+.dsmkc-admin .dsmkc-steps li { margin-bottom: 6px; }
+.dsmkc-admin .dsmkc-inline { display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+.dsmkc-admin .dsmkc-classify { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 4px; }
+.dsmkc-admin .dsmkc-classify input[type="text"] { width: 170px; }
+.dsmkc-admin .dsmkc-progress { margin: 12px 0; }
+.dsmkc-admin .dsmkc-progress-bar { height: 8px; width: 0; background: #2271b1; border-radius: 4px; transition: width .3s; }
+.dsmkc-admin .dsmkc-progress-text { color: #646970; font-size: 12px; word-break: break-all; }
+
+/* Vista previa: el banner y el panel dejan de ser fijos para verse dentro de la tarjeta. */
+.dsmkc-admin .dsmkc-preview { position: relative; background: repeating-linear-gradient(45deg, #f6f7f7, #f6f7f7 10px, #fff 10px, #fff 20px); border: 1px solid #dcdcde; border-radius: 6px; padding: 20px; min-height: 220px; overflow: hidden; }
+.dsmkc-admin .dsmkc-preview .dsmkc-banner,
+.dsmkc-admin .dsmkc-preview .dsmkc-panel { position: relative !important; inset: auto !important; transform: none !important; margin: 0 auto 16px; width: 100% !important; }
+.dsmkc-admin .dsmkc-preview .dsmkc-pos-caja_izquierda .dsmkc-banner { margin-left: 0; }
+.dsmkc-admin .dsmkc-preview .dsmkc-pos-caja_derecha .dsmkc-banner { margin-right: 0; }
+.dsmkc-admin .dsmkc-preview .dsmkc-pos-caja_izquierda .dsmkc-banner,
+.dsmkc-admin .dsmkc-preview .dsmkc-pos-caja_derecha .dsmkc-banner { max-width: var(--dsmkc-maxw) !important; }
+.dsmkc-admin .dsmkc-preview .dsmkc-pos-barra_inferior .dsmkc-banner,
+.dsmkc-admin .dsmkc-preview .dsmkc-pos-barra_superior .dsmkc-banner { padding: 18px 22px; }
+.dsmkc-admin .dsmkc-preview .dsmkc-panel { max-height: none; height: auto; }
+.dsmkc-admin .dsmkc-preview .dsmkc-overlay,
+.dsmkc-admin .dsmkc-preview .dsmkc-revisit { display: none !important; }
