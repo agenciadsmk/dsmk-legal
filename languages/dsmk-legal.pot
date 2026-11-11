@@ -1,0 +1,3707 @@
+# Copyright (C) 2026 DSMK Agencia Digital
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: DSMK Legal 2.3.0\n"
+"Report-Msgid-Bugs-To: hola@dsmk.es\n"
+"POT-Creation-Date: 2026-11-06 23:03+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+"X-Domain: dsmk-legal\n"
+
+#: admin/class-dsmkc-admin.php:45
+msgid "Resumen"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:46 admin/class-dsmkc-admin.php:623 admin/class-dsmkc-admin.php:638 includes/class-dsmkc-legal.php:371 includes/class-dsmkc-report.php:359 includes/class-dsmkc-frontend.php:448
+msgid "Titular"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:47
+msgid "Documentos"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:48 admin/class-dsmkc-admin.php:774
+msgid "Servicios"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:49
+msgid "Tienda"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:50 includes/class-dsmkc-settings.php:282
+msgid "Textos adicionales"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:51
+msgid "Cookies: banner"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:52
+msgid "Cookies: categorías"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:53
+msgid "Cookies: servicios"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:54 includes/class-dsmkc-settings.php:178
+msgid "Integraciones"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:55
+msgid "Registro"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:56 includes/class-dsmkc-audit.php:502
+msgid "Auditoría"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:58
+msgid "Herramientas"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:98 admin/class-dsmkc-admin.php:99 admin/class-dsmkc-admin.php:241
+msgid "DSMK Legal"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:116
+msgid "Ajustes"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:137
+msgid "el banner ya bloquea las cookies, pero faltan los datos del titular para generar los textos legales."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:137
+msgid "Completar ahora"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:178
+msgid "Escaneando"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:179
+msgid "Escaneo completado. Recargando…"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:180
+msgid "No se pudo leer la web desde el navegador (¿dominio distinto o protección contra iframes?). Usa el escaneo de servidor."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:181
+msgid "Copiado"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:182
+msgid "Escaneo del navegador terminado. Ejecutando la auditoría de servidor (puede tardar hasta un minuto)…"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:233 admin/class-dsmkc-admin.php:1016
+msgid "No tienes permisos suficientes."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:305
+msgid "Ajustes guardados. Se han vaciado las cachés de página compatibles."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:306
+msgid "Hecho."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:307
+msgid "Página asignada al documento."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:308
+msgid "Auditoría completada y guardada en el histórico."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:309
+msgid "Escaneo completado."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:310
+msgid "Hecho: todos los visitantes verán de nuevo el banner."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:311
+msgid "Cookie clasificada y añadida a la política."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:312
+msgid "Elemento ignorado."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:313
+msgid "Servicio actualizado."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:314
+msgid "Cookie eliminada de la política."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:315
+msgid "Ajustes importados."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:316
+msgid "Comprobación de actualizaciones hecha."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:317
+msgid "No se pudo completar la acción."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:364
+msgid "Guardar cambios"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:384
+msgid "Activado"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:412
+msgid "— Sin asignar —"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:419
+msgid "Ver"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:453
+msgid "Vista previa"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:454
+msgid "Guarda para actualizar textos. Los colores se actualizan al momento. En modo «Heredar» se usan los colores globales de Elementor del kit activo."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:458
+msgid "Ver / ocultar el panel de configuración"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:477
+msgid "Puesta en marcha"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:479
+#, php-format
+msgid "Rellena los <a href=\"%s\">datos del titular</a>."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:480
+#, php-format
+msgid "Pulsa «Escanear la web» en <a href=\"%s\">Servicios y cookies</a> (el plugin ya bloquea todo lo conocido desde el primer minuto)."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:481
+#, php-format
+msgid "En <a href=\"%s\">Documentos</a> activa los que necesita la web y, para cada uno, usa la página que ya tenga o crea una nueva con su botón."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:482
+#, php-format
+msgid "Atajo: en <a href=\"%s\">Herramientas</a> puedes detectar datos automáticamente, descargar el briefing para la IA y pegar el JSON que te devuelva."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:483
+#, php-format
+msgid "Ajusta el <a href=\"%s\">aspecto del banner</a> si lo necesitas."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:484
+#, php-format
+msgid "Ejecuta la <a href=\"%s\">auditoría completa</a> y descarga el informe técnico."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:488 admin/class-dsmkc-admin.php:664
+msgid "Estado"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:497
+msgid "Datos"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:499
+#, php-format
+msgid "Servicios detectados: %d"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:500
+#, php-format
+msgid "Cookies documentadas: %d"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:501
+#, php-format
+msgid "Último escaneo: %s"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:501
+msgid "nunca"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:502
+#, php-format
+msgid "Versión de la política: %d"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:503
+#, php-format
+msgid "Consentimientos (30 días): %1$d — aceptan todo %2$d · rechazan todo %3$d · personalizado %4$d"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:506
+#, php-format
+msgid "Última auditoría: %1$s · %2$d/100"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:506
+msgid "Sin auditorías todavía."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:507
+msgid "Ir a la auditoría"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:526
+msgid "Escanear la web"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:527
+msgid "El escaneo completo usa tu navegador (detecta cookies creadas por JavaScript y servicios cargados por Google Tag Manager) y el servidor (cabeceras y HTML). Tarda unos segundos por página."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:529
+msgid "Escanear la web (completo)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:530
+msgid "Solo escaneo de servidor"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:534
+#, php-format
+msgid "Último escaneo: %1$s (%2$s, %3$d páginas)."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:540
+msgid "Servicios detectados"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:541
+msgid "Todos los servicios conocidos que no son necesarios se bloquean siempre hasta el consentimiento, aunque no aparezcan aquí. Esta lista determina lo que se documenta en la política y en el panel."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:543 includes/class-dsmkc-report.php:431
+msgid "Servicio"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:543 includes/class-dsmkc-report.php:431
+msgid "Proveedor"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:543 admin/class-dsmkc-admin.php:623 includes/class-dsmkc-report.php:431
+msgid "Categoría"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:543
+msgid "Cookies"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:543
+msgid "Detectado"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:568
+msgid "(recomendada)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:570
+msgid "No se usa en esta web (ocultar)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:576
+msgid "Integración / siempre"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:584 includes/class-dsmkc-report.php:451
+msgid "Pendientes de clasificar"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:586
+msgid "No hay cookies ni recursos sin clasificar."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:588
+msgid "El escáner ha encontrado elementos que no están en el catálogo. Clasifícalos para que aparezcan en la política (o ignóralos si no instalan cookies). Los dominios de terceros desconocidos puedes bloquearlos en «Avanzado»."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:590
+msgid "Nombre"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:590 includes/class-dsmkc-legal.php:371
+msgid "Tipo"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:590
+msgid "Clasificar"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:595
+msgid "Dominio de terceros"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:602
+msgid "Titular (Propia o empresa)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:603 admin/class-dsmkc-admin.php:623 admin/class-dsmkc-admin.php:639 includes/class-dsmkc-legal.php:371 includes/class-dsmkc-frontend.php:448
+msgid "Finalidad"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:604
+msgid "Duración (ej. 1 año)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:605 admin/class-dsmkc-admin.php:626 admin/class-dsmkc-admin.php:641 includes/class-dsmkc-services.php:442 includes/class-dsmkc-services.php:455
+msgid "Propia"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:605 admin/class-dsmkc-admin.php:626 admin/class-dsmkc-admin.php:641 includes/class-dsmkc-services.php:442 includes/class-dsmkc-services.php:455
+msgid "De terceros"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:606
+msgid "Guardar"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:608
+msgid "Ignorar"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:618
+msgid "Cookies añadidas a mano"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:620
+msgid "Ninguna."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:623 includes/class-dsmkc-legal.php:371 includes/class-dsmkc-frontend.php:448
+msgid "Cookie"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:623 admin/class-dsmkc-admin.php:640 admin/class-dsmkc-admin.php:871 includes/class-dsmkc-legal.php:371 includes/class-dsmkc-frontend.php:448
+msgid "Duración"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:627
+msgid "Eliminar"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:632
+msgid "Añadir cookie"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:636
+msgid "Nombre (admite *)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:642
+msgid "Añadir"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:661
+msgid "Documentos y páginas"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:662
+msgid "Nada se crea solo. Para cada documento activo, usa una página que ya tenga la web (recomendado si existe) o crea una nueva. Si la web ya tiene una página parecida, aparece preseleccionada."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:664 includes/class-dsmkc-report.php:491
+msgid "Documento"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:664 admin/class-dsmkc-admin.php:774
+msgid "Acción"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:680
+msgid "Desactivado"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:684
+msgid "La página no usa el shortcode: muestra su propio texto, no el del plugin."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:686
+msgid "Texto generado por el plugin"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:689
+msgid "Gestionada por otro plugin"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:691
+#, php-format
+msgid "Sin asignar. La web ya tiene «%s»."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:693
+msgid "Sin página"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:707
+msgid "— Elegir página existente —"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:713
+msgid "Sustituir su contenido por el texto del plugin"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:714
+msgid "Usar esta página"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:718
+#, php-format
+msgid "La web ya tiene la página «%s». ¿Crear otra nueva de todos modos?"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:719
+msgid "Crear página nueva"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:728
+msgid "Se crearán estas páginas nuevas:"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:728
+msgid "Los documentos para los que la web ya tiene una página parecida no se crean: asígnalos con «Usar esta página»."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:728
+#, php-format
+msgid "Crear las páginas que faltan (%d)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:730
+msgid "«Sustituir su contenido» guarda una copia del texto anterior (revisiones de WordPress) y, en páginas de Elementor, desactiva el constructor solo en esa página. Sin marcarlo, la página solo se enlaza y conserva su texto."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:733
+msgid "Otros shortcodes"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:736
+msgid "Enlaces a todos los documentos activos + «Configurar cookies», para el pie (Elementor: widget Shortcode)."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:737
+msgid "Solo las tablas de cookies."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:738
+msgid "Enlace que abre el panel de cookies."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:739
+msgid "Función de desistimiento online: la aporta el plugin de desistimiento de DSMK (filtro dsmkc_withdrawal_form); sin él, botón por email."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:740
+msgid "Enlace para cualquier botón o menú (también en Elementor) que abre el panel de cookies. También sirve la clase CSS «dsmkc-open-settings»."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:764
+msgid "Consentimientos registrados"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:768
+msgid "ID de consentimiento"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:769
+msgid "Buscar"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:770
+msgid "Exportar CSV"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:772
+msgid "El visitante puede ver su ID de consentimiento con DSMKCookies.consent().id en la consola, o te lo puede facilitar para localizar su registro."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:774
+msgid "Fecha (UTC)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:774
+msgid "ID"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:774
+msgid "Categorías"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:774
+msgid "Política / banner"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:774
+msgid "IP anonimizada"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:774 includes/class-dsmkc-report.php:404
+msgid "URL"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:777
+msgid "Sin registros todavía."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:800 includes/class-dsmkc-report.php:472
+msgid "Versiones del banner mostradas"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:802 includes/class-dsmkc-report.php:473
+msgid "Huella"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:802 includes/class-dsmkc-report.php:473
+msgid "Desde"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:802 includes/class-dsmkc-report.php:473
+msgid "Política"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:802
+msgid "Textos"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:828
+msgid "Auditoría técnica"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:829
+msgid "Un clic: escanea la web desde tu navegador (cookies creadas por JavaScript) y desde el servidor (cada página como visitante sin consentimiento y como escáner), revisa la configuración, el SSL, las cabeceras, los formularios y los enlaces legales, y guarda el resultado en el histórico. Tarda entre 20 y 60 segundos."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:831
+msgid "Ejecutar auditoría completa"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:832
+msgid "Solo desde el servidor (más rápido)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:835
+msgid "Además se ejecuta automáticamente una vez por semana (desactivable en «Cookies: servicios»)."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:835
+msgid "La auditoría semanal automática está desactivada."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:839
+msgid "Todavía no hay auditorías. Ejecuta la primera con el botón de arriba."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:842
+#, php-format
+msgid "Última auditoría: %s"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:845
+msgid "Abrir informe técnico (PDF)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:869
+msgid "Histórico de auditorías"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:871 includes/class-dsmkc-report.php:521
+msgid "Fecha"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:871 includes/class-dsmkc-report.php:521
+msgid "Origen"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:871 includes/class-dsmkc-report.php:521
+msgid "Puntuación"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:871 includes/class-dsmkc-report.php:521
+msgid "Páginas"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:871 includes/class-dsmkc-report.php:404 includes/class-dsmkc-report.php:521
+msgid "Rastreadores sin consentimiento"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:871 includes/class-dsmkc-report.php:521
+msgid "Servicios nuevos"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:876 includes/class-dsmkc-report.php:523
+msgid "Automática"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:876 includes/class-dsmkc-report.php:523
+msgid "Manual"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:883
+msgid "Informe"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:888
+msgid "Se guardan las 50 últimas auditorías; el detalle por página y el entorno técnico, en las 10 más recientes."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:892
+msgid "Declaración técnica de cumplimiento"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:893
+msgid "Texto para justificar el cumplimiento ante un cliente, un auditor o cualquier organismo. Adjunta el informe técnico en PDF."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:895
+msgid "Copiar texto"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:914
+msgid "Actualizaciones de DSMK Legal"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:917
+msgid "Versión instalada"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:918
+msgid "Última versión publicada"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:923
+msgid "Actualizar ahora"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:926
+msgid "Sin comprobar todavía"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:930
+msgid "Última comprobación"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:931 includes/class-dsmkc-report.php:503
+msgid "Servidor"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:931
+msgid "URL no válida (debe ser https)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:933
+msgid "Error"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:937
+msgid "Comprobar ahora"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:938
+msgid "WordPress comprueba solo cada 12 horas. Solo se instalan versiones firmadas por DSMK, y cada ZIP se verifica con su huella SHA-256 antes de instalarse."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:940
+msgid "Multisite: el origen de las actualizaciones lo fija la red (constantes DSMK_LEGAL_UPDATE_URL y DSMK_LEGAL_UPDATE_KEY en wp-config.php) y las automáticas se activan en Red › Plugins. Activa DSMK Legal para toda la red."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:944
+msgid "1. Detectar datos automáticamente"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:945
+msgid "Busca datos para los campos vacíos en WooCommerce, en los ajustes de WordPress y en los textos legales que ya tenga la web. Marca los que quieras aplicar."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:947
+msgid "No hay sugerencias: los campos detectables ya están rellenos o no se han encontrado datos."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:963
+msgid "Aplicar seleccionados"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:969
+msgid "2. Rellenar con IA"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:970
+msgid "Descarga el briefing (describe todos los campos, sus valores permitidos y lo que ya está relleno) y pégalo en Claude junto con la información del cliente. Te devolverá un JSON: pégalo en el punto 3."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:972
+msgid "Descargar briefing para IA (.md)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:973
+msgid "Copiar al portapapeles"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:979
+msgid "3. Importar"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:980
+msgid "Pega el JSON (de la IA, de otra web o de DSMK Cookies 1.x) o sube el archivo. Solo se aplican campos conocidos y todo se valida. Los IDs de página nunca se importan."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:986
+msgid "Rellenar solo los campos vacíos (no sobrescribir lo que ya hay)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:987
+msgid "Importar"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:992
+msgid "4. Exportar"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:993
+msgid "JSON con toda la configuración (sin IDs de página) para replicarla en otra web o guardarla como plantilla."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:994
+msgid "Exportar ajustes (JSON)"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:995
+msgid "Volver a pedir el consentimiento de cookies"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:996
+msgid "Todos los visitantes volverán a ver el banner. Úsalo si cambias las finalidades de las cookies."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:997
+msgid "¿Volver a mostrar el banner a todos los visitantes?"
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:997
+msgid "Pedir de nuevo el consentimiento"
+msgstr ""
+
+#. translators: %s: documentos.
+#: admin/class-dsmkc-admin.php:1087
+#, php-format
+msgid "No creadas porque ya existe una página parecida (asígnala): %s."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:1124
+msgid "Elige una página."
+msgstr ""
+
+#. translators: %s: lista de páginas.
+#: admin/class-dsmkc-admin.php:1147
+#, php-format
+msgid "Páginas creadas: %s."
+msgstr ""
+
+#. translators: 1: páginas, 2: servicios nuevos, 3: pendientes.
+#: admin/class-dsmkc-admin.php:1162
+#, php-format
+msgid "%1$d páginas · %2$d servicios nuevos · %3$d pendientes de clasificar."
+msgstr ""
+
+#. translators: %s: versión.
+#: admin/class-dsmkc-admin.php:1197
+#, php-format
+msgid "Hay una versión nueva: %s."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:1198
+msgid "Ya tienes la última versión."
+msgstr ""
+
+#. translators: 1: puntuación, 2: páginas, 3: segundos.
+#: admin/class-dsmkc-admin.php:1246
+#, php-format
+msgid "Puntuación %1$d/100 · %2$d páginas · %3$s s."
+msgstr ""
+
+#: admin/class-dsmkc-admin.php:1384
+msgid "No se encontró un JSON válido."
+msgstr ""
+
+#. translators: 1: campos aplicados, 2: ignorados.
+#: admin/class-dsmkc-admin.php:1389
+#, php-format
+msgid "%1$d campos aplicados, %2$d ignorados."
+msgstr ""
+
+#. translators: %d: campos.
+#: admin/class-dsmkc-admin.php:1427
+#, php-format
+msgid "%d campos aplicados."
+msgstr ""
+
+#. translators: %s: dominio.
+#: includes/class-dsmkc-scanner.php:464
+#, php-format
+msgid "[DSMK Legal] Cambios en las cookies de %s"
+msgstr ""
+
+#: includes/class-dsmkc-scanner.php:465
+msgid "El escaneo semanal ha detectado cambios en la web."
+msgstr ""
+
+#: includes/class-dsmkc-scanner.php:467
+msgid "Servicios nuevos (ya documentados y bloqueados hasta el consentimiento):"
+msgstr ""
+
+#: includes/class-dsmkc-scanner.php:470
+msgid "Cookies o recursos sin clasificar (revísalos en el panel):"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:61
+msgid "Datos del titular"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:62
+msgid "Con estos datos se generan automáticamente el aviso legal, la política de privacidad, la política de cookies y el texto del banner."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:64
+msgid "Titular (nombre o razón social)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:68
+msgid "Tipo de titular"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:70
+msgid "Sociedad mercantil"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:71
+msgid "Persona física / autónomo"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:72
+msgid "Asociación / fundación / entidad sin ánimo de lucro"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:73
+msgid "Administración pública"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:76
+msgid "NIF / CIF"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:77
+msgid "Domicilio completo"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:78
+msgid "Email de contacto"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:79
+msgid "Teléfono"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:80
+msgid "Datos registrales"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:80
+msgid "Sociedades: Registro Mercantil, tomo, folio, hoja e inscripción. Asociaciones: registro y número."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:81
+msgid "Profesión regulada (opcional)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:81
+msgid "Colegio profesional, número de colegiado, título y Estado que lo expidió, normas aplicables."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:82
+msgid "Actividad de la web"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:82
+msgid "Ej.: «información sobre los servicios de fotografía de la empresa y venta online de productos»."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:83
+msgid "Email del Delegado de Protección de Datos (si lo hay)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:84
+msgid "Proveedor de alojamiento web"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:84
+msgid "Se cita como encargado del tratamiento en la política de privacidad."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:88
+msgid "Datos que se recogen en la web"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:90
+msgid "Formulario de contacto"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:91
+msgid "Solicitud de presupuesto"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:92
+msgid "Tienda online (pedidos y clientes)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:93
+msgid "Clientes de servicios (encargos y facturación)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:94
+msgid "Registro de usuarios / área privada"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:95
+msgid "Newsletter / comunicaciones comerciales"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:96
+msgid "Envío de currículums"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:97 includes/class-dsmkc-legal.php:490
+msgid "Comentarios en el blog"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:98
+msgid "Reservas / citas"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:101
+msgid "Juzgados competentes (ciudad)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:101
+msgid "Para usuarios no consumidores. Con consumidores siempre rige su domicilio."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:105 includes/class-dsmkc-report.php:404
+msgid "Banner"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:106
+msgid "Los botones «Aceptar» y «Rechazar» siempre se muestran juntos en la primera capa y con el mismo diseño (Guía AEPD). Deja los textos vacíos para usar los textos automáticos."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:111
+msgid "Formato y posición"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:113
+msgid "Barra inferior a todo el ancho"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:114
+msgid "Barra superior a todo el ancho"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:115
+msgid "Caja flotante abajo a la izquierda"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:116
+msgid "Caja flotante abajo a la derecha"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:117
+msgid "Ventana centrada"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:120
+msgid "Título"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:120 includes/class-dsmkc-legal.php:248
+msgid "Usamos cookies"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:121
+msgid "Texto de la primera capa"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:121
+msgid "Vacío = texto automático según los servicios detectados (recomendado). Variables: {titular}, {finalidades}, {terceros}, {politica}."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:122
+msgid "Botón aceptar"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:122 includes/class-dsmkc-legal.php:250
+msgid "Aceptar todas"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:123
+msgid "Botón rechazar"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:123 includes/class-dsmkc-legal.php:251
+msgid "Rechazar todas"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:124
+msgid "Botón configurar"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:124 includes/class-dsmkc-legal.php:252
+msgid "Configurar"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:125
+msgid "Botón guardar selección"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:125 includes/class-dsmkc-legal.php:253
+msgid "Guardar mi selección"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:126
+msgid "Mostrar botón flotante para cambiar el consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:126
+msgid "Recomendado: permite revocar en cualquier momento. Si lo desactivas, enlaza «#dsmk-cookies» en el pie."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:130
+msgid "Posición del botón flotante"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:131
+msgid "Abajo a la izquierda"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:131
+msgid "Abajo a la derecha"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:133
+msgid "Validez del consentimiento (días)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:133
+msgid "Máximo 730 (24 meses, recomendación AEPD). Pasado el plazo se vuelve a preguntar."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:134
+msgid "Respetar la señal «Global Privacy Control» del navegador como rechazo"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:138
+msgid "Estilo"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:139
+msgid "En modo «Heredar» el banner toma los colores y la tipografía globales de Elementor (o del tema). En modo «Personalizado» usa los valores de abajo."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:144
+msgid "Modo de estilo"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:146
+msgid "Heredar estilos globales (Elementor / tema)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:147 includes/class-dsmkc-report.php:482
+msgid "Personalizado"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:150
+msgid "Fondo"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:151
+msgid "Texto"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:152
+msgid "Botones aceptar / rechazar (fondo)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:153
+msgid "Botones aceptar / rechazar (texto)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:154
+msgid "Enlaces e interruptores activos"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:155
+msgid "Radio de esquinas (px)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:156
+msgid "Tipografía (font-family)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:156
+msgid "Vacío = la de la web."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:157
+msgid "Tamaño de letra (px)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:158
+msgid "Ancho máximo de la caja (px)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:159
+msgid "Sombra"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:160
+msgid "CSS adicional"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:160
+msgid "Clases disponibles: .dsmkc-banner, .dsmkc-panel, .dsmkc-btn, .dsmkc-revisit."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:164
+msgid "Textos de categorías"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:165
+msgid "Textos que ve el usuario en el panel de configuración. Vacío = texto por defecto."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:167 includes/class-dsmkc-services.php:366
+msgid "Técnicas (necesarias)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:167
+msgid "Necesarias: nombre"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:168
+msgid "Necesarias: descripción"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:169 includes/class-dsmkc-services.php:370
+msgid "Preferencias"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:169
+msgid "Preferencias: nombre"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:170
+msgid "Preferencias: descripción"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:171 includes/class-dsmkc-services.php:374
+msgid "Analíticas"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:171
+msgid "Analíticas: nombre"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:172
+msgid "Analíticas: descripción"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:173 includes/class-dsmkc-services.php:378
+msgid "Publicidad y contenidos de terceros"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:173
+msgid "Publicidad: nombre"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:174
+msgid "Publicidad: descripción"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:179
+msgid "Si pegas aquí los identificadores, el plugin inserta los códigos ya bloqueados hasta el consentimiento. No los insertes además en el tema o en otro plugin."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:181
+msgid "Google Analytics 4 (G-XXXXXXX)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:182
+msgid "Google Tag Manager (GTM-XXXXXX)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:183
+msgid "Google Ads (AW-XXXXXXXXX)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:184
+msgid "Meta Pixel (ID numérico)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:185
+msgid "Microsoft Clarity (ID del proyecto)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:189
+msgid "Google Tag Manager se carga con…"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:191
+msgid "Consentimiento de analíticas (recomendado)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:192
+msgid "Consentimiento de publicidad"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:194
+msgid "Las etiquetas publicitarias dentro de GTM deben usar la comprobación de consentimiento de Consent Mode (ad_storage). El plugin envía el evento «dsmkc_consent_update» al dataLayer."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:196
+msgid "Google Consent Mode v2 (señales de consentimiento a Google)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:197
+msgid "Consent Mode «avanzado» (cargar etiquetas de Google sin cookies antes del consentimiento)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:197
+msgid "Desactivado = cumplimiento estricto: ninguna etiqueta de Google se carga sin consentimiento. Activarlo envía pings sin cookies a Google antes de consentir; la AEPD no lo ha avalado expresamente."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:198
+msgid "Ocultar datos publicitarios sin consentimiento (ads_data_redaction)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:199
+msgid "Pasar parámetros de clic por URL (url_passthrough)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:200
+msgid "Comunicar el consentimiento a otros plugins (WP Consent API)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:204
+msgid "Documentos legales"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:205
+msgid "Activa los documentos que necesita la web. Las páginas se crean o asignan con los botones de la tabla de arriba; los textos se actualizan solos con los datos de los formularios."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:207 includes/class-dsmkc-settings.php:285 includes/class-dsmkc-documents.php:77 includes/class-dsmkc-documents.php:77
+msgid "Aviso legal"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:208 includes/class-dsmkc-settings.php:286 includes/class-dsmkc-documents.php:78 includes/class-dsmkc-documents.php:78
+msgid "Política de privacidad"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:209 includes/class-dsmkc-settings.php:287 includes/class-dsmkc-documents.php:79 includes/class-dsmkc-documents.php:79
+msgid "Política de cookies"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:210 includes/class-dsmkc-settings.php:224 includes/class-dsmkc-settings.php:288 includes/class-dsmkc-documents.php:80
+msgid "Términos y condiciones del servicio"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:210
+msgid "Para webs que venden servicios (agencias, estudios, consultoras, profesionales). Se configura en la pestaña «Servicios»."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:211
+msgid "Condiciones generales de venta (tienda online)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:211
+msgid "Obligatorias en tiendas online. Se configuran en la pestaña «Tienda». Se asignan como página de términos de WooCommerce."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:212
+msgid "Derecho de desistimiento (información y formulario modelo)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:213
+msgid "Crear automáticamente las páginas que falten al guardar"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:213
+msgid "Desactivado (recomendado): las páginas se crean o asignan con los botones de arriba, después de revisar si la web ya tiene las suyas."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:214
+msgid "Página: aviso legal"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:215
+msgid "Página: política de privacidad"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:216
+msgid "Página: política de cookies"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:217
+msgid "Página: términos y condiciones"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:218
+msgid "Página: condiciones de venta"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:219
+msgid "Página: desistimiento"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:219
+msgid "Si usas el plugin de desistimiento de DSMK, elige aquí su página y marca «Página de otro plugin» en la pestaña Tienda."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:220
+msgid "Añadir automáticamente los enlaces legales al final de todas las páginas"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:220
+msgid "Si el pie está hecho con Elementor, mejor usa el shortcode [dsmk_enlaces_legales] en el pie."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:225
+msgid "Datos para el documento de términos y condiciones de servicios. Lo que dejes vacío se redacta con un texto genérico prudente."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:227
+msgid "Servicios que se prestan"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:227
+msgid "Ej.: diseño de identidad de marca, diseño gráfico, fotografía y vídeo corporativo…"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:228
+msgid "Tipo de clientes"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:228
+msgid "Solo empresas y profesionales (B2B)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:228
+msgid "También particulares / consumidores"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:229
+msgid "Cómo se contrata"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:229
+msgid "Presupuesto aceptado por escrito"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:229
+msgid "Contratación y pago en la web"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:229
+msgid "Ambas"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:230
+msgid "Precio y forma de pago"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:230
+#, php-format
+msgid "Ej.: 50 % al aceptar el presupuesto y 50 % a la entrega, por transferencia en 15 días desde la factura."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:231
+msgid "Plazos de ejecución"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:232
+msgid "Revisiones incluidas"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:232
+msgid "Ej.: dos rondas de cambios"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:233
+msgid "Propiedad intelectual de los trabajos"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:233
+msgid "Cesión de derechos de explotación al cliente tras el pago"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:233
+msgid "El titular conserva los derechos y da licencia de uso"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:234
+msgid "El titular puede mostrar los trabajos en su portfolio"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:235
+msgid "Cancelación por el cliente"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:236
+msgid "Límite de responsabilidad (solo B2B)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:236 includes/class-dsmkc-documents.php:560
+msgid "el importe abonado por el servicio afectado"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:240 includes/class-dsmkc-settings.php:289 includes/class-dsmkc-documents.php:81
+msgid "Condiciones de venta"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:241
+msgid "Datos para las condiciones generales de venta y el desistimiento de la tienda online."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:243
+msgid "Qué se vende"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:243
+msgid "Ej.: láminas y obra gráfica original"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:244
+msgid "Zonas de envío"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:244
+msgid "Ej.: España peninsular y Baleares"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:245
+msgid "Plazo de entrega habitual"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:245
+msgid "Ej.: 24-72 horas laborables"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:246
+msgid "Gastos de envío"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:246
+msgid "Ej.: Envío gratuito a partir de 50 €. Resto, 4,95 €."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:247
+msgid "Precios"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:247
+msgid "IVA incluido"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:247
+msgid "IVA no incluido (venta a profesionales)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:251
+msgid "Formas de pago"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:252
+msgid "Tarjeta"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:252
+msgid "Transferencia"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:252
+msgid "Contra reembolso"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:254
+msgid "Días para desistir"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:254
+msgid "Mínimo legal: 14 días naturales."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:255
+msgid "Gastos de devolución"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:255
+msgid "A cargo del cliente"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:255
+msgid "A cargo de la tienda"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:259
+msgid "Productos sin derecho de desistimiento"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:261
+msgid "Personalizados o hechos a medida"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:262
+msgid "Perecederos"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:263
+msgid "Precintados por higiene o salud"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:264
+msgid "Grabaciones o software precintados"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:265
+msgid "Contenido digital descargable"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:266
+msgid "Mezclados con otros bienes tras la entrega"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:269
+msgid "Atención al cliente (canal y horario)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:269
+msgid "Ej.: de lunes a viernes de 9 a 14 h"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:273 includes/class-dsmkc-settings.php:290 includes/class-dsmkc-documents.php:82
+msgid "Desistimiento"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:274
+msgid "Desde el 19/06/2026 la Directiva (UE) 2023/2673 exige una función de desistimiento online en las tiendas. El plugin de desistimiento de DSMK se integra aquí: aporta el botón funcional y este hub, los textos."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:276
+msgid "Página de desistimiento"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:276
+msgid "La genera este plugin (información + formulario modelo)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:276
+msgid "Página de otro plugin (p. ej. el de desistimiento de DSMK)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:277
+msgid "Email para desistimientos"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:277
+msgid "Vacío = email del titular."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:278
+msgid "Dirección para devoluciones"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:278
+msgid "Vacío = domicilio del titular."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:283
+msgid "Cláusulas propias de este cliente. Se añaden al final de cada documento en un apartado «Otras condiciones»."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:294 includes/class-dsmkc-report.php:241
+msgid "Escaneo"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:296
+msgid "Escanear la web automáticamente cada semana"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:297
+msgid "Volver a pedir el consentimiento cuando aparezcan servicios nuevos"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:298
+msgid "Email para avisos de nuevos servicios o cookies sin clasificar"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:298
+msgid "Vacío = email del administrador."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:302
+msgid "Registro de consentimientos"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:304
+msgid "Guardar prueba de cada consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:304
+msgid "Se guarda: ID anónimo, fecha, elección, versión del banner, IP anonimizada y huella del navegador (hash). Sin datos identificativos."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:305
+msgid "Conservar registros (meses)"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:305
+msgid "36 meses cubre el plazo de prescripción de infracciones muy graves de la LSSI (3 años)."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:309
+msgid "Avanzado"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:311
+msgid "Bloqueos adicionales"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:311
+msgid "Una regla por línea: «texto-de-la-url | categoría | nombre del servicio». Categorías: preferences, analytics, marketing. Ej.: «widget.ejemplo.com | marketing | Widget Ejemplo»."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:312
+msgid "Borrar todos los datos y registros al desinstalar el plugin"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:317
+msgid "Actualizaciones"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:319
+msgid "Instalar automáticamente las nuevas versiones de DSMK Legal"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:319
+msgid "WordPress las instala solo, en segundo plano, y avisa por email al administrador. Desactívalo para actualizar a mano desde Plugins."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:320
+msgid "URL de actualizaciones"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:320
+msgid "Vacío = servidor de DSMK. Solo https. La constante DSMK_LEGAL_UPDATE_URL de wp-config.php tiene prioridad."
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:321
+msgid "Clave de actualizaciones"
+msgstr ""
+
+#: includes/class-dsmkc-settings.php:321
+msgid "Opcional. Solo si el servidor de actualizaciones la pide. Nunca se exporta."
+msgstr ""
+
+#. translators: %s: dato pendiente.
+#: includes/class-dsmkc-legal.php:72 includes/class-dsmkc-documents.php:372
+#, php-format
+msgid "[pendiente: %s]"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:190
+msgid "recordar tus preferencias y ofrecerte funciones de terceros como chats o reservas"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:191
+msgid "analizar de forma estadística el uso de la web y mejorarla"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:192
+msgid "mostrarte publicidad personalizada a partir de un perfil elaborado con tus hábitos de navegación (por ejemplo, páginas visitadas), medir campañas y mostrar contenidos de terceros como vídeos o mapas"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:201 includes/class-dsmkc-legal.php:550 includes/class-dsmkc-legal.php:643
+msgid "política de cookies"
+msgstr ""
+
+#. translators: 1: titular, 2: finalidades.
+#: includes/class-dsmkc-legal.php:217
+#, php-format
+msgid "En %1$s utilizamos cookies propias y de terceros para %2$s."
+msgstr ""
+
+#. translators: %s: lista de terceros.
+#: includes/class-dsmkc-legal.php:223
+#, php-format
+msgid "Pueden instalarlas: %s."
+msgstr ""
+
+#. translators: %s: enlace a la política de cookies.
+#: includes/class-dsmkc-legal.php:227
+#, php-format
+msgid "Puedes aceptarlas todas, rechazarlas todas o elegir cuáles permites en «Configurar», y cambiar tu decisión cuando quieras. Más información en nuestra %s."
+msgstr ""
+
+#. translators: %s: titular.
+#: includes/class-dsmkc-legal.php:233
+#, php-format
+msgid "En %s solo utilizamos cookies técnicas, necesarias para que la web funcione, que no requieren tu consentimiento. Si incorporamos otras cookies solo se instalarán si las aceptas."
+msgstr ""
+
+#. translators: %s: enlace a la política de cookies.
+#: includes/class-dsmkc-legal.php:237
+#, php-format
+msgid "Más información en nuestra %s."
+msgstr ""
+
+#. translators: %s: enlace a la política de cookies.
+#: includes/class-dsmkc-legal.php:256
+#, php-format
+msgid "Elige qué cookies permites. Las técnicas son necesarias y están siempre activas; el resto solo se instalan si las activas. Puedes cambiar tu elección en cualquier momento. Más información en la %s."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:311
+msgid "y"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:326 includes/class-dsmkc-frontend.php:305 includes/class-dsmkc-frontend.php:468 includes/class-dsmkc-frontend.php:468
+msgid "Configurar cookies"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:345 includes/class-dsmkc-report.php:235
+msgid "Información legal"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:403
+#, php-format
+msgid "Esta política explica qué son las cookies, qué tipos existen, cuáles se utilizan en %1$s (%2$s), con qué finalidad y cómo puedes aceptarlas, rechazarlas o retirar tu consentimiento en cualquier momento, de acuerdo con el artículo 22.2 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI), el Reglamento (UE) 2016/679 (RGPD) y la Guía sobre el uso de las cookies de la Agencia Española de Protección de Datos."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:405
+msgid "1. ¿Qué son las cookies y para qué sirven?"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:406
+msgid "Una cookie es un pequeño archivo de texto que una página web descarga en tu ordenador, móvil o tableta cuando la visitas. Permite a la web almacenar y recuperar información sobre tu navegación o tu equipo y, según la información que contenga y cómo se utilice, puede servir para reconocerte como usuario."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:407
+msgid "Las cookies cumplen funciones muy diversas: permiten que la web funcione correctamente (por ejemplo, mantener la sesión o el carrito de la compra), recordar tus preferencias, obtener estadísticas sobre cómo se usa la web para mejorarla o mostrarte publicidad adaptada a tus intereses."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:408
+msgid "Esta política se aplica también a tecnologías similares que almacenan o leen información en tu dispositivo, como el almacenamiento local del navegador (localStorage), los píxeles o las balizas web."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:410
+msgid "2. Responsable"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:411
+#, php-format
+msgid "El responsable de las cookies propias de esta web es %1$s, con NIF %2$s, domicilio en %3$s y email de contacto %4$s. Las cookies de terceros son responsabilidad de las empresas indicadas en el apartado 4."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:411 includes/class-dsmkc-legal.php:528 includes/class-dsmkc-legal.php:618 includes/class-dsmkc-documents.php:433 includes/class-dsmkc-documents.php:512 includes/class-dsmkc-documents.php:737
+msgid "titular"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:411 includes/class-dsmkc-legal.php:530 includes/class-dsmkc-legal.php:579 includes/class-dsmkc-legal.php:620 includes/class-dsmkc-documents.php:435 includes/class-dsmkc-documents.php:478
+msgid "domicilio"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:413
+msgid "3. Tipos de cookies"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:414
+msgid "Según la entidad que las gestiona"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:416
+msgid "Cookies propias:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:416
+msgid "se envían a tu equipo desde un dominio gestionado por el titular de la web y desde el que se presta el servicio que solicitas."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:417
+msgid "Cookies de terceros:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:417
+msgid "se envían a tu equipo desde un dominio que no gestiona el titular de la web, sino otra entidad que trata los datos obtenidos (por ejemplo, Google o Meta)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:419
+msgid "Según su finalidad"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:421
+msgid "Técnicas (necesarias):"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:421
+msgid "permiten navegar por la web y usar sus funciones básicas: controlar el tráfico, identificar la sesión, gestionar el carrito y el pago, aplicar medidas de seguridad, recordar el idioma elegido o guardar tu decisión sobre las cookies. Están exentas de consentimiento."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:422
+msgid "De preferencias o personalización:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:422
+msgid "recuerdan información para que accedas al servicio con características que te diferencian de otros usuarios o habilitan funciones de terceros (chat, reservas)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:423
+msgid "De análisis o medición:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:423
+msgid "permiten cuantificar el número de usuarios y analizar estadísticamente cómo se usa la web, para mejorarla."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:424
+msgid "De publicidad comportamental:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:424
+msgid "almacenan información del comportamiento de los usuarios obtenida mediante la observación continuada de sus hábitos de navegación, lo que permite elaborar un perfil para mostrar publicidad en función del mismo y medir la eficacia de las campañas. En esta categoría se incluyen también los contenidos incrustados de terceros (vídeos, mapas, redes sociales) que instalan cookies con estos fines."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:426
+msgid "Según el plazo de conservación"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:428
+msgid "De sesión:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:428
+msgid "se eliminan cuando cierras el navegador."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:429
+msgid "Persistentes:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:429
+msgid "permanecen en tu equipo durante el plazo indicado para cada una en la tabla siguiente."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:432
+msgid "4. Cookies que utiliza esta web"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:433
+#, php-format
+msgid "A continuación se detallan las cookies que utiliza %s, agrupadas por finalidad, con su nombre, titular, tipo (propia o de terceros), finalidad y plazo de conservación o caducidad. Las cookies que no son técnicas solo se instalan si das tu consentimiento."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:437
+msgid "Terceros y transferencias internacionales"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:438
+msgid "Estos terceros pueden instalar cookies a través de la web. Puedes consultar cómo tratan tus datos en sus políticas de privacidad:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:441 includes/class-dsmkc-legal.php:462 includes/class-dsmkc-legal.php:643 includes/class-dsmkc-documents.php:550 includes/class-dsmkc-documents.php:705
+msgid "política de privacidad"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:441
+#, php-format
+msgid "Transferencia internacional: %s."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:444
+msgid "Cuando un tercero trata datos fuera del Espacio Económico Europeo, la transferencia se ampara en una decisión de adecuación de la Comisión Europea (como el Marco de Privacidad de Datos UE-EE. UU. para las empresas adheridas) o en las cláusulas contractuales tipo aprobadas por la Comisión."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:447
+msgid "5. Cómo aceptar, rechazar o retirar tu consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:448
+msgid "Al entrar en la web se muestra un aviso en el que puedes «Aceptar todas» las cookies, «Rechazar todas» o «Configurar» y elegir por categorías. Ambas opciones, aceptar y rechazar, se presentan con el mismo nivel de visibilidad. Mientras no decidas, solo se usan cookies técnicas."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:449
+#, php-format
+msgid "Puedes cambiar o retirar tu consentimiento en cualquier momento, con la misma facilidad con la que lo diste, desde este enlace: %s, o desde el icono de cookies que aparece en la esquina inferior de la pantalla. Al retirarlo eliminamos las cookies propias de las categorías desactivadas y la página se recarga para que deje de usarse cualquier cookie que no hayas aceptado."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:450
+#, php-format
+msgid "Tu decisión se guarda durante %s. Pasado ese plazo, o si cambiamos las cookies que utilizamos, te volveremos a preguntar."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:451
+msgid "También puedes permitir, bloquear o eliminar las cookies instaladas en tu equipo desde la configuración de tu navegador:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:459
+msgid "Si bloqueas todas las cookies desde el navegador, es posible que algunas funciones de la web no estén disponibles."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:461
+msgid "6. Actualización de esta política"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:462
+#, php-format
+msgid "Revisamos periódicamente las cookies de la web y actualizamos esta política cuando hay cambios. Si se incorporan cookies con nuevas finalidades, volveremos a pedirte el consentimiento. Para más información sobre el tratamiento de tus datos consulta nuestra %s."
+msgstr ""
+
+#. translators: %s: fecha.
+#: includes/class-dsmkc-legal.php:464 includes/class-dsmkc-documents.php:456
+#, php-format
+msgid "Última actualización: %s."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:481
+msgid "y, después, durante los plazos de prescripción de las posibles responsabilidades legales"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:483
+msgid "Consultas por formulario, email o teléfono"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:483
+msgid "Atender y responder a tus consultas."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:483
+msgid "Tu consentimiento (art. 6.1.a RGPD) y, si la consulta se refiere a nuestros servicios, la aplicación de medidas precontractuales a tu solicitud (art. 6.1.b RGPD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:483
+msgid "El tiempo necesario para responderte"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:484
+msgid "Solicitudes de presupuesto"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:484
+msgid "Elaborar y enviarte el presupuesto solicitado y hacer su seguimiento."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:484
+msgid "Aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:484
+msgid "Durante la validez del presupuesto"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:485
+msgid "Clientes y pedidos de la tienda online"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:485
+msgid "Gestionar tus pedidos, pagos, envíos, devoluciones, garantías y la facturación."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:485
+msgid "Ejecución del contrato de compraventa (art. 6.1.b RGPD) y cumplimiento de obligaciones legales fiscales y contables (art. 6.1.c RGPD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:485 includes/class-dsmkc-legal.php:486
+msgid "Durante la relación comercial y, después, durante los plazos legales (6 años según el Código de Comercio y 4 años según la normativa tributaria)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:486
+msgid "Clientes de servicios"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:486
+msgid "Gestionar los encargos contratados, la comunicación con el cliente, la facturación y el cobro."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:486
+msgid "Ejecución del contrato (art. 6.1.b RGPD) y cumplimiento de obligaciones legales fiscales y contables (art. 6.1.c RGPD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:487
+msgid "Usuarios registrados"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:487
+msgid "Crear y gestionar tu cuenta de usuario y el acceso al área privada."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:487
+msgid "Ejecución de las condiciones de uso que aceptas al registrarte (art. 6.1.b RGPD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:487
+msgid "Mientras mantengas tu cuenta activa"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:488
+msgid "Newsletter y comunicaciones comerciales"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:488
+msgid "Enviarte información sobre novedades, productos y servicios por email u otros medios electrónicos."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:488
+msgid "Tu consentimiento (art. 6.1.a RGPD y art. 21 LSSI). Si ya eres cliente, el interés legítimo para informarte de productos o servicios similares (art. 21.2 LSSI). Puedes darte de baja en cualquier momento desde el enlace incluido en cada comunicación."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:488
+msgid "Hasta que te des de baja o retires tu consentimiento."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:489
+msgid "Currículums"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:489
+msgid "Valorar tu candidatura en los procesos de selección actuales y futuros."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:489
+msgid "Tu consentimiento al enviarnos el currículum (art. 6.1.a RGPD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:489
+msgid "Un máximo de un año desde su recepción, salvo que retires antes tu consentimiento."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:490
+msgid "Publicar y moderar los comentarios que dejas en la web."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:490
+msgid "Tu consentimiento (art. 6.1.a RGPD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:490
+msgid "Mientras el comentario permanezca publicado o hasta que solicites su supresión."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:491
+msgid "Reservas y citas"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:491
+msgid "Gestionar tus reservas o citas y comunicarnos contigo sobre ellas."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:491
+msgid "Ejecución del contrato o medidas precontractuales (art. 6.1.b RGPD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:491
+msgid "Durante la gestión de la reserva"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:524
+#, php-format
+msgid "En esta política te informamos de cómo tratamos los datos personales que nos facilitas a través de %s, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:526
+msgid "1. Responsable del tratamiento"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:528 includes/class-dsmkc-legal.php:618 includes/class-dsmkc-documents.php:433
+msgid "Titular:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:529 includes/class-dsmkc-legal.php:619 includes/class-dsmkc-documents.php:434
+msgid "NIF:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:530 includes/class-dsmkc-legal.php:620 includes/class-dsmkc-documents.php:435
+msgid "Domicilio:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:531 includes/class-dsmkc-legal.php:621 includes/class-dsmkc-documents.php:436
+msgid "Email:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:532 includes/class-dsmkc-legal.php:622 includes/class-dsmkc-documents.php:438
+msgid "Teléfono:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:533
+msgid "Delegado de Protección de Datos:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:536
+msgid "2. Qué datos tratamos, con qué finalidad, con qué base jurídica y durante cuánto tiempo"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:541 includes/class-dsmkc-legal.php:548
+msgid "Finalidad:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:542 includes/class-dsmkc-legal.php:549
+msgid "Base jurídica:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:543 includes/class-dsmkc-legal.php:550
+msgid "Conservación:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:546
+msgid "Navegación y cookies"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:548
+msgid "Garantizar el funcionamiento y la seguridad de la web y, solo si lo aceptas, obtener estadísticas de uso o mostrarte publicidad personalizada."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:549
+msgid "El interés legítimo en la seguridad de la web (art. 6.1.f RGPD) para los registros técnicos y las cookies necesarias, y tu consentimiento (art. 6.1.a RGPD) para el resto de cookies."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:550
+#, php-format
+msgid "La indicada para cada cookie en la %s."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:552
+msgid "Los campos marcados como obligatorios en los formularios son necesarios para atender tu solicitud; si no los facilitas, no podremos hacerlo. Nos garantizas que los datos que nos facilitas son ciertos y que, si son de terceros, cuentas con su autorización para ello. No tomamos decisiones automatizadas que produzcan efectos jurídicos sobre ti."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:554
+msgid "3. Destinatarios"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:555
+msgid "No cedemos tus datos a terceros salvo obligación legal (por ejemplo, a la Agencia Tributaria, a bancos para gestionar cobros o a jueces y tribunales). Para prestar nuestros servicios contamos con proveedores que tratan datos por nuestra cuenta como encargados del tratamiento, con los que hemos firmado el correspondiente contrato:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:557
+#, php-format
+msgid "Alojamiento web: %s."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:557
+msgid "proveedor de alojamiento web"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:561
+msgid "Empresas de transporte y mensajería, para la entrega de los pedidos, y pasarelas de pago, para el cobro."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:562
+msgid "Asesoría fiscal y contable, cuando sea necesario para cumplir nuestras obligaciones legales."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:565
+msgid "4. Transferencias internacionales"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:567
+msgid "Algunos de los proveedores indicados pueden tratar datos fuera del Espacio Económico Europeo:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:573
+msgid "Estas transferencias se amparan en una decisión de adecuación de la Comisión Europea (como el Marco de Privacidad de Datos UE-EE. UU. para las empresas adheridas) o en las cláusulas contractuales tipo aprobadas por la Comisión Europea."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:575
+msgid "No realizamos transferencias internacionales de datos fuera del Espacio Económico Europeo."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:578
+msgid "5. Tus derechos"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:579
+#, php-format
+msgid "Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad de tus datos, así como retirar el consentimiento prestado, escribiendo a %1$s o a %2$s, indicando el derecho que ejerces. Podremos pedirte que acredites tu identidad si tenemos dudas razonables sobre ella. Retirar el consentimiento no afecta a la licitud de los tratamientos anteriores."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:580
+msgid "Si consideras que no hemos tratado tus datos correctamente, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (C/ Jorge Juan, 6, 28001 Madrid — <a href=\"https://www.aepd.es\" target=\"_blank\" rel=\"noopener\">www.aepd.es</a>)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:582
+msgid "6. Menores de edad"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:583
+msgid "Los menores de 14 años no pueden facilitarnos datos personales sin el consentimiento de sus padres o tutores (art. 7 LOPDGDD)."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:585
+msgid "7. Seguridad"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:586
+msgid "Aplicamos las medidas técnicas y organizativas adecuadas para garantizar la confidencialidad, integridad y disponibilidad de tus datos y evitar su pérdida, alteración o acceso no autorizado, teniendo en cuenta el estado de la técnica y los riesgos del tratamiento."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:588
+msgid "8. Cambios en esta política"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:590
+#, php-format
+msgid "Podemos actualizar esta política para adaptarla a cambios legales o en nuestros tratamientos. Te recomendamos revisarla periódicamente. Última actualización: %s."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:610 includes/class-dsmkc-documents.php:495
+msgid "del domicilio del titular"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:615
+msgid "1. Datos identificativos"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:616
+msgid "En cumplimiento del artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI), se informa de los datos del titular de esta web:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:623 includes/class-dsmkc-legal.php:623 includes/class-dsmkc-documents.php:441
+msgid "Datos registrales:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:623
+msgid "datos registrales"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:624
+msgid "Profesión regulada:"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:627
+msgid "2. Objeto"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:628
+#, php-format
+msgid "Este aviso legal regula el acceso y el uso de la web %1$s (%2$s)%3$s. Acceder a la web te atribuye la condición de usuario e implica la aceptación de estas condiciones."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:628
+msgid "cuyo objeto es"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:630
+msgid "3. Condiciones de uso"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:631
+msgid "El usuario se compromete a hacer un uso adecuado y lícito de la web y de sus contenidos, de conformidad con la legislación aplicable, este aviso legal, la moral y el orden público. En particular, se compromete a no utilizar la web para actividades ilícitas o que lesionen derechos de terceros, a no introducir virus o sistemas que puedan dañar los sistemas del titular o de terceros, y a no intentar acceder a áreas restringidas sin autorización."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:633
+msgid "4. Propiedad intelectual e industrial"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:634
+msgid "Todos los contenidos de la web (textos, fotografías, gráficos, imágenes, iconos, tecnología, software, diseño, logotipos y marcas) son titularidad del titular de la web o de terceros que han autorizado su uso, y están protegidos por la normativa de propiedad intelectual e industrial. Queda prohibida su reproducción, distribución, comunicación pública o transformación sin autorización expresa, salvo para uso personal y privado."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:636
+msgid "5. Responsabilidad"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:637
+msgid "El titular trabaja para que la web esté disponible y sus contenidos sean correctos y actualizados, pero no garantiza la ausencia de interrupciones o errores ni se hace responsable de los daños que pudieran derivarse de ellos, salvo en los casos en que la ley lo establezca. Tampoco se responsabiliza del uso que los usuarios hagan de la web en contra de este aviso legal."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:639
+msgid "6. Enlaces"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:640
+msgid "La web puede contener enlaces a sitios de terceros. El titular no controla esos sitios ni es responsable de sus contenidos; si tuviera conocimiento efectivo de que un enlace remite a contenidos ilícitos, lo retirará con la mayor brevedad."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:642
+msgid "7. Protección de datos y cookies"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:643
+#, php-format
+msgid "El tratamiento de tus datos personales se rige por nuestra %1$s, y el uso de cookies por nuestra %2$s."
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:645
+msgid "8. Legislación aplicable y jurisdicción"
+msgstr ""
+
+#: includes/class-dsmkc-legal.php:646
+#, php-format
+msgid "Estas condiciones se rigen por la legislación española. Para la resolución de cualquier controversia, si el usuario es consumidor serán competentes los juzgados y tribunales de su domicilio; en el resto de casos, las partes se someten a los juzgados y tribunales de %s."
+msgstr ""
+
+#: includes/class-dsmkc-services.php:367
+msgid "Imprescindibles para que la web funcione: seguridad, sesión, carrito, idioma elegido o recordar tu decisión sobre las cookies. No requieren consentimiento y no se pueden desactivar."
+msgstr ""
+
+#: includes/class-dsmkc-services.php:371
+msgid "Permiten recordar opciones que cambian el aspecto o el comportamiento de la web y ofrecer funciones como chats o reservas de terceros."
+msgstr ""
+
+#: includes/class-dsmkc-services.php:375
+msgid "Nos permiten contar las visitas y saber cómo se usa la web (páginas vistas, tiempo, origen) para mejorarla. La información se trata de forma agregada."
+msgstr ""
+
+#: includes/class-dsmkc-services.php:379
+msgid "Las usan redes publicitarias y plataformas como Google, Meta o YouTube para mostrarte anuncios según un perfil elaborado a partir de tus hábitos de navegación y para medir campañas. También se activan al ver vídeos, mapas o publicaciones incrustadas."
+msgstr ""
+
+#: includes/class-dsmkc-services.php:409
+msgid "Otras cookies de la web"
+msgstr ""
+
+#. translators: %d: años.
+#: includes/class-dsmkc-services.php:476
+#, php-format
+msgid "%d año"
+msgid_plural "%d años"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: meses.
+#: includes/class-dsmkc-services.php:480
+#, php-format
+msgid "%d mes"
+msgid_plural "%d meses"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: días.
+#: includes/class-dsmkc-services.php:483
+#, php-format
+msgid "%d día"
+msgid_plural "%d días"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-dsmkc-documents.php:80
+msgid "Términos y condiciones"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:81
+msgid "Condiciones generales de venta"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:82 includes/class-dsmkc-documents.php:572 includes/class-dsmkc-documents.php:691
+msgid "Derecho de desistimiento"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:408
+msgid "Otras condiciones"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:497
+msgid "Cada encargo se formaliza mediante un presupuesto o propuesta que detalla el alcance, el precio y los plazos. El contrato se entiende celebrado cuando el cliente acepta expresamente el presupuesto por escrito (incluido el correo electrónico o la firma electrónica). Los trabajos no incluidos en el presupuesto se presupuestarán aparte."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:498
+msgid "Los servicios se contratan a través de la web siguiendo el proceso indicado en ella. Antes de confirmar se muestra el resumen del servicio, el precio total con impuestos y estas condiciones, que el cliente debe aceptar. Tras la contratación se envía una confirmación por correo electrónico. El documento electrónico del contrato se archiva y el cliente puede solicitar una copia. El idioma del contrato es el español."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:499
+msgid "Los servicios pueden contratarse a través de la web, siguiendo el proceso indicado en ella, o mediante la aceptación expresa por escrito de un presupuesto o propuesta que detalla el alcance, el precio y los plazos. En ambos casos se envía una confirmación por correo electrónico."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:502
+msgid "El titular conserva los derechos de propiedad intelectual sobre los trabajos realizados y concede al cliente, una vez abonado el precio completo, una licencia de uso no exclusiva para los fines acordados en el encargo. Cualquier otro uso requiere autorización."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:503
+msgid "Una vez abonado el precio completo, el titular cede al cliente los derechos de explotación (reproducción, distribución, comunicación pública y transformación) sobre los trabajos finales entregados, para los fines acordados, con el alcance territorial y temporal máximo permitido por la ley. Los derechos morales de autor son irrenunciables. Los archivos de trabajo, bocetos y propuestas no elegidas no se ceden salvo acuerdo expreso."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:508
+msgid "1. Identificación del prestador"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:511
+msgid "2. Objeto y aceptación"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:512
+#, php-format
+msgid "Estas condiciones regulan la contratación de los servicios que presta %s. Al contratar un servicio el cliente declara haberlas leído y aceptado. Las condiciones particulares de cada presupuesto prevalecen sobre estas condiciones generales en lo que las contradigan."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:514
+msgid "Los servicios se ofrecen tanto a empresas y profesionales como a consumidores. Cuando el cliente sea consumidor se aplicarán, además, los derechos que le reconoce la normativa de consumo, que prevalecen sobre estas condiciones."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:514
+msgid "Los servicios se dirigen exclusivamente a empresas y profesionales que contratan en el ámbito de su actividad, por lo que no les es de aplicación la normativa de protección de consumidores."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:516
+msgid "3. Contratación"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:519
+msgid "4. Precio y forma de pago"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:520
+msgid "El precio de cada servicio es el indicado en el presupuesto o en la web. Salvo que se indique lo contrario, los precios no incluyen el IVA ni otros impuestos aplicables, que se añadirán en la factura."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:522
+msgid "El retraso en el pago podrá suponer la suspensión del servicio hasta su regularización, previo aviso al cliente."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:522
+msgid "El retraso en el pago podrá suponer la suspensión del servicio hasta su regularización y devengará los intereses de demora previstos en la Ley 3/2004, de medidas de lucha contra la morosidad en las operaciones comerciales."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:524
+msgid "5. Plazos de ejecución"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:526
+msgid "Los plazos se cuentan desde que el cliente acepta el presupuesto, realiza el pago inicial acordado y entrega la información y los materiales necesarios. Los retrasos del cliente en esas entregas o en sus respuestas desplazan los plazos en la misma medida."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:528
+msgid "6. Obligaciones del cliente"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:529
+msgid "El cliente se compromete a facilitar información veraz y completa, a colaborar en lo necesario para la prestación del servicio y a garantizar que dispone de los derechos sobre los textos, imágenes, marcas y demás materiales que entrega, manteniendo indemne al titular frente a cualquier reclamación de terceros por su uso."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:531
+msgid "7. Revisiones y aceptación del trabajo"
+msgstr ""
+
+#. translators: %s: revisiones incluidas.
+#: includes/class-dsmkc-documents.php:536
+#, php-format
+msgid "El precio incluye %s. Los cambios adicionales o los que supongan modificar el alcance acordado se presupuestarán aparte."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:538
+msgid "Las revisiones incluidas son las indicadas en el presupuesto. Los cambios adicionales o los que supongan modificar el alcance acordado se presupuestarán aparte."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:541
+msgid "Si el cliente no comunica objeciones concretas en los 10 días hábiles siguientes a la entrega, el trabajo se entenderá aceptado."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:543
+msgid "8. Propiedad intelectual"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:546
+msgid "Salvo que el cliente se oponga por escrito o exista un acuerdo de confidencialidad, el titular podrá mostrar los trabajos realizados en su portfolio, web y redes sociales como muestra de su actividad."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:549
+msgid "9. Confidencialidad y protección de datos"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:550
+#, php-format
+msgid "Ambas partes guardarán confidencialidad sobre la información no pública que conozcan con motivo del encargo. Si para prestar el servicio el titular debe acceder a datos personales de los que el cliente es responsable, ambas partes firmarán el contrato de encargo del tratamiento previsto en el artículo 28 del RGPD. El tratamiento de los datos del cliente se rige por la %s."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:552
+msgid "10. Responsabilidad"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:557
+msgid "El titular responde de la correcta prestación de los servicios conforme a la ley. No será responsable de los daños causados por servicios o proveedores de terceros que el cliente contrate directamente (alojamiento, dominios, plataformas publicitarias, etc.) ni por el uso que el cliente haga de los trabajos entregados."
+msgstr ""
+
+#. translators: %s: límite de responsabilidad.
+#: includes/class-dsmkc-documents.php:560
+#, php-format
+msgid "Salvo dolo o culpa grave, la responsabilidad total del titular frente al cliente por cualquier causa relacionada con el servicio se limita a %s. El titular no responde del lucro cesante ni de los daños indirectos, ni de los causados por servicios o proveedores de terceros que el cliente contrate directamente (alojamiento, dominios, plataformas publicitarias, etc.)."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:565
+msgid "11. Cancelación"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:568
+msgid "Si el cliente cancela un encargo ya iniciado, deberá abonar los trabajos realizados hasta la fecha de cancelación y los gastos en que se haya incurrido. Las cantidades pagadas por adelantado se regularizarán en consecuencia."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:571
+msgid "Derecho de desistimiento de los consumidores"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:572
+#, php-format
+msgid "Si el cliente es consumidor y el contrato se celebra a distancia, dispone de 14 días naturales desde la celebración del contrato para desistir sin necesidad de justificación. Si solicita expresamente que el servicio comience durante ese plazo, deberá abonar la parte proporcional de lo prestado hasta que comunique el desistimiento. El derecho de desistimiento no se aplica cuando el servicio se haya ejecutado completamente con su consentimiento expreso y su reconocimiento de que perdería este derecho (art. 103.a del Real Decreto Legislativo 1/2007). Más información y formulario en %s."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:575
+msgid "12. Legislación aplicable y jurisdicción"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:576
+#, php-format
+msgid "Estas condiciones se rigen por la legislación española. Si el cliente es consumidor, serán competentes los juzgados y tribunales de su domicilio; en el resto de casos, las partes se someten a los juzgados y tribunales de %s."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:596
+msgid "tarjeta de crédito o débito"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:599
+msgid "transferencia bancaria (el pedido se envía al recibir el pago)"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:600
+msgid "contra reembolso"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:620
+msgid "Productos confeccionados conforme a las especificaciones del cliente o claramente personalizados."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:621
+msgid "Productos que puedan deteriorarse o caducar con rapidez."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:622
+msgid "Productos precintados que no sean aptos para ser devueltos por razones de protección de la salud o de higiene y que hayan sido desprecintados tras la entrega."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:623
+msgid "Grabaciones de sonido o de vídeo precintadas o programas informáticos precintados que hayan sido desprecintados tras la entrega."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:624
+msgid "Contenidos digitales sin soporte material cuando la descarga o el acceso haya comenzado con el consentimiento expreso del cliente y su reconocimiento de que pierde el derecho de desistimiento."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:625
+msgid "Productos que, después de su entrega, se hayan mezclado de forma indisociable con otros bienes."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:648
+msgid "Los precios se indican en euros y no incluyen el IVA, que se añade y se muestra desglosado antes de finalizar la compra."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:648
+msgid "Los precios se indican en euros e incluyen el IVA."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:653
+msgid "1. Identificación del vendedor"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:655
+#, php-format
+msgid "Estas condiciones regulan las compras realizadas en %1$s y se rigen por el Real Decreto Legislativo 1/2007 (Ley General para la Defensa de los Consumidores y Usuarios), la Ley 7/1998 sobre condiciones generales de la contratación y la Ley 34/2002 (LSSI). Antes de comprar, el cliente debe aceptarlas expresamente. La versión aplicable es la vigente en el momento del pedido. Para comprar es necesario ser mayor de edad."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:657
+msgid "2. Productos y precios"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:659
+msgid "Los gastos de envío se indican antes de finalizar la compra y se suman al precio de los productos."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:659
+msgid "Los precios pueden cambiar, pero se aplica siempre el vigente en el momento de realizar el pedido. Las imágenes de los productos son orientativas."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:661
+msgid "3. Proceso de compra"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:663
+msgid "Añade los productos al carrito y accede al proceso de compra."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:664
+msgid "Introduce tus datos de facturación y envío y elige la forma de envío y de pago."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:665
+msgid "Revisa el resumen del pedido, con el precio total, impuestos y gastos de envío, y acepta estas condiciones."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:666
+msgid "Pulsa el botón de pedido con obligación de pago y completa el pago."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:668
+msgid "Recibirás por correo electrónico la confirmación del pedido. El documento electrónico del contrato se archiva y puedes pedirnos una copia. Puedes corregir los errores en tus datos antes de confirmar el pedido. El idioma del contrato es el español."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:670
+msgid "4. Formas de pago"
+msgstr ""
+
+#. translators: %s: formas de pago.
+#: includes/class-dsmkc-documents.php:675
+#, php-format
+msgid "Puedes pagar mediante: %s."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:677
+msgid "Las formas de pago disponibles se muestran en el proceso de compra."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:680
+msgid "Los pagos con tarjeta se procesan mediante pasarelas seguras: no almacenamos los datos de tu tarjeta."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:682
+msgid "5. Envío y entrega"
+msgstr ""
+
+#. translators: 1: zonas de envío, 2: plazo.
+#: includes/class-dsmkc-documents.php:686
+#, php-format
+msgid "Realizamos envíos a: %1$s. Plazo de entrega habitual: %2$s desde la confirmación del pago. En cualquier caso, la entrega se realizará en un plazo máximo de 30 días naturales desde el pedido; si no fuera posible, te avisaremos y podrás cancelar el pedido con reembolso de las cantidades pagadas."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:686
+msgid "zonas de envío"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:686
+msgid "plazo de entrega"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:688
+msgid "El riesgo de pérdida o deterioro de los productos se transmite al cliente cuando los recibe. Si el paquete llega dañado, indícalo al transportista y comunícanoslo lo antes posible."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:690
+msgid "6. Derecho de desistimiento"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:691
+#, php-format
+msgid "Si eres consumidor, puedes desistir de la compra sin necesidad de justificación en un plazo de %1$d días naturales desde que recibes el producto (o el último producto, si el pedido llega en varios envíos). Para ejercerlo basta con comunicárnoslo de forma inequívoca a %2$s o a %3$s, por ejemplo con el formulario modelo, o desde la página %4$s."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:692
+msgid "Los gastos de devolución corren de nuestra cuenta."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:692
+msgid "Los gastos directos de devolución corren a cargo del cliente."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:692
+msgid "Debes devolver los productos en un plazo máximo de 14 días naturales desde que nos comunicas el desistimiento. Te reembolsaremos todos los pagos recibidos, incluidos los gastos de envío estándar, en un plazo máximo de 14 días naturales desde la comunicación, utilizando el mismo medio de pago; podemos retener el reembolso hasta recibir los productos o la prueba de su envío. Solo responderás de la disminución de valor de los productos resultante de una manipulación distinta de la necesaria para comprobar su naturaleza, características y funcionamiento."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:694
+msgid "No se aplica el derecho de desistimiento (art. 103 del Real Decreto Legislativo 1/2007) a:"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:698
+msgid "7. Garantía legal"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:699
+msgid "Respondemos de las faltas de conformidad de los productos que se manifiesten en un plazo de tres años desde la entrega (dos años en el caso de contenidos o servicios digitales), conforme a los artículos 114 y siguientes del Real Decreto Legislativo 1/2007. Ante una falta de conformidad puedes elegir entre la reparación o la sustitución del producto, salvo que una de ellas sea imposible o desproporcionada y, en su caso, la rebaja del precio o la resolución del contrato. Para ejercer la garantía, contacta con nosotros con el número de pedido y una descripción del problema."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:701
+msgid "8. Atención al cliente y reclamaciones"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:702
+#, php-format
+msgid "Puedes contactar con nosotros en %1$s%2$s. Atenderemos tus reclamaciones en el menor plazo posible y, en todo caso, en un máximo de 15 días hábiles. Tienes a tu disposición hojas de reclamaciones oficiales y puedes acudir a los organismos de consumo de tu comunidad autónoma."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:704
+msgid "9. Protección de datos"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:705
+#, php-format
+msgid "Los datos que nos facilitas para la compra se tratan conforme a nuestra %s."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:707
+msgid "10. Legislación aplicable y jurisdicción"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:708
+msgid "Estas condiciones se rigen por la legislación española. Si eres consumidor, serán competentes los juzgados y tribunales de tu domicilio."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:735
+#, php-format
+msgid "Tienes derecho a desistir del contrato en un plazo de %d días naturales sin necesidad de justificación."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:736
+#, php-format
+msgid "El plazo de desistimiento expirará a los %d días naturales del día en que tú o un tercero indicado por ti, distinto del transportista, adquiristeis la posesión material de los bienes (o del último de ellos, si se entregan por separado). En los contratos de servicios, el plazo cuenta desde la celebración del contrato."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:737
+#, php-format
+msgid "Para ejercer el derecho de desistimiento, debes notificarnos tu decisión de desistir del contrato a través de una declaración inequívoca a %1$s, con domicilio en %2$s, email %3$s. Puedes utilizar el formulario de desistimiento que aparece en esta página, aunque su uso no es obligatorio. Para cumplir el plazo basta con que la comunicación se envíe antes de que venza."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:741
+msgid "Consecuencias del desistimiento"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:742
+msgid "Te devolveremos todos los pagos recibidos, incluidos los gastos de entrega (salvo los costes adicionales si elegiste una modalidad de entrega distinta de la menos costosa que ofrecemos), sin demora indebida y, en todo caso, a más tardar 14 días naturales a partir de la fecha en que nos informes de tu decisión de desistir. Utilizaremos el mismo medio de pago que empleaste, salvo que acordemos otro, y no incurrirás en ningún gasto como consecuencia del reembolso. Podremos retener el reembolso hasta haber recibido los bienes o hasta que presentes una prueba de su devolución, según qué condición se cumpla primero."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:743
+#, php-format
+msgid "Deberás devolvernos los bienes a %s sin demora indebida y, en cualquier caso, a más tardar en 14 días naturales a partir de la fecha en que nos comuniques tu decisión de desistir."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:743
+msgid "Nosotros asumimos el coste de la devolución."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:743
+msgid "Deberás asumir el coste directo de devolución de los bienes."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:743
+msgid "Solo serás responsable de la disminución de valor de los bienes resultante de una manipulación distinta a la necesaria para establecer su naturaleza, sus características o su funcionamiento."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:744
+msgid "Si solicitaste que la prestación de un servicio comenzara durante el plazo de desistimiento, deberás abonarnos un importe proporcional a la parte ya prestada en el momento en que nos comuniques el desistimiento."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:746
+msgid "Excepciones"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:750
+msgid "Formulario modelo de desistimiento"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:751
+msgid "(Solo debe cumplimentar y enviar el presente formulario si desea desistir del contrato.)"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:753
+#, php-format
+msgid "A la atención de %1$s, %2$s, %3$s:"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:754
+msgid "Por la presente le comunico/comunicamos (*) que desisto de mi/desistimos de nuestro (*) contrato de venta del siguiente bien/prestación del siguiente servicio (*):"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:755
+msgid "Pedido el/recibido el (*):"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:756
+msgid "Nombre del consumidor o de los consumidores:"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:757
+msgid "Domicilio del consumidor o de los consumidores:"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:758
+msgid "Firma del consumidor o de los consumidores (solo si el presente formulario se presenta en papel):"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:759
+msgid "Fecha:"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:760
+msgid "(*) Táchese lo que no proceda."
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:797
+msgid "Desistimiento del pedido nº "
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:798
+msgid "Por la presente comunico que desisto de mi contrato.\nNº de pedido:\nFecha de pedido / recepción:\nNombre:\nDomicilio:\nFecha:"
+msgstr ""
+
+#: includes/class-dsmkc-documents.php:799
+msgid "Desistir del contrato aquí"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:56
+msgid "Datos identificativos del titular completos"
+msgstr ""
+
+#. translators: %s: datos que faltan.
+#: includes/class-dsmkc-report.php:59
+#, php-format
+msgid "Faltan: %s."
+msgstr ""
+
+#. translators: %s: documento.
+#: includes/class-dsmkc-report.php:72 includes/class-dsmkc-report.php:83
+#, php-format
+msgid "Página publicada: %s"
+msgstr ""
+
+#. translators: %s: URL.
+#: includes/class-dsmkc-report.php:75
+#, php-format
+msgid "%s muestra su propio texto (no usa el shortcode): revísalo o sustitúyelo en Documentos."
+msgstr ""
+
+#. translators: %s: documento.
+#: includes/class-dsmkc-report.php:83
+msgid "Apartado específico de política de cookies"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:85
+msgid "Gestionado por otro plugin: asigna su página en Documentos."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:85
+msgid "No hay página asignada: asígnala o créala en Documentos."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:95
+msgid "Tienda: condiciones de venta aceptadas en el checkout"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:97
+msgid "Página asignada como «Términos y condiciones» de WooCommerce."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:97
+msgid "Activa «Condiciones generales de venta» en Documentos."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:103
+msgid "Tienda: función de desistimiento online"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:105
+msgid "Aportada por el plugin de desistimiento."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:105
+msgid "Solo hay botón por email. Para la Directiva (UE) 2023/2673 instala el plugin de desistimiento de DSMK."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:114
+msgid "Banner con botones «Aceptar» y «Rechazar» en la primera capa y con el mismo diseño"
+msgstr ""
+
+#. translators: 1: aceptar, 2: rechazar, 3: configurar.
+#: includes/class-dsmkc-report.php:117
+#, php-format
+msgid "Botones: «%1$s», «%2$s» y «%3$s». Aceptar y rechazar comparten estilo (no configurable, por diseño)."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:131
+msgid "Relación de cookies con tipo, finalidad, titular (propia / de terceros) y plazo de conservación"
+msgstr ""
+
+#. translators: %d: número de cookies.
+#: includes/class-dsmkc-report.php:134
+#, php-format
+msgid "Cookies sin datos completos: %s."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:134
+#, php-format
+msgid "%d cookies documentadas automáticamente."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:143
+msgid "Política con definición y función de las cookies, clasificación según origen, finalidad y plazo, y forma de aceptar, denegar o revocar"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:145
+msgid "Generada por [dsmk_politica_cookies]: incluye todos los apartados y se actualiza sola."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:145
+msgid "La página no usa el shortcode [dsmk_politica_cookies]: revisa a mano que incluya todos los apartados."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:152
+msgid "Retirada del consentimiento en cualquier momento, tan fácil como darlo"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:154
+msgid "Botón flotante permanente + enlace en la política. Al retirar se borran las cookies y se recarga."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:154
+msgid "Botón flotante desactivado: asegúrate de enlazar «#dsmk-cookies» en el pie de todas las páginas."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:162
+msgid "Todas las cookies detectadas están clasificadas"
+msgstr ""
+
+#. translators: %s: lista.
+#: includes/class-dsmkc-report.php:165
+#, php-format
+msgid "Pendientes de clasificar: %s."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:165
+msgid "Sin elementos pendientes."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:173
+msgid "Escaneo de cookies reciente (menos de 8 días)"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:175
+msgid "Nunca. Ejecuta un escaneo desde «Servicios y cookies»."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:182
+msgid "Validez del consentimiento no superior a 24 meses"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:191
+msgid "Registro de pruebas del consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:193
+msgid "Activo (IP anonimizada)."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:193
+msgid "Desactivado: no podrás demostrar los consentimientos."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:203
+msgid "Google Consent Mode v2 activo"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:205
+msgid "Estado por defecto denegado y actualización al consentir."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:205
+msgid "Desactivado: Google Ads perderá medición en el EEE."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:212
+msgid "AdSense / Ad Manager detectado"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:214
+msgid "Google exige un CMP certificado con IAB TCF para mostrar anuncios personalizados en el EEE. Este plugin cumple la ley, pero no es un CMP certificado: AdSense solo servirá anuncios no personalizados."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:236
+msgid "Cookies y consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:237
+msgid "Privacidad y terceros"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:238
+msgid "Prueba del consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:239
+msgid "Tienda online"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:240
+msgid "Seguridad técnica"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:242
+msgid "Otros"
+msgstr ""
+
+#. translators: 1: web, 2: URL política de cookies, 3: fecha, 4: ID de auditoría.
+#: includes/class-dsmkc-report.php:274
+#, php-format
+msgid "En el sitio web %1$s está implantado un sistema de gestión del consentimiento de cookies que: (1) muestra en la primera capa un aviso con las opciones «Aceptar todas», «Rechazar todas» y «Configurar», con el mismo nivel de visibilidad; (2) bloquea técnicamente las cookies no técnicas y de terceros hasta que el usuario otorga su consentimiento expreso, sin instalar ninguna si las rechaza; (3) permite configurar el consentimiento por categorías y aceptarlo, denegarlo o revocarlo en cualquier momento desde un botón permanente y desde la propia política, eliminando las cookies afectadas; (4) conserva prueba de cada consentimiento; y (5) dispone de una política de cookies específica en %2$s con la definición y función de las cookies, su clasificación según origen, finalidad y plazo, la relación de cookies utilizadas con su titular (propia o de terceros), finalidad y plazo de conservación, y la forma de aceptar, denegar o revocar el consentimiento. Se adjunta informe técnico de auditoría de fecha %3$s (ref. %4$s)."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:276
+msgid "[URL de la política de cookies]"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:301
+msgid "Cumple"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:301
+msgid "Revisar"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:301
+msgid "No cumple"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:311
+msgid "Sí"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:311 includes/class-dsmkc-report.php:463
+msgid "No"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:338
+msgid "Imprimir / Guardar como PDF"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:340
+msgid "Informe técnico de cumplimiento legal web"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:341
+msgid "LSSI · RGPD / LOPDGDD · Guía sobre el uso de las cookies (AEPD) · TRLGDCU"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:346
+msgid "cumple"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:347
+msgid "revisar"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:348
+msgid "no cumple"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:349
+msgid "páginas analizadas"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:350
+msgid "rastreadores sin consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:351
+msgid "cookies no técnicas sin consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:352
+msgid "cookies documentadas"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:353
+msgid "dominios de terceros antes de consentir"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:358
+msgid "Sitio web"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:360
+msgid "Fecha de la auditoría"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:360
+msgid "automática"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:360
+msgid "manual"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:361
+msgid "Referencia"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:362
+msgid "Sistema"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:362
+msgid "política v"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:362
+msgid "banner"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:365
+msgid "1. Resumen y acciones recomendadas"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:367
+msgid "No se han detectado incumplimientos ni puntos a revisar."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:369
+msgid "Prioridad"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:369
+msgid "Punto"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:369
+msgid "Detalle / acción"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:373
+msgid "Alta"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:373
+msgid "Media"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:379
+msgid "2. Comprobaciones por área"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:393
+msgid "Requisito"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:393
+msgid "Resultado"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:393
+msgid "Evidencia"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:393
+msgid "Norma"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:400
+msgid "3. Escaneo por página (vista de un visitante sin consentimiento)"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:402
+msgid "El detalle por página solo se conserva en las 10 auditorías más recientes."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:404
+msgid "Cookies del servidor"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:404
+msgid "Enlaces legales que faltan"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:404
+msgid "Formularios"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:404
+msgid "Servicios presentes"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:420
+msgid "enlace privacidad"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:420
+msgid "sin enlace"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:420
+msgid "casilla"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:420
+msgid "info básica"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:430
+msgid "4. Servicios y terceros"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:431
+msgid "Transferencia internacional"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:431
+msgid "Tratamiento sin consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:433
+msgid "Técnico (exento)"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:433
+msgid "Bloqueado hasta consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:436
+msgid "Dominios de terceros cargados antes del consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:438
+msgid "Dominio"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:438
+msgid "Recursos"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:444
+msgid "Ninguno."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:447
+msgid "5. Inventario de cookies"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:455
+msgid "6. Banner y gestión del consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:461
+msgid "Formato"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:462
+msgid "Aceptar y rechazar con el mismo diseño"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:462
+msgid "Sí (fijo, no configurable)"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:463
+msgid "Casillas premarcadas"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:464
+msgid "Botón permanente para cambiar el consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:465
+msgid "Validez del consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:466
+msgid "Revocación"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:466
+msgid "Borra las cookies propias de las categorías retiradas y recarga la página"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:467
+msgid "avanzado"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:467
+msgid "básico: sin etiquetas antes de consentir"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:470
+msgid "Funcionamiento técnico"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:470
+msgid "Los scripts, iframes y píxeles de servicios no necesarios se entregan desactivados (type=\"text/plain\" / sin src) y solo se activan tras el consentimiento de su categoría; los que se crean por código se interceptan en el navegador."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:479
+msgid "7. Registro de consentimientos"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:480
+#, php-format
+msgid "Últimos 30 días: %1$d decisiones — aceptar todas %2$d · rechazar todas %3$d · selección personalizada %4$d · contenido puntual %5$d · GPC %6$d."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:482
+msgid "Mes"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:482
+msgid "Total"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:482
+msgid "Aceptar"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:482
+msgid "Rechazar"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:482
+#, php-format
+msgid "% aceptación"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:488
+#, php-format
+msgid "Cada registro guarda un ID anónimo, fecha, decisión, versión del banner, IP anonimizada y huella del navegador (hash). Conservación: %d meses."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:490
+msgid "8. Documentos legales"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:491
+msgid "Texto generado por el sistema"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:494
+msgid "sin publicar"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:499
+msgid "9. Entorno técnico"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:504
+msgid "Tema"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:505
+msgid "Idioma / zona horaria"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:507
+msgid "Certificado SSL"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:507
+msgid "No válido"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:508
+msgid "Caché"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:508
+msgid "sin plugin de caché detectado"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:510
+msgid "Tiempo medio de respuesta"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:513
+msgid "no presente"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:516
+msgid "Plugins activos"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:520
+msgid "10. Histórico de auditorías"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:521
+msgid "Ref."
+msgstr ""
+
+#: includes/class-dsmkc-report.php:527
+msgid "11. Declaración técnica de cumplimiento"
+msgstr ""
+
+#: includes/class-dsmkc-report.php:529
+#, php-format
+msgid "Informe generado automáticamente por DSMK Legal %1$s el %2$s. Las comprobaciones técnicas reflejan el estado de la web en la fecha de la auditoría. Este informe no sustituye el asesoramiento jurídico."
+msgstr ""
+
+#. translators: 1: páginas, 2: errores.
+#: includes/class-dsmkc-audit.php:502
+msgid "Páginas analizadas correctamente"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:502
+#, php-format
+msgid "%1$d páginas, %2$d con error."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:504
+msgid "Ningún rastreador se ejecuta sin consentimiento (todas las páginas)"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:504
+#, php-format
+msgid "%d elementos de seguimiento ejecutables sin consentimiento. Revisa el detalle por página (caché antigua o código fuera de WordPress)."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:504
+msgid "0 scripts, iframes o píxeles de seguimiento ejecutables antes de consentir."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:506
+msgid "El servidor no envía cookies no técnicas a visitantes nuevos"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:506
+#, php-format
+msgid "%d cookies no técnicas o sin clasificar en las cabeceras. Ver detalle por página."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:506
+msgid "Solo cookies técnicas (o ninguna) antes de consentir."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:508
+msgid "El banner y el botón para cambiar el consentimiento están en todas las páginas"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:508
+#, php-format
+msgid "%d página sin el banner (¿plantilla sin wp_footer() o excluida?)."
+msgid_plural "%d páginas sin el banner (¿plantilla sin wp_footer() o excluida?)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-dsmkc-audit.php:508
+msgid "Presente en todas las páginas analizadas."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:510
+msgid "Enlaces a los textos legales accesibles desde todas las páginas"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:510
+#, php-format
+msgid "Falta %d enlace. Añade [dsmk_enlaces_legales] al pie de la web."
+msgid_plural "Faltan %d enlaces. Añade [dsmk_enlaces_legales] al pie de la web."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-dsmkc-audit.php:510
+msgid "Todos los documentos activos enlazados en todas las páginas."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:513
+msgid "Los formularios informan de la protección de datos"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:513
+#, php-format
+msgid "%1$d de %2$d formularios sin enlace a la política de privacidad ni información básica (responsable, finalidad, derechos)."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:513
+#, php-format
+msgid "%d formularios con enlace o información de privacidad."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:517
+msgid "Recursos de terceros cargados antes del consentimiento"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:517
+#, php-format
+msgid "Se envía la IP del visitante a: %s. Valora alojarlos en la propia web."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:517
+msgid "Ningún recurso de terceros antes de consentir."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:520
+msgid "Google Fonts cargadas desde los servidores de Google"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:520
+msgid "Transfiere la IP del visitante a Google sin consentimiento. En Elementor: Ajustes › Rendimiento › cargar Google Fonts localmente."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:523
+msgid "Web servida por HTTPS"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:523
+msgid "Sí."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:523
+msgid "La web no usa HTTPS: los datos de los formularios viajan sin cifrar."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:526
+msgid "Certificado SSL válido"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:526
+#, php-format
+msgid "Emitido por %1$s. Caduca el %2$s (%3$d días)."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:526
+#, php-format
+msgid "No se pudo validar: %s"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:526
+msgid "caducado"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:536
+msgid "Cabeceras de seguridad HTTP"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:536
+#, php-format
+msgid "No presentes: %s."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:536
+msgid "Todas presentes."
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:536 includes/class-dsmkc-audit.php:538
+msgid "Buenas prácticas (RGPD art. 32)"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:538
+msgid "Versiones de software"
+msgstr ""
+
+#: includes/class-dsmkc-audit.php:538
+msgid "PHP sin soporte de seguridad: actualizar."
+msgstr ""
+
+#. translators: %s: nombre del servicio (YouTube, Google Maps...).
+#: includes/class-dsmkc-frontend.php:303
+#, php-format
+msgid "Este contenido de %s está bloqueado porque instala cookies de terceros."
+msgstr ""
+
+#: includes/class-dsmkc-frontend.php:304
+msgid "Aceptar y mostrar"
+msgstr ""
+
+#: includes/class-dsmkc-frontend.php:306
+msgid "Preferencias guardadas"
+msgstr ""
+
+#: includes/class-dsmkc-frontend.php:407
+msgid "Configuración de cookies"
+msgstr ""
+
+#: includes/class-dsmkc-frontend.php:408
+msgid "Cerrar"
+msgstr ""
+
+#: includes/class-dsmkc-frontend.php:426
+msgid "Siempre activas"
+msgstr ""
+
+#: includes/class-dsmkc-frontend.php:436
+msgid "Servicios:"
+msgstr ""
+
+#. translators: %d: número de cookies.
+#: includes/class-dsmkc-frontend.php:443
+#, php-format
+msgid "Ver %d cookie"
+msgid_plural "Ver %d cookies"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-dsmkc-updater.php:274
+msgid "La URL de actualizaciones no es https o no es válida."
+msgstr ""
+
+#. translators: %d: código HTTP.
+#: includes/class-dsmkc-updater.php:301
+#, php-format
+msgid "El servidor de actualizaciones respondió %d."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:315
+msgid "El JSON de actualizaciones no es válido."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:318
+msgid "El JSON de actualizaciones es de otro plugin."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:322
+msgid "El JSON de actualizaciones no trae una versión válida."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:326
+msgid "El enlace de descarga no es https."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:330
+msgid "El JSON de actualizaciones no trae la huella SHA-256 del ZIP."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:333
+msgid "La firma de la versión publicada no es válida: no se ofrece la actualización."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:466
+msgid "Hub legal de DSMK: aviso legal, privacidad, cookies (banner, bloqueo previo y registro de consentimientos), términos, condiciones de venta y desistimiento."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:467
+msgid "Consulta el CHANGELOG.md incluido en el plugin."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:519
+msgid "No hay una huella verificada para esta actualización de DSMK Legal: no se instala. Pulsa «Comprobar de nuevo» y vuelve a intentarlo."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:523
+msgid "No se pudo crear el archivo temporal de la actualización."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:531
+msgid "No se pudo descargar la actualización de DSMK Legal."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:536
+msgid "La actualización de DSMK Legal no coincide con su huella SHA-256 firmada y no se ha instalado."
+msgstr ""
+
+#: includes/class-dsmkc-updater.php:570
+msgid "No se pudo preparar la carpeta de la actualización de DSMK Legal."
+msgstr ""
+

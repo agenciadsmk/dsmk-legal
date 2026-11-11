@@ -79,7 +79,7 @@ final class DSMKC_Audit {
 
 		foreach ( DSMKC_Scanner::urls() as $url ) {
 			$visitor = self::fetch( $url, array() );
-			$scanner = self::fetch( $url, array( 'X-DSMKC-Scan' => $token ) );
+			$scanner = self::fetch( DSMKC_Scanner::nocache_url( $url ), array( 'X-DSMKC-Scan' => $token ) );
 			$page    = self::analyze_page( $url, $visitor );
 
 			if ( $scanner['ok'] ) {
@@ -145,11 +145,10 @@ final class DSMKC_Audit {
 	 */
 	private static function fetch( $url, array $headers ) {
 		$t0       = microtime( true );
-		$response = wp_remote_get(
+		$response = DSMKC_Scanner::request( // Solo redirecciones dentro del dominio (ver DSMKC_Scanner::request()).
 			$url,
 			array(
 				'timeout'     => 25,
-				'redirection' => 3,
 				'headers'     => array_merge( array( 'Cache-Control' => 'no-cache' ), $headers ),
 				'sslverify'   => apply_filters( 'https_local_ssl_verify', false ),
 				'user-agent'  => 'Mozilla/5.0 (DSMK-Legal-Audit/' . DSMKC_VERSION . ')',

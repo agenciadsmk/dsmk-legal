@@ -47,6 +47,20 @@ final class DSMKC_Blocker {
 	/** @var array<string, int> Servicios bloqueados en esta respuesta (para depuración). */
 	public $blocked = array();
 
+	/** @var bool|null Resultado de is_scan_request() en esta petición. @since 2.2.0 */
+	private static $scan_request = null;
+
+	/**
+	 * Olvida el resultado cacheado de is_scan_request() (pruebas).
+	 *
+	 * @since  2.2.0
+	 * @internal
+	 * @return void
+	 */
+	public static function reset_scan_request() {
+		self::$scan_request = null;
+	}
+
 	/**
 	 * Registra los hooks.
 	 *
@@ -56,6 +70,32 @@ final class DSMKC_Blocker {
 	public function hooks() {
 		// Prioridad muy baja: empezar el buffer antes de que el tema imprima nada.
 		add_action( 'template_redirect', array( $this, 'start' ), -9999 );
+		add_action( 'template_redirect', array( __CLASS__, 'scan_nocache' ), -10000 );
+	}
+
+	/**
+	 * Impide que una respuesta del escáner (sin bloqueos ni banner) se guarde en caché.
+	 *
+	 * Seguridad (2.2.0): sin esto, una caché de página o de servidor (WP Super
+	 * Cache, LiteSpeed, Varnish, nginx fastcgi_cache…) podía guardar el HTML sin
+	 * bloquear generado para el escáner y servírselo a los visitantes.
+	 *
+	 * @since  2.2.0
+	 * @return void
+	 */
+	public static function scan_nocache() {
+		if ( ! self::is_scan_request() ) {
+			return;
+		}
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', true ); // WP Super Cache, W3TC, WP Rocket, WP Fastest Cache…
+		}
+		nocache_headers();
+		if ( ! headers_sent() ) {
+			header( 'Cache-Control: private, no-store, no-cache, max-age=0' );
+			header( 'X-LiteSpeed-Cache-Control: no-cache' );
+		}
+		do_action( 'litespeed_control_set_nocache', 'dsmk-legal scan' ); // LiteSpeed Cache.
 	}
 
 	/**
@@ -75,13 +115,17 @@ final class DSMKC_Blocker {
 			return true;
 		}
 		// Editores visuales: Elementor, Beaver Builder, Divi, Bricks, Oxygen.
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Solo lectura de flags de editores.
-		foreach ( array( 'elementor-preview', 'fl_builder', 'et_fb', 'bricks', 'ct_builder', 'vc_editable' ) as $flag ) {
-			if ( isset( $_GET[ $flag ] ) ) {
-				return true;
+		// Seguridad (2.2.0): solo para usuarios que pueden editar; antes cualquiera
+		// podía desactivar el bloqueo con un enlace tipo ?bricks=1.
+		if ( is_user_logged_in() && current_user_can( 'edit_posts' ) ) {
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Solo lectura de flags de editores.
+			foreach ( array( 'elementor-preview', 'fl_builder', 'et_fb', 'bricks', 'ct_builder', 'vc_editable' ) as $flag ) {
+				if ( isset( $_GET[ $flag ] ) ) {
+					return true;
+				}
 			}
+			// phpcs:enable
 		}
-		// phpcs:enable
 		if ( self::is_scan_request() ) {
 			return true;
 		}
@@ -97,25 +141,30 @@ final class DSMKC_Blocker {
 	/**
 	 * ¿Es una petición del escáner (servidor o navegador del administrador)?
 	 *
-	 * Seguridad: el token se compara en tiempo constante. En el navegador,
-	 * además, exige un administrador con sesión iniciada.
+	 * Seguridad (2.2.0):
+	 *   - Servidor: cabecera X-DSMKC-Scan con el token efímero (transient de
+	 *     15 min), comparado en tiempo constante. Sin escaneo en curso no hay
+	 *     token válido.
+	 *   - Navegador: ?dsmkc_scan=<nonce> + administrador con sesión. La URL la
+	 *     ven los rastreadores durante el escaneo, pero un nonce no sirve sin la
+	 *     sesión del administrador (antes viajaba el token permanente).
 	 *
 	 * @since  1.0.0
+	 * @since  2.2.0 Token efímero y nonce en el navegador.
 	 * @return bool
 	 */
 	public static function is_scan_request() {
-		static $result = null;
-		if ( null !== $result ) {
-			return $result;
+		if ( null !== self::$scan_request ) {
+			return self::$scan_request;
 		}
-		$token  = DSMKC_Settings::scan_token();
+		$token  = DSMKC_Settings::current_scan_token();
 		$header = isset( $_SERVER['HTTP_X_DSMKC_SCAN'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_DSMKC_SCAN'] ) ) : '';
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Autenticado por token + capacidad.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Es un nonce: se verifica abajo.
 		$query  = isset( $_GET['dsmkc_scan'] ) ? sanitize_text_field( wp_unslash( $_GET['dsmkc_scan'] ) ) : '';
 
-		$result = ( '' !== $header && hash_equals( $token, $header ) )
-			|| ( '' !== $query && hash_equals( $token, $query ) && current_user_can( 'manage_options' ) );
-		return $result;
+		self::$scan_request = ( '' !== $token && '' !== $header && hash_equals( $token, $header ) )
+			|| ( '' !== $query && current_user_can( (string) apply_filters( 'dsmkc_capability', 'manage_options' ) ) && wp_verify_nonce( $query, 'dsmkc_scan_view' ) );
+		return self::$scan_request;
 	}
 
 	/**

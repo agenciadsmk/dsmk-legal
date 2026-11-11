@@ -54,7 +54,8 @@ final class DSMKC_Admin {
 			'integraciones'     => array( __( 'Integraciones', 'dsmk-legal' ), array( 'integraciones' ) ),
 			'registro'          => array( __( 'Registro', 'dsmk-legal' ), array( 'registro' ) ),
 			'informe'           => array( __( 'Auditoría', 'dsmk-legal' ), array() ),
-			'herramientas'      => array( __( 'Herramientas', 'dsmk-legal' ), array( 'avanzado' ) ),
+			// En multisite los ajustes de actualización no se muestran: mandan las constantes de la red (DSMKC_Updater::settings_allowed()).
+			'herramientas'      => array( __( 'Herramientas', 'dsmk-legal' ), DSMKC_Updater::settings_allowed() ? array( 'actualizaciones', 'avanzado' ) : array( 'avanzado' ) ),
 		);
 	}
 
@@ -80,7 +81,7 @@ final class DSMKC_Admin {
 		add_filter( 'plugin_action_links_' . plugin_basename( DSMKC_FILE ), array( $this, 'action_links' ) );
 		add_action( 'admin_notices', array( $this, 'setup_notice' ) );
 
-		foreach ( array( 'save', 'create_pages', 'scan', 'bump', 'export_csv', 'report', 'override', 'classify', 'ignore', 'manual_delete', 'export_settings', 'import_settings', 'ai_brief', 'detect_apply', 'create_page', 'assign_page', 'audit' ) as $action ) {
+		foreach ( array( 'save', 'create_pages', 'scan', 'bump', 'export_csv', 'report', 'override', 'classify', 'ignore', 'manual_delete', 'export_settings', 'import_settings', 'ai_brief', 'detect_apply', 'create_page', 'assign_page', 'audit', 'check_update' ) as $action ) {
 			add_action( 'admin_post_dsmkc_' . $action, array( $this, 'handle_' . $action ) );
 		}
 		add_action( 'wp_ajax_dsmkc_browser_scan', array( $this, 'ajax_browser_scan' ) );
@@ -170,7 +171,7 @@ final class DSMKC_Admin {
 			array(
 				'ajax'  => admin_url( 'admin-ajax.php' ),
 				'nonce' => wp_create_nonce( 'dsmkc_browser_scan' ),
-				'token' => DSMKC_Settings::scan_token(),
+				'token' => wp_create_nonce( 'dsmkc_scan_view' ), // Nonce (2.2.0): sin la sesión del administrador no sirve.
 				'urls'  => DSMKC_Scanner::urls(),
 				'host'  => wp_parse_url( home_url(), PHP_URL_HOST ),
 				't'     => array(
@@ -294,8 +295,12 @@ final class DSMKC_Admin {
 			return;
 		}
 		$msg      = sanitize_key( wp_unslash( $_GET['dsmkc_msg'] ) );
-		$extra    = isset( $_GET['dsmkc_info'] ) ? sanitize_text_field( wp_unslash( $_GET['dsmkc_info'] ) ) : '';
 		// phpcs:enable
+		// El detalle llega por transient del usuario (2.2.0), no por la URL: un
+		// enlace manipulado no puede poner texto engañoso delante del administrador.
+		$key   = 'dsmkc_notice_' . get_current_user_id();
+		$extra = (string) get_transient( $key );
+		delete_transient( $key );
 		$messages = array(
 			'saved'      => __( 'Ajustes guardados. Se han vaciado las cachés de página compatibles.', 'dsmk-legal' ),
 			'pages'      => __( 'Hecho.', 'dsmk-legal' ),
@@ -308,6 +313,7 @@ final class DSMKC_Admin {
 			'override'   => __( 'Servicio actualizado.', 'dsmk-legal' ),
 			'deleted'    => __( 'Cookie eliminada de la política.', 'dsmk-legal' ),
 			'imported'   => __( 'Ajustes importados.', 'dsmk-legal' ),
+			'updates'    => __( 'Comprobación de actualizaciones hecha.', 'dsmk-legal' ),
 			'error'      => __( 'No se pudo completar la acción.', 'dsmk-legal' ),
 		);
 		if ( isset( $messages[ $msg ] ) ) {
@@ -422,7 +428,16 @@ final class DSMKC_Admin {
 				printf( '<input type="email" class="regular-text" id="%1$s" name="%2$s" value="%3$s" placeholder="%4$s">', esc_attr( $id ), esc_attr( $name ), esc_attr( $value ), esc_attr( $ph ) );
 				break;
 			default:
-				printf( '<input type="text" class="regular-text" id="%1$s" name="%2$s" value="%3$s" placeholder="%4$s">', esc_attr( $id ), esc_attr( $name ), esc_attr( $value ), esc_attr( $ph ) );
+				// Campos «secret» (2.3.0): tipo password y sin autocompletar del navegador.
+				printf(
+					'<input type="%5$s" class="regular-text" id="%1$s" name="%2$s" value="%3$s" placeholder="%4$s"%6$s>',
+					esc_attr( $id ),
+					esc_attr( $name ),
+					esc_attr( $value ),
+					esc_attr( $ph ),
+					empty( $field['secret'] ) ? 'text' : 'password',
+					empty( $field['secret'] ) ? '' : ' autocomplete="new-password" spellcheck="false"'
+				);
 		}
 	}
 
@@ -892,8 +907,39 @@ final class DSMKC_Admin {
 	private function tab_herramientas() {
 		$fields   = DSMKC_Settings::fields();
 		$detected = DSMKC_Tools::detect();
+		$update   = DSMKC_Updater::status();
 		?>
 <div class="dsmkc-grid">
+<div class="dsmkc-card">
+	<h2><?php esc_html_e( 'Actualizaciones de DSMK Legal', 'dsmk-legal' ); ?></h2>
+	<table class="widefat striped">
+		<tbody>
+			<tr><td><?php esc_html_e( 'Versión instalada', 'dsmk-legal' ); ?></td><td><strong><?php echo esc_html( $update['installed'] ); ?></strong></td></tr>
+			<tr><td><?php esc_html_e( 'Última versión publicada', 'dsmk-legal' ); ?></td><td>
+				<?php
+				if ( '' !== $update['available'] ) {
+					echo '<strong>' . esc_html( $update['available'] ) . '</strong>';
+					if ( $update['newer'] ) {
+						echo ' — <a href="' . esc_url( self_admin_url( 'update-core.php' ) ) . '">' . esc_html__( 'Actualizar ahora', 'dsmk-legal' ) . '</a>';
+					}
+				} else {
+					esc_html_e( 'Sin comprobar todavía', 'dsmk-legal' );
+				}
+				?>
+			</td></tr>
+			<tr><td><?php esc_html_e( 'Última comprobación', 'dsmk-legal' ); ?></td><td><?php echo $update['checked'] ? esc_html( wp_date( get_option( 'date_format' ) . ' H:i', $update['checked'] ) ) : '—'; ?></td></tr>
+			<tr><td><?php esc_html_e( 'Servidor', 'dsmk-legal' ); ?></td><td><code><?php echo esc_html( '' !== $update['url'] ? $update['url'] : __( 'URL no válida (debe ser https)', 'dsmk-legal' ) ); ?></code></td></tr>
+			<?php if ( '' !== $update['error'] ) : ?>
+			<tr><td><?php esc_html_e( 'Error', 'dsmk-legal' ); ?></td><td><span class="dsmkc-fail"><?php echo esc_html( $update['error'] ); ?></span></td></tr>
+			<?php endif; ?>
+		</tbody>
+	</table>
+	<p><a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=dsmkc_check_update' ), 'dsmkc_check_update' ) ); ?>"><?php esc_html_e( 'Comprobar ahora', 'dsmk-legal' ); ?></a></p>
+	<p class="description"><?php esc_html_e( 'WordPress comprueba solo cada 12 horas. Solo se instalan versiones firmadas por DSMK, y cada ZIP se verifica con su huella SHA-256 antes de instalarse.', 'dsmk-legal' ); ?></p>
+	<?php if ( ! DSMKC_Updater::settings_allowed() ) : ?>
+	<p class="description"><?php esc_html_e( 'Multisite: el origen de las actualizaciones lo fija la red (constantes DSMK_LEGAL_UPDATE_URL y DSMK_LEGAL_UPDATE_KEY en wp-config.php) y las automáticas se activan en Red › Plugins. Activa DSMK Legal para toda la red.', 'dsmk-legal' ); ?></p>
+	<?php endif; ?>
+</div>
 <div class="dsmkc-card">
 	<h2><?php esc_html_e( '1. Detectar datos automáticamente', 'dsmk-legal' ); ?></h2>
 	<p class="description"><?php esc_html_e( 'Busca datos para los campos vacíos en WooCommerce, en los ajustes de WordPress y en los textos legales que ya tenga la web. Marca los que quieras aplicar.', 'dsmk-legal' ); ?></p>
@@ -975,6 +1021,9 @@ final class DSMKC_Admin {
 	/**
 	 * Redirige a una pestaña con mensaje.
 	 *
+	 * El código del mensaje va en la URL; el detalle, en un transient del
+	 * usuario que se lee y borra al mostrar el aviso (2.2.0).
+	 *
 	 * @since  1.0.0
 	 * @param  string $tab  Pestaña.
 	 * @param  string $msg  Mensaje.
@@ -984,13 +1033,20 @@ final class DSMKC_Admin {
 	private function back( $tab, $msg, $info = '' ) {
 		$args = array( 'dsmkc_msg' => $msg );
 		if ( '' !== $info ) {
-			$args['dsmkc_info'] = $info;
+			set_transient( 'dsmkc_notice_' . get_current_user_id(), sanitize_text_field( $info ), 5 * MINUTE_IN_SECONDS );
 		}
 		wp_safe_redirect( self::url( $tab, $args ) );
 		exit;
 	}
 
-	/** Guardar ajustes de una pestaña. */
+	/**
+	 * Guardar ajustes de una pestaña.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_save`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_save() {
 		$this->guard( 'dsmkc_save' );
 		$tabs = self::tabs();
@@ -1009,7 +1065,14 @@ final class DSMKC_Admin {
 		$this->back( $tab, 'saved', self::created_pages_info() );
 	}
 
-	/** Crear todas las páginas que faltan (salvo las que tienen una página parecida). */
+	/**
+	 * Crear todas las páginas que faltan (salvo las que tienen una página parecida).
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_create_pages`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  2.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_create_pages() {
 		$this->guard( 'dsmkc_create_pages' );
 		DSMKC_Documents::create_pages( null, true );
@@ -1026,7 +1089,14 @@ final class DSMKC_Admin {
 		$this->back( 'documentos', 'pages', trim( $info ) );
 	}
 
-	/** Crear la página de un documento. */
+	/**
+	 * Crear la página de un documento.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_create_page`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  2.0.1
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_create_page() {
 		$this->guard( 'dsmkc_create_page' );
 		$doc = isset( $_GET['doc'] ) ? sanitize_key( wp_unslash( $_GET['doc'] ) ) : '';
@@ -1038,7 +1108,14 @@ final class DSMKC_Admin {
 		$this->back( 'documentos', 'pages', self::created_pages_info() );
 	}
 
-	/** Asignar una página existente a un documento. */
+	/**
+	 * Asignar una página existente a un documento.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_assign_page`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  2.0.1
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_assign_page() {
 		$this->guard( 'dsmkc_assign_page' );
 		$doc     = isset( $_POST['doc'] ) ? sanitize_key( wp_unslash( $_POST['doc'] ) ) : '';
@@ -1070,7 +1147,14 @@ final class DSMKC_Admin {
 		return sprintf( __( 'Páginas creadas: %s.', 'dsmk-legal' ), implode( ', ', $titles ) );
 	}
 
-	/** Escaneo de servidor. */
+	/**
+	 * Escaneo de servidor.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_scan`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_scan() {
 		$this->guard( 'dsmkc_scan' );
 		$result = DSMKC_Scanner::server_scan( false );
@@ -1078,7 +1162,14 @@ final class DSMKC_Admin {
 		$this->back( 'cookies_servicios', 'scanned', sprintf( __( '%1$d páginas · %2$d servicios nuevos · %3$d pendientes de clasificar.', 'dsmk-legal' ), $result['scanned'], count( $result['new_services'] ), count( $result['new_unknown'] ) ) );
 	}
 
-	/** Volver a pedir consentimiento. */
+	/**
+	 * Volver a pedir consentimiento.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_bump`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_bump() {
 		$this->guard( 'dsmkc_bump' );
 		DSMKC_Settings::bump_version();
@@ -1087,14 +1178,49 @@ final class DSMKC_Admin {
 		$this->back( 'herramientas', 'bumped' );
 	}
 
-	/** Exportar registros CSV. */
+	/**
+	 * Comprueba ahora si hay una versión nueva de DSMK Legal.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_check_update`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  2.3.0
+	 * @return void Redirige a Herramientas.
+	 */
+	public function handle_check_update() {
+		$this->guard( 'dsmkc_check_update' );
+		$remote = DSMKC_Updater::check_now();
+		if ( is_wp_error( $remote ) ) {
+			$this->back( 'herramientas', 'error', $remote->get_error_message() );
+		}
+		$info = version_compare( $remote['version'], DSMKC_VERSION, '>' )
+			/* translators: %s: versión. */
+			? sprintf( __( 'Hay una versión nueva: %s.', 'dsmk-legal' ), $remote['version'] )
+			: __( 'Ya tienes la última versión.', 'dsmk-legal' );
+		$this->back( 'herramientas', 'updates', $info );
+	}
+
+	/**
+	 * Exportar registros CSV.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_export_csv`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_export_csv() {
 		$this->guard( 'dsmkc_export_csv' );
 		$search = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
 		DSMKC_Consent_Log::export_csv( $search );
 	}
 
-	/** Informe técnico imprimible de una auditoría (la indicada o la última; si no hay, ejecuta una). */
+	/**
+	 * Informe técnico imprimible de una auditoría (la indicada o la última; si no hay, ejecuta una).
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_report`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_report() {
 		$this->guard( 'dsmkc_report' );
 		$id     = isset( $_GET['audit'] ) ? sanitize_text_field( wp_unslash( $_GET['audit'] ) ) : '';
@@ -1105,7 +1231,14 @@ final class DSMKC_Admin {
 		DSMKC_Report::render_printable( $record );
 	}
 
-	/** Ejecutar una auditoría completa. */
+	/**
+	 * Ejecutar una auditoría completa.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_audit`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  2.1.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_audit() {
 		$this->guard( 'dsmkc_audit' );
 		$record = DSMKC_Audit::run( 'manual' );
@@ -1113,7 +1246,14 @@ final class DSMKC_Admin {
 		$this->back( 'informe', 'audited', sprintf( __( 'Puntuación %1$d/100 · %2$d páginas · %3$s s.', 'dsmk-legal' ), $record['score'], $record['totals']['pages'], $record['duration'] ) );
 	}
 
-	/** Cambiar la categoría de un servicio o excluirlo. */
+	/**
+	 * Cambiar la categoría de un servicio o excluirlo.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_override`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_override() {
 		$this->guard( 'dsmkc_override' );
 		$service  = isset( $_POST['service'] ) ? sanitize_key( wp_unslash( $_POST['service'] ) ) : '';
@@ -1133,7 +1273,14 @@ final class DSMKC_Admin {
 		$this->back( 'cookies_servicios', 'override' );
 	}
 
-	/** Clasificar una cookie desconocida o añadir una manual. */
+	/**
+	 * Clasificar una cookie desconocida o añadir una manual.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_classify`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_classify() {
 		$this->guard( 'dsmkc_classify' );
 		$name     = isset( $_POST['name'] ) ? substr( sanitize_text_field( wp_unslash( $_POST['name'] ) ), 0, 120 ) : '';
@@ -1149,7 +1296,7 @@ final class DSMKC_Admin {
 			'provider' => isset( $_POST['provider'] ) ? sanitize_text_field( wp_unslash( $_POST['provider'] ) ) : '',
 			'purpose'  => isset( $_POST['purpose'] ) ? sanitize_text_field( wp_unslash( $_POST['purpose'] ) ) : '',
 			'duration' => isset( $_POST['duration'] ) ? sanitize_text_field( wp_unslash( $_POST['duration'] ) ) : '',
-			'party'    => isset( $_POST['party'] ) && 'tercero' === $_POST['party'] ? 'tercero' : 'propia',
+			'party'    => isset( $_POST['party'] ) && 'tercero' === sanitize_key( wp_unslash( $_POST['party'] ) ) ? 'tercero' : 'propia',
 		);
 		$unknown = (array) $data['unknown'];
 		unset( $unknown[ $name ] );
@@ -1158,7 +1305,14 @@ final class DSMKC_Admin {
 		$this->back( 'cookies_servicios', 'classified' );
 	}
 
-	/** Ignorar un elemento desconocido. */
+	/**
+	 * Ignorar un elemento desconocido.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_ignore`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_ignore() {
 		$this->guard( 'dsmkc_ignore' );
 		$name    = isset( $_GET['name'] ) ? sanitize_text_field( wp_unslash( $_GET['name'] ) ) : '';
@@ -1171,7 +1325,14 @@ final class DSMKC_Admin {
 		$this->back( 'cookies_servicios', 'ignored' );
 	}
 
-	/** Eliminar una cookie manual. */
+	/**
+	 * Eliminar una cookie manual.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_manual_delete`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_manual_delete() {
 		$this->guard( 'dsmkc_manual_delete' );
 		$i      = isset( $_GET['i'] ) ? absint( $_GET['i'] ) : -1;
@@ -1184,7 +1345,14 @@ final class DSMKC_Admin {
 		$this->back( 'cookies_servicios', 'deleted' );
 	}
 
-	/** Exportar ajustes. */
+	/**
+	 * Exportar ajustes.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_export_settings`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_export_settings() {
 		$this->guard( 'dsmkc_export_settings' );
 		nocache_headers();
@@ -1194,7 +1362,14 @@ final class DSMKC_Admin {
 		exit;
 	}
 
-	/** Importar ajustes (archivo o JSON pegado). */
+	/**
+	 * Importar ajustes (archivo o JSON pegado).
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_import_settings`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  1.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_import_settings() {
 		$this->guard( 'dsmkc_import_settings' );
 		$raw = isset( $_POST['json'] ) ? (string) wp_unslash( $_POST['json'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON; se valida y sanea campo a campo.
@@ -1219,7 +1394,14 @@ final class DSMKC_Admin {
 		$this->back( 'herramientas', 'imported', trim( $info . ' ' . $created ) );
 	}
 
-	/** Descargar el briefing para IA. */
+	/**
+	 * Descargar el briefing para IA.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_ai_brief`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  2.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_ai_brief() {
 		$this->guard( 'dsmkc_ai_brief' );
 		nocache_headers();
@@ -1229,7 +1411,14 @@ final class DSMKC_Admin {
 		exit;
 	}
 
-	/** Aplicar datos autodetectados. */
+	/**
+	 * Aplicar datos autodetectados.
+	 *
+	 * Handler de admin-post (`admin_post_dsmkc_detect_apply`). Comprueba capacidad y nonce con guard().
+	 *
+	 * @since  2.0.0
+	 * @return void Redirige o envía una descarga y termina la ejecución.
+	 */
 	public function handle_detect_apply() {
 		$this->guard( 'dsmkc_detect_apply' );
 		$keys = isset( $_POST['keys'] ) && is_array( $_POST['keys'] ) ? array_map( 'sanitize_key', wp_unslash( $_POST['keys'] ) ) : array();

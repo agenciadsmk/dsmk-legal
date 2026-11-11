@@ -1,0 +1,17 @@
+# Lo que NO entra en el ZIP de producción (bin/build.sh y wp dist-archive lo respetan)
+/.git
+/.github
+/bin
+/tests
+/vendor
+/node_modules
+/dist
+.gitignore
+.distignore
+.editorconfig
+phpcs.xml.dist
+composer.json
+composer.lock
+CLAUDE.md
+TESTS.md
+ENTREGA.md

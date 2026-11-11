@@ -69,6 +69,7 @@ final class DSMKC_Plugin {
 		( new DSMKC_Documents() )->hooks();
 		( new DSMKC_Consent_Log() )->hooks();
 		( new DSMKC_Scanner() )->hooks();
+		DSMKC_Updater::init(); // Solo filtros; la consulta la dispara WordPress al comprobar actualizaciones.
 
 		if ( is_admin() ) {
 			( new DSMKC_Admin() )->hooks();
@@ -83,6 +84,8 @@ final class DSMKC_Plugin {
 	 *
 	 * 2.0.1: la creación automática de páginas pasa a ser opcional y desactivada.
 	 * Se desactiva también en las webs que ya tenían la 2.0.0 instalada.
+	 * 2.2.0: se borra el token de escaneo permanente (ahora es efímero).
+	 * 2.2.1: importa los ajustes del plugin «DSMK Cookies» 1.0.0 de Arturo.
 	 *
 	 * @since  2.0.1
 	 * @return void
@@ -100,7 +103,54 @@ final class DSMKC_Plugin {
 				DSMKC_Settings::flush();
 			}
 		}
+		self::migrate_dsmk_cookies_settings();
+		if ( version_compare( '' !== $installed ? $installed : '0', '2.2.0', '<' ) ) {
+			// 2.2.0: el token de escaneo permanente se sustituye por uno efímero.
+			$data = get_option( DSMKC_Settings::DATA );
+			if ( is_array( $data ) && isset( $data['scan_token'] ) ) {
+				unset( $data['scan_token'] );
+				update_option( DSMKC_Settings::DATA, $data, false );
+				DSMKC_Settings::flush();
+			}
+		}
 		update_option( 'dsmkc_plugin_version', DSMKC_VERSION, false );
+	}
+
+	/**
+	 * Importa los ajustes del plugin «DSMK Cookies» 1.0.0 (Arturo), que comparte
+	 * la opción `dsmkc_settings` con otra estructura (claves anidadas).
+	 *
+	 * Copia los datos del titular a los campos de DSMK Legal que estén vacíos y
+	 * quita las claves anidadas, que DSMK Legal no usa y ensuciarían la
+	 * exportación JSON. Se ejecuta en cada actualización y no hace nada si no
+	 * hay datos de ese plugin.
+	 *
+	 * @since  2.2.1
+	 * @return void
+	 */
+	private static function migrate_dsmk_cookies_settings() {
+		$saved = get_option( DSMKC_Settings::OPTION );
+		$keys  = array( 'company', 'pages', 'banner', 'consent', 'services', 'scripts', 'gcm', 'advanced' );
+		if ( ! is_array( $saved ) || ! isset( $saved['company'] ) || ! is_array( $saved['company'] ) ) {
+			return;
+		}
+		$map     = array(
+			'owner'   => 'titular_nombre',
+			'nif'     => 'titular_nif',
+			'address' => 'titular_domicilio',
+			'email'   => 'titular_email',
+		);
+		$company = $saved['company'];
+		foreach ( $map as $from => $to ) {
+			if ( empty( $saved[ $to ] ) && isset( $company[ $from ] ) && is_scalar( $company[ $from ] ) && '' !== trim( (string) $company[ $from ] ) ) {
+				$saved[ $to ] = sanitize_text_field( (string) $company[ $from ] );
+			}
+		}
+		foreach ( $keys as $key ) {
+			unset( $saved[ $key ] );
+		}
+		update_option( DSMKC_Settings::OPTION, $saved, true );
+		DSMKC_Settings::flush();
 	}
 
 	/**
@@ -111,7 +161,6 @@ final class DSMKC_Plugin {
 	 */
 	public static function activate() {
 		DSMKC_Consent_Log::install();
-		DSMKC_Settings::scan_token();
 		if ( ! get_option( DSMKC_Settings::OPTION ) ) {
 			add_option( DSMKC_Settings::OPTION, DSMKC_Settings::defaults(), '', true );
 		}
@@ -200,9 +249,9 @@ final class DSMKC_Plugin {
 	 * @return void
 	 */
 	public static function purge_caches() {
-		if ( function_exists( 'wp_cache_flush' ) ) {
-			wp_cache_flush();
-		}
+		// Sin wp_cache_flush() (2.2.0): vaciaba toda la caché de objetos (Redis/
+		// Memcached compartidos, todas las webs de un multisite). update_option()
+		// ya invalida nuestras opciones; aquí solo se vacían cachés de página.
 		// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Hooks de terceros.
 		if ( function_exists( 'rocket_clean_domain' ) ) {
 			rocket_clean_domain(); // WP Rocket.
