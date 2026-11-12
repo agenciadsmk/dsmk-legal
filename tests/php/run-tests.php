@@ -222,7 +222,10 @@ $GLOBALS['__opts'];
 function wp_kses_post_test( $t ) { return $t; }
 $pp = DSMKC_Legal::privacy_policy();
 ok( false !== strpos( $pp, 'Clientes y pedidos de la tienda online' ) && false !== strpos( $pp, 'Clientes de servicios' ), 'Activar condiciones/términos añade sus tratamientos a la privacidad' );
-ok( false !== strpos( $pp, '<h2>Otras condiciones</h2>' ) && false !== strpos( $pp, 'Cláusula <strong>especial</strong>' ), 'Cláusulas adicionales al final del documento' );
+ok( false !== strpos( $pp, '<h2>8. Información adicional sobre los tratamientos</h2>' ) && false !== strpos( $pp, 'Cláusula <strong>especial</strong>' ) && strpos( $pp, 'Cláusula <strong>especial</strong>' ) < strpos( $pp, '9. Cambios en esta política' ), 'Cláusulas adicionales con su propio apartado (8), antes de «9. Cambios en esta política» (2.4.0)' );
+dsmkc_test_setup( array( 'extra_privacidad' => '' ) );
+$pp0 = DSMKC_Legal::privacy_policy();
+ok( false !== strpos( $pp0, '8. Cambios en esta política' ) && false === strpos( $pp0, 'Información adicional sobre los tratamientos' ), 'Sin cláusulas adicionales, la numeración no cambia (8. Cambios)' );
 
 /* ------------------------------------------------------------------ */
 echo "\n[12] Herramientas: importar, exportar, IA y autodetección\n";
@@ -708,6 +711,72 @@ if ( '' === DSMKC_Updater::PUBLIC_KEY ) {
 }
 array_map( 'unlink', glob( $tmpd . '/*' ) );
 rmdir( $tmpd );
+
+/* ------------------------------------------------------------------ */
+echo "\n[18] Webs con WooCommerce que no venden en línea y cabeceras de seguridad (2.4.0)\n";
+if ( ! class_exists( 'WooCommerce' ) ) {
+	eval( 'class WooCommerce {}' ); // phpcs:ignore -- Solo en pruebas: simula que WooCommerce está activo.
+}
+$GLOBALS['__test_gateways'] = array();
+if ( ! function_exists( 'WC' ) ) {
+	/**
+	 * WooCommerce simulado: solo lo que usa DSMKC_Documents::active_payment_gateways().
+	 *
+	 * @return object
+	 */
+	function WC() {
+		return new class() {
+			public function payment_gateways() {
+				return new class() {
+					public function payment_gateways() {
+						return $GLOBALS['__test_gateways'];
+					}
+				};
+			}
+		};
+	}
+}
+$gw = static function ( $enabled ) {
+	$g          = new stdClass();
+	$g->enabled = $enabled;
+	return $g;
+};
+$woo_check = static function () {
+	foreach ( DSMKC_Report::checks( false ) as $c ) {
+		if ( in_array( $c['id'], array( 'woo_terms', 'withdrawal_fn' ), true ) ) {
+			$out[ $c['id'] ] = $c;
+		}
+	}
+	return isset( $out ) ? $out : array();
+};
+
+dsmkc_test_setup();
+$GLOBALS['__test_gateways'] = array( 'bacs' => $gw( 'no' ), 'cod' => $gw( 'no' ) );
+ok( 0 === DSMKC_Documents::active_payment_gateways() && ! DSMKC_Documents::sells_online(), 'Automático: sin pasarelas activas la web no vende en línea' );
+$wc = $woo_check();
+ok( isset( $wc['woo_terms'] ) && 'ok' === $wc['woo_terms']['status'] && ! isset( $wc['withdrawal_fn'] ), 'Sin venta en línea: comprobación de tienda en verde y sin exigir desistimiento online' );
+
+$GLOBALS['__test_gateways']['stripe'] = $gw( 'yes' );
+ok( 1 === DSMKC_Documents::active_payment_gateways() && DSMKC_Documents::sells_online(), 'Automático: con una pasarela activa, la web vende en línea' );
+$wc = $woo_check();
+ok( 'fail' === $wc['woo_terms']['status'] && 'warn' === $wc['withdrawal_fn']['status'], 'Con venta en línea y sin condiciones: se siguen exigiendo condiciones de venta y desistimiento' );
+
+dsmkc_test_setup( array( 'tienda_venta_online' => 'no' ) );
+ok( ! DSMKC_Documents::sells_online(), 'Forzado «No»: aunque haya pasarelas activas, no vende en línea' );
+dsmkc_test_setup( array( 'tienda_venta_online' => 'si' ) );
+$GLOBALS['__test_gateways'] = array();
+ok( DSMKC_Documents::sells_online(), 'Forzado «Sí»: vende en línea aunque no haya pasarelas activas' );
+ok( 'auto' === DSMKC_Settings::sanitize_field( 'cualquiera', DSMKC_Settings::fields()['tienda_venta_online'] ), 'El ajuste solo admite auto / si / no' );
+
+$h = DSMKC_Frontend::security_headers_list( array(), true );
+ok( 'nosniff' === $h['X-Content-Type-Options'] && 'SAMEORIGIN' === $h['X-Frame-Options'] && isset( $h['Referrer-Policy'], $h['Permissions-Policy'], $h['Strict-Transport-Security'] ), 'Cabeceras de seguridad: las cinco con HTTPS' );
+ok( ! isset( $h['Content-Security-Policy'] ), 'No se envía Content-Security-Policy (depende de cada web)' );
+$h = DSMKC_Frontend::security_headers_list( array( 'x-frame-options: DENY', 'Referrer-Policy: no-referrer' ), false );
+ok( ! isset( $h['X-Frame-Options'], $h['Referrer-Policy'], $h['Strict-Transport-Security'] ) && isset( $h['X-Content-Type-Options'] ), 'Respeta las cabeceras que ya envía el servidor y no envía HSTS sin HTTPS' );
+add_filter( 'dsmkc_security_headers', static function ( $hh ) { $hh['Permissions-Policy'] = ''; return $hh; } );
+$h = DSMKC_Frontend::security_headers_list( array(), true );
+ok( ! isset( $h['Permissions-Policy'] ), 'El filtro dsmkc_security_headers permite quitar una cabecera' );
+ok( 0 === DSMKC_Settings::defaults()['cabeceras_seguridad'], 'Cabeceras desactivadas por defecto: no cambia nada en las webs ya instaladas' );
 
 /* ------------------------------------------------------------------ */
 $total = $GLOBALS['pass'] + count( $GLOBALS['fail'] );

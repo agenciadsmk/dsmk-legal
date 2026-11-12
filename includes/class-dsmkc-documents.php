@@ -397,15 +397,72 @@ final class DSMKC_Documents {
 	 * Cláusulas adicionales del documento.
 	 *
 	 * @since  2.0.0
-	 * @param  string $doc Id del documento.
+	 * @since  2.4.0 Parámetro $heading (título del apartado; por defecto «Otras condiciones»).
+	 * @param  string $doc     Id del documento.
+	 * @param  string $heading Título del apartado.
 	 * @return string HTML.
 	 */
-	public static function extra( $doc ) {
+	public static function extra( $doc, $heading = '' ) {
 		$value = trim( (string) DSMKC_Settings::get( 'extra_' . $doc, '' ) );
 		if ( '' === $value ) {
 			return '';
 		}
-		return '<h2>' . esc_html__( 'Otras condiciones', 'dsmk-legal' ) . '</h2>' . wpautop( wp_kses_post( $value ) );
+		$heading = '' !== $heading ? $heading : __( 'Otras condiciones', 'dsmk-legal' );
+		return '<h2>' . esc_html( $heading ) . '</h2>' . wpautop( wp_kses_post( $value ) );
+	}
+
+	/**
+	 * ¿La web vende en línea (carrito y pago en la propia web)?
+	 *
+	 * Decide si la auditoría exige condiciones de venta aceptadas en el checkout y
+	 * función de desistimiento online. Con el ajuste «auto» basta una pasarela de
+	 * pago activa de WooCommerce; sin WooCommerce nunca se considera tienda.
+	 *
+	 * @since  2.4.0
+	 * @return bool
+	 */
+	public static function sells_online() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return false;
+		}
+		$mode = (string) DSMKC_Settings::get( 'tienda_venta_online', 'auto' );
+		if ( 'si' === $mode ) {
+			return true;
+		}
+		if ( 'no' === $mode ) {
+			return false;
+		}
+		return self::active_payment_gateways() > 0;
+	}
+
+	/**
+	 * Número de pasarelas de pago de WooCommerce activas.
+	 *
+	 * @since  2.4.0
+	 * @return int
+	 */
+	public static function active_payment_gateways() {
+		$count = 0;
+		if ( function_exists( 'WC' ) ) {
+			$wc = WC();
+			if ( $wc && method_exists( $wc, 'payment_gateways' ) ) {
+				$gateways = $wc->payment_gateways();
+				if ( $gateways && method_exists( $gateways, 'payment_gateways' ) ) {
+					foreach ( (array) $gateways->payment_gateways() as $gateway ) {
+						if ( is_object( $gateway ) && isset( $gateway->enabled ) && 'yes' === $gateway->enabled ) {
+							++$count;
+						}
+					}
+				}
+			}
+		}
+		/**
+		 * Permite corregir el recuento (p. ej. pasarelas que no se registran en WooCommerce).
+		 *
+		 * @since 2.4.0
+		 * @param int $count Pasarelas activas.
+		 */
+		return (int) apply_filters( 'dsmkc_active_payment_gateways', $count );
 	}
 
 	/**

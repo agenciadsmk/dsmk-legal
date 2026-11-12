@@ -1,5 +1,25 @@
 # Registro de pruebas — DSMK Legal
 
+## v2.4.0 — 2026-11-12
+
+| Suite | Resultado |
+|---|---|
+| `php tests/php/run-tests.php` | **229/229** |
+| `node tests/e2e/consent.e2e.js` | **46/46** (Chrome del sistema, `--no-sandbox`) |
+
+**Nuevas [18]: webs que no venden en línea y cabeceras de seguridad (12 pruebas).**
+
+| Qué se prueba | Comprobaciones |
+|---|---|
+| Automático | Sin pasarelas activas, no vende en línea; con una activa, sí. |
+| Auditoría | Sin venta en línea: «Tienda: la web no vende en línea» en verde y sin exigir desistimiento online. Con venta en línea y sin condiciones: siguen el rojo y el ámbar de la 2.3.0. |
+| Forzado | «No» gana a las pasarelas activas; «Sí», a su ausencia. El ajuste solo admite auto / si / no. |
+| Cabeceras | Las cinco con HTTPS; sin Content-Security-Policy; respeta las que ya envía el servidor; sin HSTS en HTTP; el filtro permite quitar una; desactivadas por defecto. |
+
+**Adaptada [11]:** los textos adicionales de la privacidad salen como «8. Información adicional sobre los tratamientos», antes de «9. Cambios en esta política»; sin textos adicionales, la numeración no cambia.
+
+**En producción** (activosubastas.com, 12-11-2026): instalación manual de la 2.4.0 sobre la 2.3.0, auditoría completa antes y después (ver ENTREGA o el histórico de auditorías de la web).
+
 ## v2.3.0 — 2026-11-07
 
 | Suite | Resultado |

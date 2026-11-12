@@ -13,7 +13,7 @@
  */
 
 define( 'ABSPATH', __DIR__ . '/' );
-define( 'DSMKC_VERSION', '2.3.0' );
+define( 'DSMKC_VERSION', '2.4.0' );
 define( 'DSMKC_DB_VERSION', '2' );
 define( 'DSMKC_DIR', dirname( __DIR__, 2 ) . '/' );
 define( 'DSMKC_FILE', DSMKC_DIR . 'dsmk-legal.php' );
