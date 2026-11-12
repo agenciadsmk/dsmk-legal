@@ -129,7 +129,7 @@ Es **otro plugin**, no una versión anterior de este, aunque comparte prefijo `d
 ## Pruebas (obligatorias antes de publicar)
 
 ```bash
-php tests/php/run-tests.php                         # 216 pruebas de lógica
+php tests/php/run-tests.php                         # 233 pruebas de lógica
 php tests/php/render-report.php > informe.html      # informe técnico de una auditoría simulada
 php -S 127.0.0.1:8765 tests/e2e/router.php &        # web de prueba con rastreadores locales
 node tests/e2e/consent.e2e.js [carpeta-capturas]    # 46 pruebas en Chromium real

@@ -240,6 +240,20 @@ final class DSMKC_Settings {
 				'title'  => __( 'Condiciones de venta', 'dsmk-legal' ),
 				'intro'  => __( 'Datos para las condiciones generales de venta y el desistimiento de la tienda online.', 'dsmk-legal' ),
 				'fields' => array(
+					// 2.4.0: con WooCommerce instalado pero sin venta en la web (catálogo, subastas
+					// cuyo pago va fuera) la auditoría no debe exigir condiciones de venta ni
+					// función de desistimiento. «auto» decide por las pasarelas de pago activas.
+					'tienda_venta_online'     => array(
+						'type'    => 'select',
+						'default' => 'auto',
+						'label'   => __( '¿La web vende en línea (carrito y pago)?', 'dsmk-legal' ),
+						'help'    => __( 'Automático = sí si WooCommerce tiene alguna pasarela de pago activa. Elige «No» si WooCommerce solo se usa como catálogo o para subastas cuyo pago va fuera de la web: la auditoría no exigirá condiciones de venta ni función de desistimiento.', 'dsmk-legal' ),
+						'options' => array(
+							'auto' => __( 'Automático (según las pasarelas de pago activas)', 'dsmk-legal' ),
+							'si'   => __( 'Sí, se compra y se paga en la web', 'dsmk-legal' ),
+							'no'   => __( 'No, no se paga en la web', 'dsmk-legal' ),
+						),
+					),
 					'tienda_productos'        => array( 'type' => 'text', 'default' => '', 'label' => __( 'Qué se vende', 'dsmk-legal' ), 'placeholder' => __( 'Ej.: láminas y obra gráfica original', 'dsmk-legal' ) ),
 					'tienda_ambito'           => array( 'type' => 'text', 'default' => '', 'label' => __( 'Zonas de envío', 'dsmk-legal' ), 'placeholder' => __( 'Ej.: España peninsular y Baleares', 'dsmk-legal' ) ),
 					'tienda_plazo_envio'      => array( 'type' => 'text', 'default' => '', 'label' => __( 'Plazo de entrega habitual', 'dsmk-legal' ), 'placeholder' => __( 'Ej.: 24-72 horas laborables', 'dsmk-legal' ) ),
@@ -310,6 +324,8 @@ final class DSMKC_Settings {
 				'fields' => array(
 					'patrones_extra' => array( 'type' => 'textarea', 'default' => '', 'label' => __( 'Bloqueos adicionales', 'dsmk-legal' ), 'help' => __( 'Una regla por línea: «texto-de-la-url | categoría | nombre del servicio». Categorías: preferences, analytics, marketing. Ej.: «widget.ejemplo.com | marketing | Widget Ejemplo».', 'dsmk-legal' ) ),
 					'borrar_datos'   => array( 'type' => 'bool', 'default' => 0, 'label' => __( 'Borrar todos los datos y registros al desinstalar el plugin', 'dsmk-legal' ) ),
+					// 2.4.0: desactivado por defecto para no cambiar nada en las webs ya instaladas.
+					'cabeceras_seguridad' => array( 'type' => 'bool', 'default' => 0, 'label' => __( 'Enviar cabeceras de seguridad HTTP básicas', 'dsmk-legal' ), 'help' => __( 'Añade en la web pública X-Content-Type-Options, X-Frame-Options (mismo origen), Referrer-Policy, Permissions-Policy (sin cámara, micrófono, geolocalización ni pago) y, con HTTPS, Strict-Transport-Security (1 año). No añade Content-Security-Policy, que depende de cada web. Si el servidor ya envía una, se respeta.', 'dsmk-legal' ) ),
 				),
 			),
 			// 2.3.0: actualizaciones desde el servidor de DSMK (DSMKC_Updater).

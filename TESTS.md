@@ -1,5 +1,37 @@
 # Registro de pruebas — DSMK Legal
 
+## v2.4.1 — 2026-11-12
+
+| Suite | Resultado |
+|---|---|
+| `php tests/php/run-tests.php` | **233/233** |
+| `node tests/e2e/consent.e2e.js` | **46/46** |
+
+Nuevas [19]: con TranslatePress en español no se retraducen las cadenas de `dsmk-legal`; las de otros dominios no se tocan; en inglés decide TranslatePress; se respeta un `true` previo.
+
+## v2.4.0 — 2026-11-12
+
+| Suite | Resultado |
+|---|---|
+| `php tests/php/run-tests.php` | **229/229** |
+| `node tests/e2e/consent.e2e.js` | **46/46** (Chrome del sistema, `--no-sandbox`) |
+
+**Nuevas [18]: webs que no venden en línea y cabeceras de seguridad (12 pruebas).**
+
+| Qué se prueba | Comprobaciones |
+|---|---|
+| Automático | Sin pasarelas activas, no vende en línea; con una activa, sí. |
+| Auditoría | Sin venta en línea: «Tienda: la web no vende en línea» en verde y sin exigir desistimiento online. Con venta en línea y sin condiciones: siguen el rojo y el ámbar de la 2.3.0. |
+| Forzado | «No» gana a las pasarelas activas; «Sí», a su ausencia. El ajuste solo admite auto / si / no. |
+| Cabeceras | Las cinco con HTTPS; sin Content-Security-Policy; respeta las que ya envía el servidor; sin HSTS en HTTP; el filtro permite quitar una; desactivadas por defecto. |
+
+**Adaptada [11]:** los textos adicionales de la privacidad salen como «8. Información adicional sobre los tratamientos», antes de «9. Cambios en esta política»; sin textos adicionales, la numeración no cambia.
+
+**En producción** (activosubastas.com, 12-11-2026): instalación manual de la 2.4.0 sobre la 2.3.0 (Plugins › Subir › Reemplazar), `tienda_venta_online` en «auto» y `cabeceras_seguridad` activado.
+- Auditoría completa 10:17 (2.3.0): 87/100 (20 ✔ / 5 ! / 1 ✘).
+- Auditoría completa 10:49 (2.4.0): **98/100 (23 ✔ / 1 ! / 0 ✘)**. Tienda: «la web no vende en línea» (0 pasarelas activas). Cabeceras: solo falta CSP (no se envía por diseño). Sin recursos de terceros antes de consentir. El único aviso es «Páginas analizadas correctamente: 9 con error», porque la web está en modo mantenimiento (503 para visitantes).
+- Petición anónima a `/politica-de-privacidad/`: llegan X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy y HSTS. Con sesión iniciada, la política muestra «8. Información adicional sobre los tratamientos» y «9. Cambios en esta política».
+
 ## v2.3.0 — 2026-11-07
 
 | Suite | Resultado |

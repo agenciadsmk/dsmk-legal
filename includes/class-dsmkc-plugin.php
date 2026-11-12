@@ -77,6 +77,34 @@ final class DSMKC_Plugin {
 
 		add_action( 'dsmkc_settings_saved', array( __CLASS__, 'on_settings_saved' ) );
 		add_action( 'init', array( __CLASS__, 'ensure_cron' ), 20 ); // Se registra durante `init` (prioridad 0) y se ejecuta en esta misma pasada.
+		add_filter( 'trp_skip_gettext_processing', array( __CLASS__, 'skip_machine_retranslation' ), 999, 4 );
+	}
+
+	/**
+	 * Impide que TranslatePress «retraduzca» por máquina los textos legales en español.
+	 *
+	 * Los textos de origen del plugin ya están en español y no hay .mo es_ES.
+	 * TranslatePress trata esas cadenas gettext como pendientes de traducir y,
+	 * en la vista en español, las sustituye por una traducción automática del
+	 * propio español. El resultado cambia el texto legal: mezcla «tú» y «usted»,
+	 * duplica puntos y cambia infinitivos por imperativos. Un texto legal no
+	 * puede alterarse sin revisión, así que en cualquier idioma español se
+	 * sirve el original. Los demás idiomas siguen el criterio del propio
+	 * TranslatePress.
+	 *
+	 * @since  2.4.1
+	 * @param  bool        $skip        Decisión previa.
+	 * @param  string|null $translation Traducción propuesta (no se usa).
+	 * @param  string|null $text        Texto original (no se usa).
+	 * @param  string|null $domain      Dominio de texto.
+	 * @return bool
+	 */
+	public static function skip_machine_retranslation( $skip, $translation = null, $text = null, $domain = null ) {
+		if ( 'dsmk-legal' !== $domain ) {
+			return $skip;
+		}
+		$lang = ( isset( $GLOBALS['TRP_LANGUAGE'] ) && is_string( $GLOBALS['TRP_LANGUAGE'] ) ) ? $GLOBALS['TRP_LANGUAGE'] : ( function_exists( 'determine_locale' ) ? determine_locale() : '' );
+		return 0 === strpos( (string) $lang, 'es' ) ? true : $skip;
 	}
 
 	/**

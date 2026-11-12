@@ -87,8 +87,17 @@ final class DSMKC_Report {
 			);
 		}
 
-		// 2b. Tienda online.
-		if ( class_exists( 'WooCommerce' ) ) {
+		// 2b. Tienda online (2.4.0: solo si la web vende en línea; WooCommerce como catálogo
+		// o para subastas con pago fuera de la web no exige checkout ni desistimiento online).
+		if ( class_exists( 'WooCommerce' ) && ! DSMKC_Documents::sells_online() ) {
+			$checks[] = array(
+				'id'     => 'woo_terms',
+				'label'  => __( 'Tienda: la web no vende en línea', 'dsmk-legal' ),
+				'status' => 'ok',
+				'detail' => 'no' === DSMKC_Settings::get( 'tienda_venta_online' ) ? __( 'Marcado en Tienda: no se compra ni se paga en la web. No se exigen condiciones de venta en el checkout ni función de desistimiento online.', 'dsmk-legal' ) : __( 'WooCommerce no tiene ninguna pasarela de pago activa: no se exigen condiciones de venta en el checkout ni función de desistimiento online.', 'dsmk-legal' ),
+				'req'    => 'LSSI art. 27 · TRLGDCU art. 60',
+			);
+		} elseif ( class_exists( 'WooCommerce' ) ) {
 			$terms    = (int) get_option( 'woocommerce_terms_page_id' );
 			$checks[] = array(
 				'id'     => 'woo_terms',

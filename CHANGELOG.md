@@ -2,6 +2,36 @@
 
 Formato: versión semántica (MAYOR.MENOR.PARCHE). Cada entrada indica qué cambia, por qué y qué pruebas se pasaron (detalle en `TESTS.md`).
 
+## [2.4.1] — 2026-11-12
+
+### Corregido
+- **TranslatePress alteraba los textos legales en español.**
+  - **Síntoma:** en activosubastas.com la política de privacidad publicada no coincidía con la plantilla. Decía «Crea y gestiona» en lugar de «Crear y gestionar», «Mientras mantienes» en lugar de «Mientras mantengas», terminaba en «legales..», mezclaba «tú» y «usted» («nos facilita», «su consentimiento») y ponía mayúscula tras punto y coma.
+  - **Causa:** el plugin no trae .mo es_ES porque sus textos de origen ya están en español. TranslatePress trata esas cadenas gettext como pendientes y, en la vista en español, las sustituye por una traducción automática del propio español. Esa capa actúa antes del HTML, así que no la frena `data-no-translation`.
+  - **Solución:** `DSMKC_Plugin::skip_machine_retranslation()` en el filtro `trp_skip_gettext_processing`. Cuando el idioma es cualquier variante de español (`es*`), las cadenas del dominio `dsmk-legal` se sirven tal cual. En los demás idiomas decide TranslatePress, y no se toca ningún otro dominio.
+
+### Pruebas
+- Sección [19] nueva (4 pruebas). Total: 233/233.
+
+## [2.4.0] — 2026-11-12
+
+### Añadido
+- **Webs con WooCommerce que no venden en línea** (ajuste «¿La web vende en línea?» en Tienda: automático / sí / no; `DSMKC_Documents::sells_online()`).
+  - **Síntoma:** en webs que usan WooCommerce solo como catálogo o para subastas cuyo pago va fuera de la web (primer caso: activosubastas.com, sin ninguna pasarela de pago activa), la auditoría marcaba en rojo «condiciones de venta aceptadas en el checkout» y en ámbar la «función de desistimiento online». La única forma de ponerlas en verde era publicar unas condiciones de venta que no corresponden a la web.
+  - **Decisión:** en «automático», la web vende en línea si WooCommerce tiene alguna pasarela de pago activa (`DSMKC_Documents::active_payment_gateways()`, filtro `dsmkc_active_payment_gateways`). Si no vende, la auditoría muestra «Tienda: la web no vende en línea» en verde y no exige ni checkout ni desistimiento online. Si vende, todo sigue igual que en la 2.3.0.
+- **Cabeceras de seguridad HTTP opcionales** (Herramientas › Avanzado › «Enviar cabeceras de seguridad HTTP básicas», desactivado por defecto; `DSMKC_Frontend::security_headers_list()` y `send_security_headers()` en `send_headers`, filtro `dsmkc_security_headers`).
+  - X-Content-Type-Options, X-Frame-Options (SAMEORIGIN), Referrer-Policy, Permissions-Policy y, solo con HTTPS, Strict-Transport-Security de 1 año sin `includeSubDomains`.
+  - No añade Content-Security-Policy: depende de cada web y rompe constructores y pasarelas si no se ajusta a mano.
+  - Si el servidor ya envía una de ellas, se respeta.
+  - **Por qué:** la auditoría ya avisaba de su ausencia, pero la solución exigía tocar el servidor (`.htaccess` o la configuración del hosting).
+
+### Cambiado
+- **Política de privacidad:** los textos adicionales (Textos adicionales › Política de privacidad) salen ahora como apartado propio, «8. Información adicional sobre los tratamientos», antes de «9. Cambios en esta política». **Síntoma:** salían dentro de «8. Cambios en esta política», bajo un título «Otras condiciones» que no encaja en una política de privacidad. Sin textos adicionales la numeración no cambia. `DSMKC_Documents::extra()` admite un título propio (parámetro `$heading`); el resto de documentos siguen con «Otras condiciones».
+
+### Pruebas
+- PHP: 229/229. Nueva sección [18] con 12 pruebas y la de la [11] adaptada (posición y numeración de los textos adicionales en la privacidad).
+- E2E: 46/46 (Chrome del sistema).
+
 ## [2.3.0] — 2026-11-07
 
 ### Añadido

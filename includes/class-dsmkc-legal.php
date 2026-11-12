@@ -585,8 +585,12 @@ final class DSMKC_Legal {
 <h2><?php esc_html_e( '7. Seguridad', 'dsmk-legal' ); ?></h2>
 <p><?php esc_html_e( 'Aplicamos las medidas técnicas y organizativas adecuadas para garantizar la confidencialidad, integridad y disponibilidad de tus datos y evitar su pérdida, alteración o acceso no autorizado, teniendo en cuenta el estado de la técnica y los riesgos del tratamiento.', 'dsmk-legal' ); ?></p>
 
-<h2><?php esc_html_e( '8. Cambios en esta política', 'dsmk-legal' ); ?></h2>
-<?php echo DSMKC_Documents::extra( 'privacidad' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php
+// 2.4.0: los textos adicionales van antes del apartado de cambios y con su propio título
+// (antes quedaban dentro de «8. Cambios en esta política», bajo «Otras condiciones»).
+echo DSMKC_Documents::extra( 'privacidad', __( '8. Información adicional sobre los tratamientos', 'dsmk-legal' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+?>
+<h2><?php echo esc_html( '' !== trim( (string) DSMKC_Settings::get( 'extra_privacidad', '' ) ) ? __( '9. Cambios en esta política', 'dsmk-legal' ) : __( '8. Cambios en esta política', 'dsmk-legal' ) ); ?></h2>
 <p><?php printf( esc_html__( 'Podemos actualizar esta política para adaptarla a cambios legales o en nuestros tratamientos. Te recomendamos revisarla periódicamente. Última actualización: %s.', 'dsmk-legal' ), esc_html( self::updated_date() ) ); ?></p>
 </div>
 		<?php

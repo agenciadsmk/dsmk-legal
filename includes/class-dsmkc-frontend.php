@@ -47,6 +47,7 @@ final class DSMKC_Frontend {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'wp_footer', array( $this, 'print_banner' ), 5 );
 		add_action( 'wp_footer', array( $this, 'print_footer_links' ), 4 );
+		add_action( 'send_headers', array( __CLASS__, 'send_security_headers' ) );
 
 		// WP Consent API: declaramos que este plugin gestiona el consentimiento (modelo opt-in).
 		if ( DSMKC_Settings::get( 'wp_consent_api' ) ) {
@@ -63,6 +64,68 @@ final class DSMKC_Frontend {
 	 */
 	public static function consent_type() {
 		return 'optin';
+	}
+
+	/**
+	 * Cabeceras de seguridad que se enviarán, sin las que ya existan.
+	 *
+	 * Decisiones: no se incluye Content-Security-Policy (depende de cada web y rompe
+	 * constructores y pasarelas si no se ajusta a mano); X-Frame-Options en SAMEORIGIN
+	 * para no impedir las vistas previas de los constructores; HSTS sin
+	 * includeSubDomains ni preload, para no afectar a subdominios que no tengan HTTPS.
+	 *
+	 * @since  2.4.0
+	 * @param  string[] $existing Cabeceras ya preparadas (formato «Nombre: valor»).
+	 * @param  bool     $https    Si la petición va por HTTPS.
+	 * @return array<string, string> nombre => valor.
+	 */
+	public static function security_headers_list( array $existing, $https ) {
+		$headers = array(
+			'X-Content-Type-Options' => 'nosniff',
+			'X-Frame-Options'        => 'SAMEORIGIN',
+			'Referrer-Policy'        => 'strict-origin-when-cross-origin',
+			'Permissions-Policy'     => 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
+		);
+		if ( $https ) {
+			$headers['Strict-Transport-Security'] = 'max-age=31536000';
+		}
+		/**
+		 * Permite ajustar las cabeceras de seguridad (valor vacío = no enviar).
+		 *
+		 * @since 2.4.0
+		 * @param array<string, string> $headers nombre => valor.
+		 */
+		$headers = (array) apply_filters( 'dsmkc_security_headers', $headers );
+
+		$present = array();
+		foreach ( $existing as $line ) {
+			$present[] = strtolower( trim( strtok( (string) $line, ':' ) ) );
+		}
+		$out = array();
+		foreach ( $headers as $name => $value ) {
+			if ( '' !== (string) $value && ! in_array( strtolower( $name ), $present, true ) ) {
+				$out[ $name ] = (string) $value;
+			}
+		}
+		return $out;
+	}
+
+	/**
+	 * Envía las cabeceras de seguridad en la web pública (ajuste «cabeceras_seguridad»).
+	 *
+	 * Efectos: cabeceras HTTP de la respuesta. No actúa en el escritorio, ni si ya
+	 * se enviaron las cabeceras.
+	 *
+	 * @since  2.4.0
+	 * @return void
+	 */
+	public static function send_security_headers() {
+		if ( ! DSMKC_Settings::get( 'cabeceras_seguridad' ) || is_admin() || headers_sent() ) {
+			return;
+		}
+		foreach ( self::security_headers_list( headers_list(), is_ssl() ) as $name => $value ) {
+			header( $name . ': ' . $value );
+		}
 	}
 
 	/**
