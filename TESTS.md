@@ -1,5 +1,14 @@
 # Registro de pruebas — DSMK Legal
 
+## v2.4.1 — 2026-11-12
+
+| Suite | Resultado |
+|---|---|
+| `php tests/php/run-tests.php` | **233/233** |
+| `node tests/e2e/consent.e2e.js` | **46/46** |
+
+Nuevas [19]: con TranslatePress en español no se retraducen las cadenas de `dsmk-legal`; las de otros dominios no se tocan; en inglés decide TranslatePress; se respeta un `true` previo.
+
 ## v2.4.0 — 2026-11-12
 
 | Suite | Resultado |

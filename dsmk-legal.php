@@ -3,7 +3,7 @@
  * Plugin Name:       DSMK Legal
  * Plugin URI:        https://dsmk.es
  * Description:       Hub legal para webs de clientes: aviso legal, política de privacidad, política de cookies con gestión del consentimiento (LSSI, RGPD, Guía AEPD), términos y condiciones de servicios, condiciones de venta y desistimiento. Auditoría técnica automatizada con histórico e informe PDF, importación/exportación JSON y plantilla para rellenarlo con IA.
- * Version:           2.4.0
+ * Version:           2.4.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Tested up to:      6.8
@@ -56,7 +56,7 @@ if ( defined( 'DSMKC_VERSION' ) ) {
 	return;
 }
 
-define( 'DSMKC_VERSION', '2.4.0' );
+define( 'DSMKC_VERSION', '2.4.1' );
 // '2' desde 2.2.1: el plugin «DSMK Cookies» 1.0.0 de Arturo también guarda
 // dsmkc_db_version = '1' con otra tabla; con '1' nuestra tabla no se completaba.
 define( 'DSMKC_DB_VERSION', '2' );

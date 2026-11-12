@@ -778,6 +778,15 @@ $h = DSMKC_Frontend::security_headers_list( array(), true );
 ok( ! isset( $h['Permissions-Policy'] ), 'El filtro dsmkc_security_headers permite quitar una cabecera' );
 ok( 0 === DSMKC_Settings::defaults()['cabeceras_seguridad'], 'Cabeceras desactivadas por defecto: no cambia nada en las webs ya instaladas' );
 
+echo "\n[19] TranslatePress no retraduce los textos legales en español (2.4.1)\n";
+$GLOBALS['TRP_LANGUAGE'] = 'es_ES';
+ok( true === DSMKC_Plugin::skip_machine_retranslation( false, 'x', 'y', 'dsmk-legal' ), 'Vista en español: las cadenas de dsmk-legal no pasan por la traducción automática' );
+ok( false === DSMKC_Plugin::skip_machine_retranslation( false, 'x', 'y', 'otro-plugin' ), 'No afecta a las cadenas de otros plugins' );
+$GLOBALS['TRP_LANGUAGE'] = 'en_US';
+ok( false === DSMKC_Plugin::skip_machine_retranslation( false, 'x', 'y', 'dsmk-legal' ), 'En otros idiomas decide TranslatePress' );
+ok( true === DSMKC_Plugin::skip_machine_retranslation( true, 'x', 'y', 'dsmk-legal' ), 'Respeta una decisión previa de no traducir' );
+unset( $GLOBALS['TRP_LANGUAGE'] );
+
 /* ------------------------------------------------------------------ */
 $total = $GLOBALS['pass'] + count( $GLOBALS['fail'] );
 echo "\nResultado: {$GLOBALS['pass']}/{$total} correctas\n";

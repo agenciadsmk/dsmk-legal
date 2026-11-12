@@ -2,6 +2,17 @@
 
 Formato: versión semántica (MAYOR.MENOR.PARCHE). Cada entrada indica qué cambia, por qué y qué pruebas se pasaron (detalle en `TESTS.md`).
 
+## [2.4.1] — 2026-11-12
+
+### Corregido
+- **TranslatePress alteraba los textos legales en español.**
+  - **Síntoma:** en activosubastas.com la política de privacidad publicada no coincidía con la plantilla. Decía «Crea y gestiona» en lugar de «Crear y gestionar», «Mientras mantienes» en lugar de «Mientras mantengas», terminaba en «legales..», mezclaba «tú» y «usted» («nos facilita», «su consentimiento») y ponía mayúscula tras punto y coma.
+  - **Causa:** el plugin no trae .mo es_ES porque sus textos de origen ya están en español. TranslatePress trata esas cadenas gettext como pendientes y, en la vista en español, las sustituye por una traducción automática del propio español. Esa capa actúa antes del HTML, así que no la frena `data-no-translation`.
+  - **Solución:** `DSMKC_Plugin::skip_machine_retranslation()` en el filtro `trp_skip_gettext_processing`. Cuando el idioma es cualquier variante de español (`es*`), las cadenas del dominio `dsmk-legal` se sirven tal cual. En los demás idiomas decide TranslatePress, y no se toca ningún otro dominio.
+
+### Pruebas
+- Sección [19] nueva (4 pruebas). Total: 233/233.
+
 ## [2.4.0] — 2026-11-12
 
 ### Añadido
