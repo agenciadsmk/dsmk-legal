@@ -18,7 +18,10 @@
 
 **Adaptada [11]:** los textos adicionales de la privacidad salen como «8. Información adicional sobre los tratamientos», antes de «9. Cambios en esta política»; sin textos adicionales, la numeración no cambia.
 
-**En producción** (activosubastas.com, 12-11-2026): instalación manual de la 2.4.0 sobre la 2.3.0, auditoría completa antes y después (ver ENTREGA o el histórico de auditorías de la web).
+**En producción** (activosubastas.com, 12-11-2026): instalación manual de la 2.4.0 sobre la 2.3.0 (Plugins › Subir › Reemplazar), `tienda_venta_online` en «auto» y `cabeceras_seguridad` activado.
+- Auditoría completa 10:17 (2.3.0): 87/100 (20 ✔ / 5 ! / 1 ✘).
+- Auditoría completa 10:49 (2.4.0): **98/100 (23 ✔ / 1 ! / 0 ✘)**. Tienda: «la web no vende en línea» (0 pasarelas activas). Cabeceras: solo falta CSP (no se envía por diseño). Sin recursos de terceros antes de consentir. El único aviso es «Páginas analizadas correctamente: 9 con error», porque la web está en modo mantenimiento (503 para visitantes).
+- Petición anónima a `/politica-de-privacidad/`: llegan X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy y HSTS. Con sesión iniciada, la política muestra «8. Información adicional sobre los tratamientos» y «9. Cambios en esta política».
 
 ## v2.3.0 — 2026-11-07
 
