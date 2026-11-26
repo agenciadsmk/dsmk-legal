@@ -9,7 +9,13 @@
 
 Nuevas [20]: título por defecto «Otras condiciones» sin tocar nada y también con ajustes guardados antes de la 2.4.2 (sin la clave); título propio; título vacío = texto sin título; sin texto adicional no sale el título; privacidad con el título por defecto («8. Información adicional…» y «9. Cambios») y sin título («8. Cambios»); un ajuste de título por documento; banner sin «Inc..» con un proveedor que acaba en punto, también con un texto propio con «{terceros}.»; sin punto final en el proveedor la frase sigue terminando en punto.
 
-**Pendiente antes de publicar:** e2e en un equipo con Playwright y prueba en staging (lamarichapu.es): título vacío en Textos adicionales › Política de cookies y banner con Jetpack Stats.
+**Staging** (new.lamarichapu.es, WooCommerce + Elementor Pro + TranslatePress, 26-11-2026): instalación manual de la 2.4.2 sobre la 2.4.1 (Plugins › Subir › Reemplazar); se conservan todos los ajustes.
+- Textos adicionales: los títulos nuevos salen con el valor de siempre («Otras condiciones»; privacidad, «8. Información adicional…»). Con el de cookies vacío, la frase con el enlace al formulario de contacto va al final del apartado 6, sin título.
+- Banner: «Pueden instalarlas: Automattic Inc.» con un solo punto. Panel «Configurar» con las tres categorías detectadas.
+- Checkout con sus dos formas de pago y formulario de contacto con reCAPTCHA (técnica) sin consentimiento. Sin errores del plugin en la consola.
+- Auditoría (servidor): **82/100 (18 ✔ / 10 ! / 0 ✘)**, igual que con la 2.4.1.
+
+**Pendiente:** e2e en un equipo con Playwright.
 
 ## v2.4.1 — 2026-11-12
 
