@@ -689,11 +689,29 @@ $tmpd = sys_get_temp_dir() . '/dsmkc-rel-' . getmypid();
 @mkdir( $tmpd );
 $zipf = $tmpd . '/dsmk-legal-' . DSMKC_VERSION . '.zip';
 file_put_contents( $zipf, 'zip de prueba' );
+// 2.4.2: proc_open con entorno propio en lugar de «DSMK_SIGNING_KEY=… php …» dentro de exec().
+// Esa sintaxis es de sh: cmd.exe no la entiende y en Windows estas pruebas fallaban siempre.
+// Además, la clave nunca se hereda del entorno de quien lanza las pruebas.
 $gen = static function ( $zip, $base, $key, $pub = null ) use ( $kp ) {
-	$env = null === $key ? '' : 'DSMK_SIGNING_KEY=' . escapeshellarg( $key ) . ' ';
 	$pub = null === $pub ? base64_encode( sodium_crypto_sign_publickey( $kp ) ) : $pub;
-	exec( $env . 'php ' . escapeshellarg( DSMKC_DIR . 'bin/make-update-json.php' ) . ' --zip=' . escapeshellarg( $zip ) . ' --base-url=' . escapeshellarg( $base ) . ( '' === $pub ? '' : ' --expected-pubkey=' . escapeshellarg( $pub ) ) . ' 2>&1', $o, $rc );
-	return $rc;
+	$cmd = array( PHP_BINARY, DSMKC_DIR . 'bin/make-update-json.php', '--zip=' . $zip, '--base-url=' . $base );
+	if ( '' !== $pub ) {
+		$cmd[] = '--expected-pubkey=' . $pub;
+	}
+	$env = getenv();
+	unset( $env['DSMK_SIGNING_KEY'] );
+	if ( null !== $key ) {
+		$env['DSMK_SIGNING_KEY'] = $key;
+	}
+	$proc = proc_open( $cmd, array( 1 => array( 'pipe', 'w' ), 2 => array( 'pipe', 'w' ) ), $pipes, null, $env );
+	if ( ! is_resource( $proc ) ) {
+		return -1;
+	}
+	stream_get_contents( $pipes[1] );
+	stream_get_contents( $pipes[2] );
+	fclose( $pipes[1] );
+	fclose( $pipes[2] );
+	return proc_close( $proc );
 };
 $rc   = $gen( $zipf, 'https://agenciadsmk.github.io/dsmk-legal', base64_encode( sodium_crypto_sign_secretkey( $kp ) ) );
 $json = json_decode( (string) @file_get_contents( $tmpd . '/info.json' ), true );
@@ -786,6 +804,39 @@ $GLOBALS['TRP_LANGUAGE'] = 'en_US';
 ok( false === DSMKC_Plugin::skip_machine_retranslation( false, 'x', 'y', 'dsmk-legal' ), 'En otros idiomas decide TranslatePress' );
 ok( true === DSMKC_Plugin::skip_machine_retranslation( true, 'x', 'y', 'dsmk-legal' ), 'Respeta una decisión previa de no traducir' );
 unset( $GLOBALS['TRP_LANGUAGE'] );
+
+echo "\n[20] Título de los textos adicionales y punto final del banner (2.4.2)\n";
+$extra = 'Escríbenos desde el formulario de contacto.';
+dsmkc_test_setup( array( 'extra_cookies' => $extra ) );
+ok( false !== strpos( DSMKC_Legal::cookie_policy(), '<h2>Otras condiciones</h2><p>' . $extra ), 'Sin tocar el título: el apartado sigue llamándose «Otras condiciones»' );
+unset( $GLOBALS['__opts']['dsmkc_settings']['extra_titulo_cookies'] );
+DSMKC_Settings::flush();
+ok( false !== strpos( DSMKC_Legal::cookie_policy(), '<h2>Otras condiciones</h2><p>' . $extra ), 'Ajustes guardados antes de la 2.4.2 (sin la clave del título): mismo título de siempre' );
+dsmkc_test_setup( array( 'extra_cookies' => $extra, 'extra_titulo_cookies' => 'Contacto' ) );
+ok( false !== strpos( DSMKC_Legal::cookie_policy(), '<h2>Contacto</h2><p>' . $extra ), 'Título propio del apartado' );
+dsmkc_test_setup( array( 'extra_cookies' => $extra, 'extra_titulo_cookies' => '' ) );
+$c = DSMKC_Legal::cookie_policy();
+ok( false !== strpos( $c, '<p>' . $extra ) && false === strpos( $c, 'Otras condiciones' ), 'Título vacío: el texto va sin título' );
+dsmkc_test_setup( array( 'extra_titulo_cookies' => 'Contacto' ) );
+ok( false === strpos( DSMKC_Legal::cookie_policy(), '<h2>Contacto</h2>' ), 'Sin texto adicional no se pinta el título' );
+dsmkc_test_setup( array( 'extra_privacidad' => 'Tratamiento propio.' ) );
+$p = DSMKC_Legal::privacy_policy();
+ok( false !== strpos( $p, '<h2>8. Información adicional sobre los tratamientos</h2><p>Tratamiento propio.</p>' ) && false !== strpos( $p, '9. Cambios en esta política' ), 'Privacidad: título por defecto «8. Información adicional…» y «Cambios» pasa al 9' );
+dsmkc_test_setup( array( 'extra_privacidad' => 'Tratamiento propio.', 'extra_titulo_privacidad' => '' ) );
+$p = DSMKC_Legal::privacy_policy();
+ok( false !== strpos( $p, '<p>Tratamiento propio.</p>' ) && false !== strpos( $p, '8. Cambios en esta política' ) && false === strpos( $p, '9. Cambios' ), 'Privacidad sin título: el texto sigue al apartado 7 y «Cambios» conserva el 8' );
+$f = DSMKC_Settings::fields();
+ok( isset( $f['extra_titulo_aviso'], $f['extra_titulo_privacidad'], $f['extra_titulo_cookies'], $f['extra_titulo_terminos'], $f['extra_titulo_condiciones'], $f['extra_titulo_desistimiento'] ), 'Un ajuste de título por documento en «Textos adicionales»' );
+
+$jetpack = array( 'detected' => array( 'jetpack_stats' => array( 'first' => time(), 'last' => time(), 'via' => 'test' ) ) );
+dsmkc_test_setup( array(), $jetpack );
+$t = DSMKC_Legal::banner_texts();
+ok( false !== strpos( $t['text'], 'Pueden instalarlas: Automattic Inc.' ) && false === strpos( $t['text'], 'Inc..' ), 'Banner: si el proveedor acaba en punto, no queda «Inc..»' );
+dsmkc_test_setup( array( 'banner_texto' => 'Cookies de {terceros}. Más información en la {politica}.' ), $jetpack );
+$t = DSMKC_Legal::banner_texts();
+ok( false !== strpos( $t['text'], 'Cookies de Automattic Inc. Más información' ) && false === strpos( $t['text'], 'Inc..' ), 'Texto propio del banner con «{terceros}.»: tampoco queda «..»' );
+dsmkc_test_setup();
+ok( false !== strpos( DSMKC_Legal::banner_texts()['text'], 'Pueden instalarlas: Google Ireland Limited.' ), 'Proveedor sin punto final: la frase termina en punto, como siempre' );
 
 /* ------------------------------------------------------------------ */
 $total = $GLOBALS['pass'] + count( $GLOBALS['fail'] );

@@ -200,8 +200,15 @@ final class DSMKC_Legal {
 		$titular     = '' !== trim( $s['titular_nombre'] ) ? $s['titular_nombre'] : self::site_name();
 		$politica    = self::link( 'cookies', __( 'política de cookies', 'dsmk-legal' ) );
 
+		// 2.4.2: si el último proveedor acaba en punto («Automattic Inc.»), ese punto cierra la
+		// frase; sin esto el banner decía «Pueden instalarlas: Automattic Inc..».
+		$terceros_punto = '.' === substr( $terceros, -1 );
+
 		$custom = trim( (string) $s['banner_texto'] );
 		if ( '' !== $custom ) {
+			if ( $terceros_punto ) {
+				$custom = str_replace( '{terceros}.', '{terceros}', $custom );
+			}
 			$text = strtr(
 				wpautop( $custom ),
 				array(
@@ -220,7 +227,11 @@ final class DSMKC_Legal {
 			);
 			if ( '' !== $terceros ) {
 				/* translators: %s: lista de terceros. */
-				$text .= ' ' . sprintf( esc_html__( 'Pueden instalarlas: %s.', 'dsmk-legal' ), esc_html( $terceros ) );
+				$frase = sprintf( esc_html__( 'Pueden instalarlas: %s.', 'dsmk-legal' ), esc_html( $terceros ) );
+				if ( $terceros_punto && '..' === substr( $frase, -2 ) ) {
+					$frase = substr( $frase, 0, -1 );
+				}
+				$text .= ' ' . $frase;
 			}
 			$text .= '</p><p>' . sprintf(
 				/* translators: %s: enlace a la política de cookies. */
@@ -588,9 +599,14 @@ final class DSMKC_Legal {
 <?php
 // 2.4.0: los textos adicionales van antes del apartado de cambios y con su propio título
 // (antes quedaban dentro de «8. Cambios en esta política», bajo «Otras condiciones»).
-echo DSMKC_Documents::extra( 'privacidad', __( '8. Información adicional sobre los tratamientos', 'dsmk-legal' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+// 2.4.2: el título sale de «Textos adicionales» (por defecto «8. Información adicional sobre los
+// tratamientos»). Solo cuentan como apartado 8 si llevan título; sin título siguen al 7 y
+// «Cambios en esta política» conserva el número 8.
+$extra_privacidad = DSMKC_Documents::extra( 'privacidad' );
+echo $extra_privacidad; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+$apartado_extra = 0 === strpos( $extra_privacidad, '<h2>' );
 ?>
-<h2><?php echo esc_html( '' !== trim( (string) DSMKC_Settings::get( 'extra_privacidad', '' ) ) ? __( '9. Cambios en esta política', 'dsmk-legal' ) : __( '8. Cambios en esta política', 'dsmk-legal' ) ); ?></h2>
+<h2><?php echo esc_html( $apartado_extra ? __( '9. Cambios en esta política', 'dsmk-legal' ) : __( '8. Cambios en esta política', 'dsmk-legal' ) ); ?></h2>
 <p><?php printf( esc_html__( 'Podemos actualizar esta política para adaptarla a cambios legales o en nuestros tratamientos. Te recomendamos revisarla periódicamente. Última actualización: %s.', 'dsmk-legal' ), esc_html( self::updated_date() ) ); ?></p>
 </div>
 		<?php

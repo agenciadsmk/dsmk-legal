@@ -1,5 +1,16 @@
 # Registro de pruebas — DSMK Legal
 
+## v2.4.2 — 2026-11-26
+
+| Suite | Resultado |
+|---|---|
+| `php tests/php/run-tests.php` | **244/244** (Windows 11, PHP 8.3; las dos de `make-update-json` ya pasan también en Windows) |
+| `node tests/e2e/consent.e2e.js` | No ejecutada: este equipo no tiene Playwright. El cambio no toca el JS del banner. |
+
+Nuevas [20]: título por defecto «Otras condiciones» sin tocar nada y también con ajustes guardados antes de la 2.4.2 (sin la clave); título propio; título vacío = texto sin título; sin texto adicional no sale el título; privacidad con el título por defecto («8. Información adicional…» y «9. Cambios») y sin título («8. Cambios»); un ajuste de título por documento; banner sin «Inc..» con un proveedor que acaba en punto, también con un texto propio con «{terceros}.»; sin punto final en el proveedor la frase sigue terminando en punto.
+
+**Pendiente antes de publicar:** e2e en un equipo con Playwright y prueba en staging (lamarichapu.es): título vacío en Textos adicionales › Política de cookies y banner con Jetpack Stats.
+
 ## v2.4.1 — 2026-11-12
 
 | Suite | Resultado |

@@ -206,7 +206,7 @@ final class DSMKC_Tools {
 		$md .= "1. Revisa la web (y sus textos legales actuales, si los tiene) y la información adicional que te facilite el usuario.\n";
 		$md .= "2. Rellena SOLO los campos de los que tengas datos fiables. No inventes NIF, domicilios, datos registrales ni emails: si no los encuentras, déjalos fuera y dilo al final.\n";
 		$md .= "3. Activa los documentos que correspondan: `doc_condiciones` y `doc_desistimiento` si la web vende online a consumidores; `doc_terminos` si vende servicios.\n";
-		$md .= "4. En `extra_*` añade solo cláusulas específicas que no cubra el texto estándar (HTML sencillo: <p>, <ul>, <strong>).\n";
+		$md .= "4. En `extra_<documento>` (p. ej. `extra_cookies`) añade solo cláusulas específicas que no cubra el texto estándar (HTML sencillo: <p>, <ul>, <strong>). `extra_titulo_<documento>` es el título de ese apartado: no lo incluyas salvo que el cliente pida otro título o ninguno (cadena vacía).\n";
 		$md .= "5. Responde con UN ÚNICO bloque ```json``` con este formato y, después, una lista breve de datos que faltan o que el cliente debe confirmar:\n\n";
 		$md .= "```json\n{\n  \"plugin\": \"dsmk-legal\",\n  \"settings\": {\n    \"titular_nombre\": \"…\",\n    \"doc_condiciones\": 1\n  }\n}\n```\n\n";
 		$md .= "## Web\n\n";

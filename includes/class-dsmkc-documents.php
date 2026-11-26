@@ -398,8 +398,11 @@ final class DSMKC_Documents {
 	 *
 	 * @since  2.0.0
 	 * @since  2.4.0 Parámetro $heading (título del apartado; por defecto «Otras condiciones»).
+	 * @since  2.4.2 El título sale del ajuste `extra_titulo_<doc>` (Textos adicionales); vacío =
+	 *               sin título. $heading solo se usa en documentos que no tienen ese ajuste
+	 *               (p. ej. los que añade otro plugin con el filtro `dsmkc_legal_documents`).
 	 * @param  string $doc     Id del documento.
-	 * @param  string $heading Título del apartado.
+	 * @param  string $heading Título del apartado si el documento no tiene ajuste de título.
 	 * @return string HTML.
 	 */
 	public static function extra( $doc, $heading = '' ) {
@@ -407,8 +410,16 @@ final class DSMKC_Documents {
 		if ( '' === $value ) {
 			return '';
 		}
-		$heading = '' !== $heading ? $heading : __( 'Otras condiciones', 'dsmk-legal' );
-		return '<h2>' . esc_html( $heading ) . '</h2>' . wpautop( wp_kses_post( $value ) );
+		$fields = DSMKC_Settings::fields();
+		if ( isset( $fields[ 'extra_titulo_' . $doc ] ) ) {
+			// Sin guardar todavía, get() devuelve el valor por defecto del esquema (el título de
+			// siempre); guardado vacío, el texto va sin título.
+			$heading = trim( (string) DSMKC_Settings::get( 'extra_titulo_' . $doc, '' ) );
+		} elseif ( '' === $heading ) {
+			$heading = __( 'Otras condiciones', 'dsmk-legal' );
+		}
+		$title = '' !== $heading ? '<h2>' . esc_html( $heading ) . '</h2>' : '';
+		return $title . wpautop( wp_kses_post( $value ) );
 	}
 
 	/**

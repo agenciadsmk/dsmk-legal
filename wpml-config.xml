@@ -24,6 +24,12 @@
 			<key name="extra_terminos" />
 			<key name="extra_condiciones" />
 			<key name="extra_desistimiento" />
+			<key name="extra_titulo_aviso" />
+			<key name="extra_titulo_privacidad" />
+			<key name="extra_titulo_cookies" />
+			<key name="extra_titulo_terminos" />
+			<key name="extra_titulo_condiciones" />
+			<key name="extra_titulo_desistimiento" />
 			<key name="serv_descripcion" />
 			<key name="tienda_productos" />
 		</key>

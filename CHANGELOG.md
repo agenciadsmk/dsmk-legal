@@ -2,6 +2,28 @@
 
 Formato: versión semántica (MAYOR.MENOR.PARCHE). Cada entrada indica qué cambia, por qué y qué pruebas se pasaron (detalle en `TESTS.md`).
 
+## [2.4.2] — 2026-11-26
+
+### Añadido
+- **Título de los «Textos adicionales» configurable por documento** (ajustes `extra_titulo_<documento>` en Textos adicionales; `DSMKC_Documents::extra()`).
+  - **Síntoma:** en lamarichapu.es el texto adicional de la política de cookies era una sola frase con un enlace al formulario de contacto, y salía bajo un apartado «Otras condiciones» que no encaja en una política de cookies.
+  - **Decisión:** un campo de título por documento. Su valor por defecto es el título de siempre («Otras condiciones»; en privacidad, «8. Información adicional sobre los tratamientos»), así que las webs instaladas no cambian hasta que alguien lo edite. Si se deja vacío, el texto va sin título.
+  - **Privacidad:** sin título, el texto sigue al apartado 7 y «Cambios en esta política» conserva el número 8.
+  - El parámetro `$heading` de `extra()` solo se usa ya en documentos sin ese ajuste (p. ej. los que añade otro plugin con `dsmkc_legal_documents`).
+  - Briefing para la IA: explica que `extra_titulo_<documento>` es el título y que no se rellene salvo que el cliente lo pida. WPML: los títulos son textos traducibles.
+
+### Corregido
+- **Punto doble en el banner** («Pueden instalarlas: Automattic Inc..»).
+  - **Causa:** la frase añade su punto final y el nombre del proveedor ya acababa en punto.
+  - **Solución:** si el último proveedor acaba en punto, ese punto cierra la frase. Vale también para un texto propio del banner con «{terceros}.».
+- **Pruebas de `make-update-json` en Windows.** Pasaban la clave con `DSMK_SIGNING_KEY=… php …` dentro de `exec()`, sintaxis de sh que cmd.exe no entiende, así que en Windows fallaban siempre (231/233). Ahora usan `proc_open` con entorno propio, y la clave nunca se hereda del entorno de quien lanza las pruebas.
+
+### Notas
+- `languages/dsmk-legal.pot`: en esta versión solo cambia la cabecera. `bin/build.sh` lo regenera completo al publicar; generado en Windows, el orden de los archivos cambia y produce un diff enorme sin cambios reales.
+
+### Pruebas
+- Sección [20] nueva (11 pruebas). Total: 244/244, también en Windows.
+
 ## [2.4.1] — 2026-11-12
 
 ### Corregido

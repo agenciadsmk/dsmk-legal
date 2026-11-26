@@ -294,14 +294,23 @@ final class DSMKC_Settings {
 			),
 			'clausulas'     => array(
 				'title'  => __( 'Textos adicionales', 'dsmk-legal' ),
-				'intro'  => __( 'Cláusulas propias de este cliente. Se añaden al final de cada documento en un apartado «Otras condiciones».', 'dsmk-legal' ),
+				'intro'  => __( 'Cláusulas propias de este cliente. Se añaden al final de cada documento, en un apartado con el título que indiques (si lo dejas vacío, el texto va sin título).', 'dsmk-legal' ),
+				// 2.4.2: título del apartado configurable por documento. El valor por defecto es el
+				// título que se pintaba antes, así que las webs ya instaladas no cambian hasta que
+				// alguien lo edite. Vacío = sin título (p. ej. una sola frase con un enlace).
 				'fields' => array(
-					'extra_aviso'         => array( 'type' => 'html', 'default' => '', 'label' => __( 'Aviso legal', 'dsmk-legal' ) ),
-					'extra_privacidad'    => array( 'type' => 'html', 'default' => '', 'label' => __( 'Política de privacidad', 'dsmk-legal' ) ),
-					'extra_cookies'       => array( 'type' => 'html', 'default' => '', 'label' => __( 'Política de cookies', 'dsmk-legal' ) ),
-					'extra_terminos'      => array( 'type' => 'html', 'default' => '', 'label' => __( 'Términos y condiciones del servicio', 'dsmk-legal' ) ),
-					'extra_condiciones'   => array( 'type' => 'html', 'default' => '', 'label' => __( 'Condiciones de venta', 'dsmk-legal' ) ),
-					'extra_desistimiento' => array( 'type' => 'html', 'default' => '', 'label' => __( 'Desistimiento', 'dsmk-legal' ) ),
+					'extra_titulo_aviso'         => array( 'type' => 'text', 'default' => __( 'Otras condiciones', 'dsmk-legal' ), 'label' => __( 'Aviso legal: título', 'dsmk-legal' ), 'help' => __( 'Vacío = sin título.', 'dsmk-legal' ) ),
+					'extra_aviso'                => array( 'type' => 'html', 'default' => '', 'label' => __( 'Aviso legal: texto', 'dsmk-legal' ) ),
+					'extra_titulo_privacidad'    => array( 'type' => 'text', 'default' => __( '8. Información adicional sobre los tratamientos', 'dsmk-legal' ), 'label' => __( 'Política de privacidad: título', 'dsmk-legal' ), 'help' => __( 'Vacío = sin título.', 'dsmk-legal' ) ),
+					'extra_privacidad'           => array( 'type' => 'html', 'default' => '', 'label' => __( 'Política de privacidad: texto', 'dsmk-legal' ) ),
+					'extra_titulo_cookies'       => array( 'type' => 'text', 'default' => __( 'Otras condiciones', 'dsmk-legal' ), 'label' => __( 'Política de cookies: título', 'dsmk-legal' ), 'help' => __( 'Vacío = sin título.', 'dsmk-legal' ) ),
+					'extra_cookies'              => array( 'type' => 'html', 'default' => '', 'label' => __( 'Política de cookies: texto', 'dsmk-legal' ) ),
+					'extra_titulo_terminos'      => array( 'type' => 'text', 'default' => __( 'Otras condiciones', 'dsmk-legal' ), 'label' => __( 'Términos y condiciones del servicio: título', 'dsmk-legal' ), 'help' => __( 'Vacío = sin título.', 'dsmk-legal' ) ),
+					'extra_terminos'             => array( 'type' => 'html', 'default' => '', 'label' => __( 'Términos y condiciones del servicio: texto', 'dsmk-legal' ) ),
+					'extra_titulo_condiciones'   => array( 'type' => 'text', 'default' => __( 'Otras condiciones', 'dsmk-legal' ), 'label' => __( 'Condiciones de venta: título', 'dsmk-legal' ), 'help' => __( 'Vacío = sin título.', 'dsmk-legal' ) ),
+					'extra_condiciones'          => array( 'type' => 'html', 'default' => '', 'label' => __( 'Condiciones de venta: texto', 'dsmk-legal' ) ),
+					'extra_titulo_desistimiento' => array( 'type' => 'text', 'default' => __( 'Otras condiciones', 'dsmk-legal' ), 'label' => __( 'Desistimiento: título', 'dsmk-legal' ), 'help' => __( 'Vacío = sin título.', 'dsmk-legal' ) ),
+					'extra_desistimiento'        => array( 'type' => 'html', 'default' => '', 'label' => __( 'Desistimiento: texto', 'dsmk-legal' ) ),
 				),
 			),
 			'servicios'     => array(
